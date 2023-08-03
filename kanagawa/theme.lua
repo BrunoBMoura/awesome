@@ -42,15 +42,12 @@ theme.fg_normal     = kanagawa.white
 -- theme.fg_focus      = "#ffffff"
 theme.fg_focus      = kanagawa.orange
 theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_minimize   = kanagawa.black
 
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(2)
--- theme.border_normal = "#000000"
 theme.border_normal = kanagawa.black
--- theme.border_focus  = "#535d6c"
 theme.border_focus  = kanagawa.grey
--- theme.border_marked = "#91231c"
 theme.border_marked = kanagawa.yellow
 
 -- There are other variable sets
@@ -65,10 +62,10 @@ theme.border_marked = kanagawa.yellow
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
-theme.taglist_bg_focus = kanagawa.grey
+theme.taglist_bg_focus = kanagawa.magenta
 theme.taglist_fg_focus = kanagawa.white
 theme.tasklist_fg_focus = kanagawa.red
-theme.tasklist_bg_focus = kanagawa.grey
+theme.tasklist_bg_focus = kanagawa.magenta
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
