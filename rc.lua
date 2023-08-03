@@ -57,7 +57,7 @@ end
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "kanagawa/theme.lua")
 
-beautiful.useless_gap = 3
+beautiful.useless_gap = 1
 awful.mouse.snap.edge_enabled = false
 
 -- This is used later as the default terminal and editor to run.
@@ -260,7 +260,7 @@ globalkeys = gears.table.join(
     { modkey }, "s", hotkeys_popup.show_help,
     { description = "show help", group = "awesome" }
   ),
-  awful.key({ altkey }, "l", function()
+  awful.key({ modkey }, "space", function()
       awful.spawn.with_shell("bash " ..
                              gears.filesystem.get_configuration_dir() ..
                              "scripts/kbswap_br_us.sh &>> /tmp/kb_swap.log")
@@ -398,13 +398,13 @@ globalkeys = gears.table.join(
     {description = "decrease the number of columns", group = "layout"}
   ),
   awful.key(
-    { modkey, }, "space", function()
+    { "Control" }, "space", function()
       awful.layout.inc(1)
     end,
     {description = "select next", group = "layout"}
   ),
   awful.key(
-    { modkey, "Shift" }, "space", function()
+    { altkey, "Shift" }, "space", function()
       awful.layout.inc(-1)
     end,
     {description = "select previous", group = "layout"}
@@ -623,7 +623,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -698,6 +698,7 @@ client.connect_signal("unfocus", function(c)
   c.border_color = beautiful.border_normal
 end)
 -- }}}
---
 
--- awful.spawn.with_shell("picom -experimental-backends")
+beautiful.wibar_type = "desktop"
+
+-- awful.spawn.with_shell("picom")

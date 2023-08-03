@@ -22,6 +22,7 @@ local kanagawa = {
     grey       = "#282727",
     orange     = "#b6927b"
 }
+
 local theme = {}
 
 theme.font          = "JetBrains Mono 12"
