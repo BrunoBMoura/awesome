@@ -27,7 +27,7 @@ local theme = {}
 theme.font          = "JetBrains Mono 12"
 
 -- theme.bg_normal     = "#222222"
-theme.bg_normal     = kanagawa.backgroound
+theme.bg_normal     = kanagawa.background
 -- theme.bg_focus      = "#535d6c"
 theme.bg_focus      = kanagawa.black
 -- theme.bg_urgent     = "#ff0000"
