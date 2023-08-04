@@ -27,24 +27,18 @@ local theme = {}
 
 theme.font          = "JetBrains Mono 12"
 
--- theme.bg_normal     = "#222222"
 theme.bg_normal     = kanagawa.background
--- theme.bg_focus      = "#535d6c"
 theme.bg_focus      = kanagawa.black
--- theme.bg_urgent     = "#ff0000"
 theme.bg_urgent     = kanagawa.yellow
--- theme.bg_minimize   = "#444444"
 theme.bg_minimize   = kanagawa.orange
 theme.bg_systray    = theme.bg_normal
 
--- theme.fg_normal     = "#aaaaaa"
 theme.fg_normal     = kanagawa.white
--- theme.fg_focus      = "#ffffff"
 theme.fg_focus      = kanagawa.orange
-theme.fg_urgent     = "#ffffff"
+theme.fg_urgent     = kanagawa.red
 theme.fg_minimize   = kanagawa.black
 
-theme.useless_gap   = dpi(0)
+theme.useless_gap   = dpi(1)
 theme.border_width  = dpi(2)
 theme.border_normal = kanagawa.black
 theme.border_focus  = kanagawa.grey
@@ -68,7 +62,8 @@ theme.tasklist_fg_focus = kanagawa.red
 theme.tasklist_bg_focus = kanagawa.magenta
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
+-- local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(6)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )

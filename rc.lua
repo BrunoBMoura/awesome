@@ -24,11 +24,6 @@ require("awful.hotkeys_popup.keys")
 
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
--- local volume_widget = require("volume-widget.volume")
-
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
   naughty.notify({
     preset = naughty.config.presets.critical,
@@ -37,7 +32,6 @@ if awesome.startup_errors then
   })
 end
 
--- Handle runtime errors after startup
 do
   local in_error = false
   awesome.connect_signal("debug::error", function(err)
@@ -54,14 +48,10 @@ do
     in_error = false
   end)
 end
--- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "kanagawa/theme.lua")
 
-beautiful.useless_gap = 1
+beautiful.useless_gap = 2
 awful.mouse.snap.edge_enabled = false
 
 -- This is used later as the default terminal and editor to run.
@@ -115,14 +105,8 @@ local mymainmenu = awful.menu({
   }
 })
 
---[[ mylauncher = awful.widget.launcher({
-  image = beautiful.awesome_icon,
-  menu = mymainmenu
-}) ]]
-
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
+menubar.utils.terminal = terminal
 
 -- Keyboard map indicator and switcher
 local mykeyboardlayout = awful.widget.keyboardlayout()
@@ -625,20 +609,22 @@ root.keys(globalkeys)
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+    {
+      rule = { },
+      properties = {
+        border_width = beautiful.border_width,
+        border_color = beautiful.border_normal,
+        focus        = awful.client.focus.filter,
+        raise        = true,
+        keys         = clientkeys,
+        buttons      = clientbuttons,
+        screen       = awful.screen.preferred,
+        placement    = awful.placement.no_overlap+awful.placement.no_offscreen
      }
     },
-
     -- Floating clients.
-    { rule_any = {
+    {
+      rule_any = {
         instance = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
@@ -666,21 +652,25 @@ awful.rules.rules = {
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+      }, properties = { floating = true }
+    },
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
+    {
+      rule_any = {
+        type = { "normal", "dialog" }
+      },
+      properties = {
+        titlebars_enabled = false
+      }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
 }
--- }}}
 
--- {{{ Signals
--- Signal functionto execute when a new client appears.
+-- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
   -- Set the windows at the slave,
   -- i.e. put it at the end of others instead of setting it master.
@@ -733,17 +723,12 @@ client.connect_signal("request::titlebars", function(c)
   }
 end)
 
--- Enable sloppy focus, so that focus follows mouse.
---[[ client.connect_signal("mouse::enter", function(c)
-  c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end) ]]
-
 client.connect_signal("focus", function(c)
   c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
   c.border_color = beautiful.border_normal
 end)
--- }}}
 
--- awful.spawn.with_shell("picom")
+awful.spawn.with_shell("picom")
+awful.spawn.with_shell("systemctl start logid.service")
