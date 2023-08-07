@@ -8,6 +8,8 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
+vicious = require("vicious")
+
 menubar = require("menubar")
 
 menubar.utils.terminal = USER.terminal

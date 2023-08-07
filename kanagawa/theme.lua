@@ -20,12 +20,13 @@ local kanagawa = {
     cyan       = "#8ea4a2",
     white      = "#c5c9c5",
     grey       = "#282727",
-    orange     = "#b6927b"
+    orange     = "#b6927b",
+    border     = "#2d4f67"
 }
 
 local theme = {}
 
-local display = kanagawa.grey
+local display = kanagawa.border
 
 theme.font          = "JetBrains Mono 12"
 theme.bg_normal     = kanagawa.background
@@ -61,6 +62,7 @@ theme.taglist_bg_focus = display
 theme.taglist_fg_focus = kanagawa.white
 theme.tasklist_fg_focus = kanagawa.red
 theme.tasklist_bg_focus = display
+theme.hotkeys_border_color = display
 
 -- Generate taglist squares:
 -- local taglist_square_size = dpi(4)
