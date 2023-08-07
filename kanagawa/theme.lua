@@ -26,7 +26,6 @@ local kanagawa = {
 local theme = {}
 
 theme.font          = "JetBrains Mono 12"
-
 theme.bg_normal     = kanagawa.background
 theme.bg_focus      = kanagawa.black
 theme.bg_urgent     = kanagawa.yellow
@@ -38,7 +37,7 @@ theme.fg_focus      = kanagawa.orange
 theme.fg_urgent     = kanagawa.red
 theme.fg_minimize   = kanagawa.black
 
-theme.useless_gap   = dpi(1)
+theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
 theme.border_normal = kanagawa.black
 theme.border_focus  = kanagawa.grey
@@ -146,5 +145,3 @@ theme.awesome_icon = theme_assets.awesome_icon(
 theme.icon_theme = nil
 
 return theme
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
