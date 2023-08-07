@@ -3,7 +3,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "kanagawa/theme.lua")
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", USER.terminal .. " -e man awesome" },
-   -- { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "edit config", USER.editor .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
 }
@@ -71,7 +71,7 @@ end
 
 screen.connect_signal("property::geometry", set_wallpaper)
 
-local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 wibox = require("wibox")
 
@@ -165,13 +165,6 @@ awful.screen.connect_for_each_screen(function(s)
       s.mylayoutbox
     },
   })
-end)
-
-client.connect_signal("focus", function(c)
-  c.border_color = beautiful.border_focus
-end)
-client.connect_signal("unfocus", function(c)
-  c.border_color = beautiful.border_normal
 end)
 
 awful.mouse.snap.edge_enabled = false

@@ -24,9 +24,9 @@ do
 end
 
 awful.layout.layouts = {
-  awful.layout.suit.floating,
-  awful.layout.suit.tile,
   awful.layout.suit.fair,
+  awful.layout.suit.tile,
+  awful.layout.suit.floating,
   -- awful.layout.suit.tile.left,
   -- awful.layout.suit.max,
   -- awful.layout.suit.magnifier,
@@ -41,9 +41,3 @@ awful.layout.layouts = {
   -- awful.layout.suit.corner.sw,
   -- awful.layout.suit.corner.se,
 }
-
-client.connect_signal("manage", function(c)
-  if not awesome.startup then awful.client.setslave(c)
-    awful.placement.no_offscreen(c)
-  end
-end)

@@ -25,6 +25,8 @@ local kanagawa = {
 
 local theme = {}
 
+local display = kanagawa.grey
+
 theme.font          = "JetBrains Mono 12"
 theme.bg_normal     = kanagawa.background
 theme.bg_focus      = kanagawa.black
@@ -40,7 +42,7 @@ theme.fg_minimize   = kanagawa.black
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
 theme.border_normal = kanagawa.black
-theme.border_focus  = kanagawa.grey
+theme.border_focus  = display
 theme.border_marked = kanagawa.yellow
 
 -- There are other variable sets
@@ -55,10 +57,10 @@ theme.border_marked = kanagawa.yellow
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
-theme.taglist_bg_focus = kanagawa.magenta
+theme.taglist_bg_focus = display
 theme.taglist_fg_focus = kanagawa.white
 theme.tasklist_fg_focus = kanagawa.red
-theme.tasklist_bg_focus = kanagawa.magenta
+theme.tasklist_bg_focus = display
 
 -- Generate taglist squares:
 -- local taglist_square_size = dpi(4)
