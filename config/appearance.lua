@@ -1,6 +1,10 @@
+local dpi = beautiful.xresources.apply_dpi
+
 beautiful.init(gears.filesystem.get_configuration_dir() .. "kanagawa/theme.lua")
 
-myawesomemenu = {
+local kanagawa = require("kanagawa.theme").palette
+
+local awesome_menu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", USER.terminal .. " -e man awesome" },
    { "edit config", USER.editor .. " " .. awesome.conffile },
@@ -8,15 +12,13 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
-vicious = require("vicious")
-
 menubar = require("menubar")
 
 menubar.utils.terminal = USER.terminal
 
 mymainmenu = awful.menu({
   items = {
-    { "awesome", myawesomemenu, beautiful.awesome_icon },
+    { "awesome", awesome_menu, beautiful.awesome_icon },
     { "open terminal", USER.terminal }
   }
 })
@@ -73,9 +75,9 @@ end
 
 screen.connect_signal("property::geometry", set_wallpaper)
 
-volume_widget = require('awesome-wm-widgets.volume-widget.volume')
-
 wibox = require("wibox")
+
+local utils = require("config.widgets.utils")
 
 awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
@@ -106,8 +108,8 @@ awful.screen.connect_for_each_screen(function(s)
         {
           forced_width  = 5,
           forced_height = 25,
-          thickness     = 1,
-          color         = '#181616',
+          thickness     = 2,
+          color         = beautiful.bg_focus,
           widget        = wibox.widget.separator
         },
         valign = 'center',
@@ -120,7 +122,8 @@ awful.screen.connect_for_each_screen(function(s)
     widget_template = {
       {
         wibox.widget.base.make_widget(),
-        forced_height = 5,
+        forced_height = dpi(3),
+        forced_width  = dpi(1),
         id            = 'background_role',
         widget        = wibox.container.background,
       },
@@ -129,7 +132,7 @@ awful.screen.connect_for_each_screen(function(s)
           id     = 'clienticon',
           widget = awful.widget.clienticon,
         },
-        margins = 5,
+        margins = dpi(5),
         widget  = wibox.container.margin
       },
       nil,
@@ -139,26 +142,51 @@ awful.screen.connect_for_each_screen(function(s)
       layout = wibox.layout.align.vertical,
     },
   }
+
+  local separator = wibox.widget.textbox(" ")
+
   -- Create the wibox
   s.mywibox = awful.wibar({ position = "top", screen = s })
   -- Add widgets to the wibox
-  s.mywibox:setup( {
+  s.mywibox:setup({
+    spacint = dpi(50),
     layout = wibox.layout.align.horizontal,
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
       s.mytaglist,
+      separator,
       s.mypromptbox,
       s.mytasklist,
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      require("config.widgets.calendar").create(s)
+      require("config.widgets.calendar").create(s),
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      volume_widget({ widget_type = "horizontal_bar" }),
-      require("config.widgets.keyboard_layout").create(),
+      utils.underlined(
+        require('awesome-wm-widgets.volume-widget.volume')({
+          widget_type = "horizontal_bar"
+        }),
+        kanagawa.red
+      ),
+      separator,
+      utils.underlined(
+        require("config.widgets.keyboard_layout").create(),
+        kanagawa.yellow
+      ),
+      separator,
+      utils.underlined(
+        require("config.widgets.ram").create(),
+        kanagawa.green
+      ),
+      separator,
+      utils.underlined(
+        require("config.widgets.uptime").create(),
+        kanagawa.magenta
+      ),
+      separator,
       wibox.widget.systray(),
       s.mylayoutbox
     },

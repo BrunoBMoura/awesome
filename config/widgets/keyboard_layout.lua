@@ -1,3 +1,5 @@
+-- https://bbs.archlinux.org/viewtopic.php?id=182862
+
 local awful = require("awful")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
@@ -6,6 +8,7 @@ local keyboard_layout = {}
 
 keyboard_layout.create = function()
   local kbl_widget = awful.widget.keyboardlayout()
+
   awful.tooltip({
     objects = { kbl_widget },
     mode = "outside",

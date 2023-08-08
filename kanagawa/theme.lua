@@ -27,6 +27,7 @@ local kanagawa = {
 local theme = {}
 
 local display = kanagawa.border
+theme.palette = kanagawa
 
 theme.font          = "JetBrains Mono 12"
 theme.bg_normal     = kanagawa.background
@@ -40,8 +41,8 @@ theme.fg_focus      = kanagawa.orange
 theme.fg_urgent     = kanagawa.red
 theme.fg_minimize   = kanagawa.black
 
-theme.useless_gap   = dpi(3)
-theme.border_width  = dpi(2)
+theme.useless_gap   = dpi(2)
+theme.border_width  = dpi(1)
 theme.border_normal = kanagawa.black
 theme.border_focus  = display
 theme.border_marked = kanagawa.yellow
