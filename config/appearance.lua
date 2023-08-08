@@ -77,10 +77,6 @@ volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 wibox = require("wibox")
 
-keyboard_layout = awful.widget.keyboardlayout()
-
-mytextclock = wibox.widget.textclock()
-
 awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
   awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
@@ -153,16 +149,16 @@ awful.screen.connect_for_each_screen(function(s)
       layout = wibox.layout.fixed.horizontal,
       s.mytaglist,
       s.mypromptbox,
-      s.mytasklist
+      s.mytasklist,
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      mytextclock
+      require("config.widgets.calendar").create(s)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       volume_widget({ widget_type = "horizontal_bar" }),
-      keyboard_layout,
+      require("config.widgets.keyboard_layout").create(),
       wibox.widget.systray(),
       s.mylayoutbox
     },
