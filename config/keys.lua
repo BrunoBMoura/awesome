@@ -43,11 +43,7 @@ globalkeys = gears.table.join(
     { description = "decreases the volume", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "space", function()
-    awful.spawn.with_shell(
-      "bash " ..
-      gears.filesystem.get_configuration_dir() ..
-      "scripts/kbswap_br_us.sh &>> /tmp/kb_swap.log"
-    )
+      keyboard_layout_widget.switch()
     end,
     { description = "swaps keyboard layout", group = "custom" }
   ),

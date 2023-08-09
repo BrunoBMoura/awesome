@@ -36,7 +36,7 @@ ram.create = function()
   local function update_ram_widget()
     local ram_info = get_ram_usage()
     local ram_percentage = math.floor((ram_info.used / ram_info.total) * 100)
-    ram_widget:set_text(string.format("RAM:%s%%", ram_percentage))
+    ram_widget:set_text(string.format("Ram:%s%%", ram_percentage))
   end
 
   update_ram_widget()

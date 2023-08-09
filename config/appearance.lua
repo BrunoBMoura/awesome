@@ -79,6 +79,10 @@ wibox = require("wibox")
 
 local utils = require("config.widgets.utils")
 
+volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+
+keyboard_layout_widget = require("config.widgets.keyboard_layout").create()
+
 awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
   awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
@@ -149,7 +153,7 @@ awful.screen.connect_for_each_screen(function(s)
   s.mywibox = awful.wibar({ position = "top", screen = s })
   -- Add widgets to the wibox
   s.mywibox:setup({
-    spacint = dpi(50),
+    spacing = dpi(50),
     layout = wibox.layout.align.horizontal,
     expand = "none",
     { -- Left widgets
@@ -166,14 +170,14 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       utils.underlined(
-        require('awesome-wm-widgets.volume-widget.volume')({
+        volume_widget({
           widget_type = "horizontal_bar"
         }),
         kanagawa.red
       ),
       separator,
       utils.underlined(
-        require("config.widgets.keyboard_layout").create(),
+        keyboard_layout_widget,
         kanagawa.yellow
       ),
       separator,

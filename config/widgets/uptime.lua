@@ -1,8 +1,6 @@
-local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
-local dpi = beautiful.xresources.apply_dpi
 local utils = require("config.widgets.utils")
 
 -- Local widget information.
@@ -67,7 +65,16 @@ uptime.create = function()
     font = beautiful.font
   }
 
-  awful.tooltip({
+  utils.simple_tooltip({ uptime_widget }, function()
+    local startup = get_startup_time()
+    return string.format(
+      "Up since %s/%s/%s, %s:%s:%s",
+      startup.day, startup.month, startup.year,
+      startup.hour, startup.min, startup.sec
+    )
+  end)
+
+  --[[ awful.tooltip({
     objects = { uptime_widget },
     mode = "outside",
     align = "right",
@@ -82,12 +89,12 @@ uptime.create = function()
     preferred_positions = { "bottom", "center" },
     margin_leftright = dpi(15),
     margin_topbottom = dpi(15)
-  })
+  }) ]]
 
   local function update_uptime_widget()
     local uptime_info = get_uptime()
     uptime_widget:set_text(
-      string.format("UPTIME: %sh%sm", uptime_info.hour, uptime_info.min)
+      string.format("Uptime: %sh%sm", uptime_info.hour, uptime_info.min)
     )
   end
 
