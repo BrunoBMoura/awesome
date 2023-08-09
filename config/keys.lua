@@ -1,7 +1,3 @@
-hotkeys_popup = require("awful.hotkeys_popup")
-
-require("awful.hotkeys_popup.keys")
-
 root.buttons(
   gears.table.join(
     awful.button({ }, 3, function() mymainmenu:toggle() end),
@@ -58,7 +54,7 @@ globalkeys = gears.table.join(
     { description = "alt+tab like swapping with rofi", group = "custom" }
   ),
   awful.key(
-    { USER.keys.super }, "s", hotkeys_popup.show_help,
+    { USER.keys.super }, "s", require("awful.hotkeys_popup").show_help,
     { description = "show help", group = "awesome" }
   ),
   awful.key(
@@ -160,7 +156,7 @@ globalkeys = gears.table.join(
     { description = "reload awesome", group = "awesome" }
   ),
   awful.key(
-    { USER.keys.super, USER.keys.shift }, "q", awesome.quit,
+    { USER.keys.super, USER.keys.shift, USER.keys.alt }, "q", awesome.quit,
     { description = "quit awesome", group = "awesome" }
   ),
   awful.key({ USER.keys.super, USER.keys.shift }, "h", function()
@@ -234,7 +230,7 @@ clientkeys = gears.table.join(
     end,
     { description = "toggle fullscreen", group = "client" }
   ),
-  awful.key({ USER.keys.super, USER.keys.shift }, "c", function(c)
+  awful.key({ USER.keys.super }, "q", function(c)
       c:kill()
     end,
     { description = "close", group = "client" }

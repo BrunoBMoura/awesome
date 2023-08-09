@@ -24,11 +24,9 @@ calendar.create = function(screen)
      font = beautiful.font,
      long_weekdays = false,
      margin = dpi(10), -- 10
-     style_month = {border_width = dpi(1), shape = cal_shape, padding = dpi(30)},
-     --[[ style_header = {border_width = 0, bg_color = "#00000000"},
-     style_weekday = {border_width = 0, bg_color = "#00000000"},
-     style_normal = {border_width = 0, bg_color = "#00000000"},
-     style_focus = {border_width = 0, bg_color = "#8AB4F8"}, ]]
+     style_month = {
+       border_width = dpi(1), shape = cal_shape, padding = dpi(30)
+     }
   })
 
   -- Attach calentar to clock_widget
