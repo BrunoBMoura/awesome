@@ -26,12 +26,12 @@ end
 local ram = {}
 
 ram.create = function()
-  local ram_widget = wibox.widget {
+  local ram_widget = wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",
     valign = "center",
     font = beautiful.font
-  }
+  })
 
   local function update_ram_widget()
     local ram_info = get_ram_usage()

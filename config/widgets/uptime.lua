@@ -49,7 +49,7 @@ local function get_uptime()
     }
   end
   return {
-    hour = hour,
+    hour = tonumber(hour) < 10 and "0" .. hour or hour,
     min = min
   }
 end
@@ -73,23 +73,6 @@ uptime.create = function()
       startup.hour, startup.min, startup.sec
     )
   end)
-
-  --[[ awful.tooltip({
-    objects = { uptime_widget },
-    mode = "outside",
-    align = "right",
-    timer_function = function()
-      local startup = get_startup_time()
-      return string.format(
-        "Up since %s/%s/%s, %s:%s:%s",
-        startup.day, startup.month, startup.year,
-        startup.hour, startup.min, startup.sec
-      )
-    end,
-    preferred_positions = { "bottom", "center" },
-    margin_leftright = dpi(15),
-    margin_topbottom = dpi(15)
-  }) ]]
 
   local function update_uptime_widget()
     local uptime_info = get_uptime()
