@@ -79,11 +79,9 @@ wibox = require("wibox")
 
 local utils = require("config.widgets.utils")
 
-volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+volume_widget = require("config.widgets.volume")
 
-another_volume = require("config.widgets.volume").create()
-
-keyboard_layout_widget = require("config.widgets.keyboard_layout").create()
+keyboard_layout_widget = require("config.widgets.keyboard_layout")
 
 awful.screen.connect_for_each_screen(function(s)
   set_wallpaper(s)
@@ -168,21 +166,14 @@ awful.screen.connect_for_each_screen(function(s)
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
       utils.underlined(
-        require("config.widgets.calendar").create(s),
+        require("config.widgets.calendar")(s),
         kanagawa.border
       ),
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       utils.underlined(
-        another_volume,
-        kanagawa.white
-      ),
-      separator,
-      utils.underlined(
-        volume_widget({
-          widget_type = "horizontal_bar"
-        }),
+        volume_widget,
         kanagawa.red
       ),
       separator,
@@ -192,12 +183,12 @@ awful.screen.connect_for_each_screen(function(s)
       ),
       separator,
       utils.underlined(
-        require("config.widgets.ram")(),
+        require("config.widgets.ram"),
         kanagawa.green
       ),
        separator,
       utils.underlined(
-        require("config.widgets.uptime")(),
+        require("config.widgets.uptime"),
         kanagawa.magenta
       ),
       separator,

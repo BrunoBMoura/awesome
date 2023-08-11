@@ -33,13 +33,13 @@ local keyboard = {
   }
 }
 
-keyboard.create = function()
+local function create()
   local kbl_widget = wibox.widget.textbox()
 
   -- First, invoke the setxkbmap command to set the initial layout and set
   -- the widgets text accordingly.
   awful.spawn.easy_async(build_cmd(keyboard.layouts[keyboard.current].name))
-  kbl_widget:set_text(string.format("Layout: %s", keyboard.layouts[keyboard.current].name))
+  kbl_widget:set_text(string.format("Layout:%s", keyboard.layouts[keyboard.current].name))
 
   -- Then, set the tooltip as the current layouts description text.
   utils.simple_tooltip({ kbl_widget }, function()
@@ -50,19 +50,16 @@ keyboard.create = function()
   kbl_widget.switch = function()
     keyboard.current = keyboard.current % #keyboard.layouts + 1
     awful.spawn.easy_async(build_cmd(keyboard.layouts[keyboard.current].name))
-    kbl_widget:set_text(string.format("Layout: %s", keyboard.layouts[keyboard.current].name))
+    kbl_widget:set_text(string.format("Layout:%s", keyboard.layouts[keyboard.current].name))
   end
 
   -- And finally, add the 'click event' to the widget with a simple button.
-  kbl_widget:buttons(
-    awful.util.table.join(
-      awful.button({ }, 1, function()
-        kbl_widget.switch()
+  kbl_widget:buttons(awful.button({ }, 1, function()
+      kbl_widget.switch()
     end)
-    )
   )
 
   return kbl_widget
 end
 
-return keyboard
+return create()

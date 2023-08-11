@@ -5,48 +5,53 @@ local utils = require("config.widgets.utils")
 local spawn = require("awful.spawn")
 
 local PROCS = {
-  increase = function(device, step)
-    return string.format("amixer -D %s sset Master %s%%+", device, step)
-  end,
-  decrease = function(device, step)
-    return string.format("amixer -D %s sset Master %s%%-", device, step)
-  end,
-  get_volume = function(device)
-    return string.format("amixer -D %s sget Master", device)
-  end
+  increase = {
+    call = function(device, step)
+      return string.format("amixer -D %s sset Master %s%%+", device, step)
+    end
+  },
+  decrease = {
+    call = function(device, step)
+      return string.format("amixer -D %s sset Master %s%%-", device, step)
+    end
+  },
+  get_volume =  {
+    cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
+    match = "(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)",
+    interval = 1
+  }
 }
 
 local volume = {}
 
-volume.create = function()
-  local volume_widget = wibox.widget {
+local function worker(_)
+  volume.widget = wibox.widget {
     widget = wibox.widget.textbox,
     align = "center",
     valign = "center",
     font = beautiful.font
   }
 
-  utils.simple_tooltip({ volume_widget }, function ()
-    return PROCS.increase("pulse", 5)
+  utils.simple_tooltip({ volume.widget }, function ()
+    return "jorge"
   end)
 
-  volume_widget.increase = function(percent)
-    --[[ local volume = volume or 5
-    utils.invoke("amixer -D pulse sset Master 5%+") ]]
-    -- utils.invoke("pactl set-sink-volume @DEFAULT_SINK@ +5%")
-    -- utils.invoke("notify-send 'Volume' 'Volume increased'")
-    volume_widget:set_text("Last increase " .. percent)
+  volume.widget.increase = function(percent)
+    spawn.easy_async_with_shell(PROCS.increase.call("pulse", percent))
   end
 
-  volume_widget.decrease = function(percent)
-    --[[ local volume = volume or 5
-    utils.invoke("amixer -D pulse sset Master 5%-") ]]
-    -- utils.invoke("pactl set-sink-volume @DEFAULT_SINK@ -5%")
-    -- utils.invoke("notify-send 'Volume' 'Volume decreased'")
-    volume_widget:set_text("Last decrease " .. percent)
+  volume.widget.decrease = function(percent)
+    spawn.easy_async_with_shell(PROCS.decrease.call("pulse", percent))
   end
 
-  return volume_widget
+  local function update_volume_widget(widget, stdout)
+    local _, vol = stdout:match(PROCS.get_volume.match)
+    widget:set_text(string.format("Vol:%s%%", vol))
+  end
+
+  watch(PROCS.get_volume.cmd, PROCS.get_volume.interval, update_volume_widget, volume.widget)
+
+  return volume.widget
 end
 
-return volume
+return worker()

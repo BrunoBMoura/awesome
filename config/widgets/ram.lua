@@ -13,7 +13,7 @@ local PROC = {
 -- Ram widget module.
 local ram = {}
 
-local function worker(_)
+local function worker()
   ram.widget = wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",
@@ -38,4 +38,4 @@ local function worker(_)
   return ram.widget
 end
 
-return setmetatable(ram, { __call = function(_, ...) return worker(...) end })
+return worker()
