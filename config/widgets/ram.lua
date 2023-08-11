@@ -1,7 +1,6 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
-local utils = require("config.widgets.utils")
 local spawn = require("awful.spawn")
 
 -- Local widget information.
@@ -14,8 +13,7 @@ local PROC = {
 -- Ram widget module.
 local ram = {}
 
-local function worker(user_args)
-
+local function worker(_)
   ram.widget = wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",

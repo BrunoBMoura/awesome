@@ -167,7 +167,10 @@ awful.screen.connect_for_each_screen(function(s)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      --require("config.widgets.calendar").create(s),
+      utils.underlined(
+        require("config.widgets.calendar").create(s),
+        kanagawa.border
+      ),
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
@@ -192,17 +195,12 @@ awful.screen.connect_for_each_screen(function(s)
         require("config.widgets.ram")(),
         kanagawa.green
       ),
-      --[[ separator,
+       separator,
       utils.underlined(
-        require("config.widgets.uptime").create(),
+        require("config.widgets.uptime")(),
         kanagawa.magenta
       ),
       separator,
-      utils.underlined(
-        require("config.widgets.calendar").create(s),
-        kanagawa.border
-      ),
-      separator, ]]
       wibox.widget.systray(),
       s.mylayoutbox
     },
