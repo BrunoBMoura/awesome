@@ -6,20 +6,6 @@ local naughty = require("naughty")
 -- Utils module.
 local utils = {}
 
--- Invokes a shell command and returns its result as a string to be
--- further matched and processed.
-utils.invoke = function(shell_cmd)
-  local output
-  awful.spawn.easy_async(shell_cmd, function(stdout)
-    output = stdout
-  end)
-  --[[ local handle = io.popen(shell_cmd)
-  local result = handle:read("*a")
-  handle:close()
-  return result ]]
-  return output
-end
-
 -- Wraps a already existing widget with a underline.
 utils.underlined = function(widget, underline_color)
   local underline = wibox.widget {

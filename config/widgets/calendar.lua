@@ -3,15 +3,12 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local utils = require("config.widgets.utils")
 
 -- Calendar widget module.
 local calendar = {}
 
 local function create(screen)
   local clock_widget = wibox.widget.textclock()
-
-  utils.simple_tooltip({ clock_widget }, function() return os.date("%x") end)
 
   local cal_shape = function(cr, width, height)
     gears.shape.rectangle(cr, width, height)
