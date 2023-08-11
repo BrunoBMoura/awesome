@@ -1,8 +1,6 @@
 -- https://bbs.archlinux.org/viewtopic.php?id=182862
 
 local awful = require("awful")
-local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local utils = require("config.widgets.utils")
 
 -- Local widget information.

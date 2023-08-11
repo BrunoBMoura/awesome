@@ -1,12 +1,12 @@
 root.buttons(
   gears.table.join(
-    awful.button({ }, 3, function() mymainmenu:toggle() end),
+    awful.button({ }, 3, function() main_menu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
   )
 )
 
-globalkeys = gears.table.join(
+global_keys = gears.table.join(
   -- Custom keybindings
   awful.key({ USER.keys.alt }, "k", function()
       awful.screen.focus_bydirection("up")
@@ -103,7 +103,7 @@ globalkeys = gears.table.join(
     { description = "decrease master width factor", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "w", function()
-      mymainmenu:show()
+      main_menu:show()
     end,
     { description = "show main menu", group = "awesome" }
   ),
@@ -223,7 +223,7 @@ globalkeys = gears.table.join(
   )
 )
 
-clientkeys = gears.table.join(
+client_keys = gears.table.join(
   awful.key({ USER.keys.super }, "f", function(c)
       c.fullscreen = not c.fullscreen
       c:raise()
@@ -286,7 +286,7 @@ clientkeys = gears.table.join(
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-  globalkeys = gears.table.join(globalkeys,
+  global_keys = gears.table.join(global_keys,
     -- View tag only.
     awful.key({ USER.keys.super }, "#" .. i + 9, function()
         local screen = awful.screen.focused()
@@ -332,7 +332,7 @@ for i = 1, 9 do
   )
 end
 
-clientbuttons = gears.table.join(
+client_buttons = gears.table.join(
   awful.button({ }, 1, function(c)
     c:emit_signal("request::activate", "mouse_click", { raise = true })
   end),
@@ -346,4 +346,4 @@ clientbuttons = gears.table.join(
   end)
 )
 
-root.keys(globalkeys)
+root.keys(global_keys)
