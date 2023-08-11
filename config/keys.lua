@@ -29,12 +29,12 @@ globalkeys = gears.table.join(
     { description = "focus the right screen", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "]", function()
-      volume_widget:inc(5)
+      another_volume.increase(5)
     end,
     { description = "increases the volume", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "[", function()
-      volume_widget:dec(5)
+      another_volume.decrease(5)
     end,
     { description = "decreases the volume", group = "custom" }
   ),

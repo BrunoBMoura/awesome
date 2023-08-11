@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local utils = require("config.widgets.utils")
+local spawn = require("awful.spawn")
 
 -- Local widget information.
 local PROC = {
@@ -10,40 +11,36 @@ local PROC = {
   interval = 5
 }
 
--- Returns a table containing the total, used and free ram
--- memory of the system.
-local function get_ram_usage()
-  local result = utils.invoke(PROC.cmd)
-  local total, used, free = result:match(PROC.match)
-  return {
-    total = tonumber(total),
-    used = tonumber(used),
-    free = tonumber(free)
-  }
-end
-
 -- Ram widget module.
 local ram = {}
 
-ram.create = function()
-  local ram_widget = wibox.widget({
+local function worker(user_args)
+
+  ram.widget = wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",
     valign = "center",
     font = beautiful.font
   })
 
-  local function update_ram_widget()
-    local ram_info = get_ram_usage()
-    local ram_percentage = math.floor((ram_info.used / ram_info.total) * 100)
-    ram_widget:set_text(string.format("Ram:%s%%", ram_percentage))
+  spawn.easy_async_with_shell(PROC.cmd, function(stdout)
+    local total, used, free = stdout:match(PROC.match)
+    local ram_percentage = math.floor((used / total) * 100)
+    ram.widget:set_text(string.format("Ram:%s%%", ram_percentage))
+  end)
+
+  local function update_ram_widget(widget, stdout)
+    local total, used, free = stdout:match(PROC.match)
+    -- local ram_info = get_ram_usage()
+    local ram_percentage = math.floor((used / total) * 100)
+    widget:set_text(string.format("Ram:%s%%", ram_percentage))
   end
 
-  update_ram_widget()
+  -- update_ram_widget()
 
-  watch(PROC.cmd, PROC.interval, update_ram_widget, ram_widget)
+  watch(PROC.cmd, 1, update_ram_widget, ram.widget)
 
-  return ram_widget
+  return ram.widget
 end
 
-return ram
+return setmetatable(ram, { __call = function(_, ...) return worker(...) end })
