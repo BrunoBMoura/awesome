@@ -30,7 +30,7 @@ local function worker()
   }
 
   local startup = {}
-  spawn.easy_async(PROCS.main.cmd, function(stdout)
+  spawn.easy_async(PROCS.tooltip.cmd, function(stdout)
     startup.year, startup.month, startup.day,
     startup.hour, startup.min, startup.sec = stdout:match(PROCS.tooltip.match)
   end)
