@@ -1,5 +1,3 @@
--- https://bbs.archlinux.org/viewtopic.php?id=182862
-
 local awful = require("awful")
 local utils = require("config.widgets.utils")
 
@@ -32,7 +30,7 @@ local keyboard = {
 }
 
 local function create()
-  local kbl_widget = wibox.widget.textbox()
+  local kbl_widget = utils.simple_textbox()
 
   -- First, invoke the setxkbmap command to set the initial layout and set
   -- the widgets text accordingly.

@@ -1,4 +1,3 @@
-local wibox = require("wibox")
 local watch = require("awful.widget.watch")
 local utils = require("config.widgets.utils")
 local spawn = require("awful.spawn")
@@ -28,12 +27,7 @@ local PROCS = {
 local volume = {}
 
 local function worker()
-  volume.widget = wibox.widget {
-    widget = wibox.widget.textbox,
-    align = "center",
-    valign = "center",
-    font = beautiful.font
-  }
+  volume.widget = utils.simple_textbox()
 
   -- Set the initial tooltip value.
   volume.tooltip = ""

@@ -21,12 +21,13 @@ local kanagawa = {
     white      = "#c5c9c5",
     grey       = "#282727",
     orange     = "#b6927b",
-    border     = "#2d4f67"
+    border1    = "#2d4f67",
+    border2    = "#8992a7"
 }
 
 local theme = {}
 
-local display = kanagawa.border
+local display = kanagawa.border1
 theme.palette = kanagawa
 
 theme.font          = "JetBrains Mono 12"
@@ -37,7 +38,7 @@ theme.bg_minimize   = kanagawa.orange
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = kanagawa.white
-theme.fg_focus      = kanagawa.orange
+theme.fg_focus      = kanagawa.white
 theme.fg_urgent     = kanagawa.red
 theme.fg_minimize   = kanagawa.black
 

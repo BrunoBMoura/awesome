@@ -1,7 +1,6 @@
-local wibox = require("wibox")
-local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
+local utils = require("config.widgets.utils")
 
 -- Local widget information.
 local PROC = {
@@ -14,12 +13,7 @@ local PROC = {
 local cpu = {}
 
 local function worker()
-  cpu.widget = wibox.widget({
-    widget = wibox.widget.textbox,
-    align = "center",
-    valign = "center",
-    font = beautiful.font
-  })
+  cpu.widget = utils.simple_textbox()
 
   spawn.easy_async(PROC.cmd, function(stdout)
     local used = stdout:match(PROC.match)

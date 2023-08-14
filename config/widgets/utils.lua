@@ -1,6 +1,7 @@
 local wibox = require("wibox")
-local dpi = beautiful.xresources.apply_dpi
 local awful = require("awful")
+local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
 
 -- Utils module.
 local utils = {}
@@ -38,7 +39,19 @@ utils.simple_tooltip = function(widgets_tbl, callback)
     timer_function = callback,
     preferred_positions = { "bottom", "center" },
     margin_leftright = dpi(15),
-    margin_topbottom = dpi(15)
+    margin_topbottom = dpi(15),
+    border_width = dpi(1),
+    border_color = beautiful.border_focus
+  })
+end
+
+-- Creates a simple textbox widget with default configurations.
+utils.simple_textbox = function()
+  return wibox.widget({
+    widget = wibox.widget.textbox,
+    align = "center",
+    valign = "center",
+    font = beautiful.font
   })
 end
 

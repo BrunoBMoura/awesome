@@ -1,5 +1,3 @@
-local wibox = require("wibox")
-local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
 local utils = require("config.widgets.utils")
@@ -22,12 +20,7 @@ local PROCS = {
 local uptime = {}
 
 local function worker()
-  uptime.widget = wibox.widget {
-    widget = wibox.widget.textbox,
-    align = "center",
-    valign = "center",
-    font = beautiful.font
-  }
+  uptime.widget = utils.simple_textbox()
 
   local startup = {}
   spawn.easy_async(PROCS.tooltip.cmd, function(stdout)

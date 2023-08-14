@@ -1,7 +1,6 @@
-local wibox = require("wibox")
-local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
+local utils = require("config.widgets.utils")
 
 -- Local widget information.
 local PROC = {
@@ -14,13 +13,7 @@ local PROC = {
 local ram = {}
 
 local function worker()
-  ram.widget = wibox.widget({
-    widget = wibox.widget.textbox,
-    align = "center",
-    valign = "center",
-    font = beautiful.font
-  })
-
+  ram.widget = utils.simple_textbox()
   spawn.easy_async(PROC.cmd, function(stdout)
     local total, used, _ = stdout:match(PROC.match)
     local ram_percentage = math.floor((used / total) * 100)
