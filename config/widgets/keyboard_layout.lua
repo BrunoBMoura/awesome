@@ -51,7 +51,7 @@ local function create()
 
   -- And finally, add the 'click event' to the widget with a simple button.
   kbl_widget:buttons(awful.button({ }, 1, function()
-      kbl_widget.switch()
+      kbl_widget:switch()
     end)
   )
 

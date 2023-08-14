@@ -13,7 +13,7 @@ utils.underlined = function(widget, underline_color)
     orientation   = "horizontal",
     forced_height = dpi(1),
     forced_width  = dpi(25),
-    color         = underline_color,
+    color         = underline_color
   }
 
   return wibox.widget({
