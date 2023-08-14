@@ -63,22 +63,22 @@ awful.screen.connect_for_each_screen(function(screen)
   screen.mypromptbox = awful.widget.prompt()
   screen.mylayoutbox = awful.widget.layoutbox(screen)
   screen.mylayoutbox:buttons(
-  gears.table.join(
-  awful.button({ }, 1, function() awful.layout.inc( 1) end),
-  awful.button({ }, 3, function() awful.layout.inc(-1) end)
-  )
+    gears.table.join(
+      awful.button({ }, 1, function() awful.layout.inc( 1) end),
+      awful.button({ }, 3, function() awful.layout.inc(-1) end)
+    )
   )
   -- Create a taglist widget
-  screen.mytaglist = awful.widget.taglist {
+  screen.mytaglist = awful.widget.taglist({
     screen  = screen,
     filter  = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
-  }
-  -- Create a tasklis.
+  })
+  -- Create a tasklist.
   screen.mytasklist = require("config.tasklist")(screen, tasklist_buttons)
   -- Create the wibox.
   screen.mywibox = awful.wibar({ position = "top", screen = screen })
   -- Add widgets to the wibox.
-  screen.mywibox:setup(require("config.wibox")(screen))
+  screen.mywibox:setup(require("config.bar")(screen))
 end)
 

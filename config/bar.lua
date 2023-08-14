@@ -16,21 +16,24 @@ local function create(screen)
       screen.mytaglist,
       separator,
       screen.mypromptbox,
+      separator,
       screen.mytasklist,
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.underlined(require("config.widgets.calendar")(screen), kanagawa.border),
+      require("config.widgets.calendar")(screen)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
+      utils.underlined(require("config.widgets.cpu"), kanagawa.orange),
+      separator,
       utils.underlined(require("config.widgets.ram"), kanagawa.green),
+      separator,
+      utils.underlined(require("config.widgets.uptime"), kanagawa.magenta),
       separator,
       utils.underlined(volume_widget, kanagawa.red),
       separator,
       utils.underlined(keyboard_layout_widget, kanagawa.yellow),
-      separator,
-      utils.underlined(require("config.widgets.uptime"), kanagawa.magenta),
       separator,
       wibox.widget.systray(),
       screen.mylayoutbox

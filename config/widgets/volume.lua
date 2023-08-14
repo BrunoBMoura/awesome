@@ -77,11 +77,11 @@ local function worker()
   watch(PROCS.get_volume.cmd, PROCS.get_volume.interval, update_volume_widget, volume.widget)
 
   -- And finally set the volume widget methods.
-  volume.widget.increase = function(percent)
+  volume.widget.increase = function(_, percent)
     spawn.easy_async(PROCS.increase.call("pulse", percent))
   end
 
-  volume.widget.decrease = function(percent)
+  volume.widget.decrease = function(_, percent)
     spawn.easy_async(PROCS.decrease.call("pulse", percent))
   end
 

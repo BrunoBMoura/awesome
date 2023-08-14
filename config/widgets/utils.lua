@@ -1,7 +1,6 @@
 local wibox = require("wibox")
 local dpi = beautiful.xresources.apply_dpi
 local awful = require("awful")
-local naughty = require("naughty")
 
 -- Utils module.
 local utils = {}

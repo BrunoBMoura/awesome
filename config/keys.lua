@@ -29,17 +29,17 @@ global_keys = gears.table.join(
     { description = "focus the right screen", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "]", function()
-      volume_widget.increase(5)
+      volume_widget:increase(5)
     end,
     { description = "increases the volume", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "[", function()
-      volume_widget.decrease(5)
+      volume_widget:decrease(5)
     end,
     { description = "decreases the volume", group = "custom" }
   ),
   awful.key({ USER.keys.super }, "space", function()
-      keyboard_layout_widget.switch()
+      keyboard_layout_widget:switch()
     end,
     { description = "swaps keyboard layout", group = "custom" }
   ),
