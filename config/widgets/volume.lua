@@ -1,6 +1,7 @@
 local watch = require("awful.widget.watch")
 local utils = require("config.widgets.utils")
 local spawn = require("awful.spawn")
+local awful = require("awful")
 
 local PROCS = {
   increase = {
@@ -21,7 +22,13 @@ local PROCS = {
   get_sink = {
     cmd = [[bash -c "pactl list sinks | grep -E 'State:|Description:'"]],
     interval = 1
-  }
+  },
+  swap_sink = function()
+    local script_name = "scripts/pulseaudio/rofi_sink_swap.sh"
+    local script_path = require("gears.filesystem").get_configuration_dir()
+    return string.format("bash %s/%s", script_path, script_name)
+  end
+
 }
 
 local volume = {}
@@ -78,6 +85,15 @@ local function worker()
   volume.widget.decrease = function(_, percent)
     spawn.easy_async(PROCS.decrease.call("pulse", percent))
   end
+
+  volume.widget.swap_sink = function()
+    awful.spawn.with_shell(PROCS.swap_sink())
+  end
+
+  volume.widget:buttons(awful.button({ }, 1, function()
+      volume.widget:swap_sink()
+    end)
+  )
 
   return volume.widget
 end
