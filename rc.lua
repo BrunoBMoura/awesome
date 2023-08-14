@@ -1,6 +1,6 @@
 require("config.init")
-require("config.setup")
 require("config.user")
+require("config.setup")
 require("config.appearance")
 require("config.keys")
 require("config.rules")

@@ -1,4 +1,3 @@
-
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi = beautiful.xresources.apply_dpi
@@ -30,7 +29,7 @@ local function create(screen, buttons)
       widget_template = {
         {
           wibox.widget.base.make_widget(),
-          forced_height = dpi(3),
+          forced_height = dpi(2),
           forced_width  = dpi(1),
           id            = 'background_role',
           widget        = wibox.container.background,

@@ -2,6 +2,7 @@ local watch = require("awful.widget.watch")
 local utils = require("config.widgets.utils")
 local spawn = require("awful.spawn")
 local awful = require("awful")
+local gears = require("gears")
 
 local PROCS = {
   increase = {
@@ -23,12 +24,16 @@ local PROCS = {
     cmd = [[bash -c "pactl list sinks | grep -E 'State:|Description:'"]],
     interval = 1
   },
-  swap_sink = function()
+  popup_swap_sink = function()
     local script_name = "scripts/pulseaudio/rofi_sink_swap.sh"
-    local script_path = require("gears.filesystem").get_configuration_dir()
+    local script_path = gears.filesystem.get_configuration_dir()
     return string.format("bash %s/%s", script_path, script_name)
-  end
-
+  end,
+  --[[ popup_swap_source = function()
+    local script_name = "scripts/pulseaudio/rofi_source_swap.sh"
+    local script_path = gears.filesystem.get_configuration_dir()
+    return string.format("bash %s/%s", script_path, script_name)
+  end, ]]
 }
 
 local volume = {}
@@ -37,9 +42,10 @@ local function worker()
   volume.widget = utils.simple_textbox()
 
   -- Set the initial tooltip value.
-  volume.tooltip = ""
+  volume.tooltip = {}
+  volume.tooltip.source = ""
   utils.simple_tooltip({ volume.widget }, function()
-    return string.format("Sink: %s", volume.tooltip)
+    return string.format("Sink: %s", volume.tooltip.source)
   end)
 
   -- And setup a watch to update the tooltip content.
@@ -67,7 +73,7 @@ local function worker()
       return "No device found"
     end
 
-    volume.tooltip = extract_running_sink(stdout)
+    volume.tooltip.source = extract_running_sink(stdout)
   end)
 
   local function update_volume_widget(widget, stdout)
@@ -86,13 +92,19 @@ local function worker()
     spawn.easy_async(PROCS.decrease.call("pulse", percent))
   end
 
-  volume.widget.swap_sink = function()
-    awful.spawn.with_shell(PROCS.swap_sink())
+  volume.widget.popup_swap_sink = function()
+    awful.spawn.with_shell(PROCS.popup_swap_sink())
   end
 
-  volume.widget:buttons(awful.button({ }, 1, function()
-      volume.widget:swap_sink()
-    end)
+  volume.widget:buttons(
+    gears.table.join(
+      awful.button({ }, 1, function()
+        volume.widget:popup_swap_sink()
+      end),
+      awful.button({ }, 3, function()
+        volume.widget:popup_swap_sink()
+      end)
+    )
   )
 
   return volume.widget

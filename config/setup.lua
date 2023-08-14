@@ -39,3 +39,8 @@ awful.layout.layouts = {
   -- awful.layout.suit.corner.sw,
   -- awful.layout.suit.corner.se,
 }
+
+awful.mouse.snap.edge_enabled = false
+
+menubar = require("menubar")
+menubar.utils.terminal = USER.terminal
