@@ -27,7 +27,7 @@ local kanagawa = {
 
 local theme = {}
 
-local display = kanagawa.border1
+local display = kanagawa.border2
 theme.palette = kanagawa
 
 theme.font          = "JetBrains Mono 12"
@@ -95,7 +95,7 @@ theme.menu_width  = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.wallpaper = themes_path.."kanagawa/background.png"
+theme.wallpaper = themes_path.."kanagawa/ocean.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."kanagawa/layouts/fairhw.png"
