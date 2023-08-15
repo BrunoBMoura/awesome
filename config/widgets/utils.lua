@@ -6,27 +6,18 @@ local dpi = beautiful.xresources.apply_dpi
 -- Utils module.
 local utils = {}
 
--- Wraps a already existing widget with a underline.
-utils.underlined = function(widget, underline_color)
-  local underline = wibox.widget {
-    widget        = wibox.widget.separator,
-    orientation   = "horizontal",
-    forced_height = dpi(1),
-    forced_width  = dpi(25),
-    color         = underline_color
-  }
-
-  return wibox.widget({
+-- Colorizes the given widget with the given colors.
+utils.colorize = function(widget, foreground_color, background_color)
+  local fg = foreground_color and foreground_color or beautiful.fg_normal
+  local bg = background_color and background_color or beautiful.bg_normal
+  return wibox.widget ({
     {
       widget,
-      layout = wibox.layout.stack,
+      bg = bg,
+      fg = fg,
+      widget = wibox.container.background
     },
-    {
-      underline,
-      top = dpi(20),
-      layout = wibox.container.margin,
-    },
-    layout = wibox.layout.stack,
+    layout = wibox.layout.fixed.horizontal
   })
 end
 
@@ -41,7 +32,8 @@ utils.simple_tooltip = function(widgets_tbl, callback)
     margin_leftright = dpi(15),
     margin_topbottom = dpi(15),
     border_width = dpi(1),
-    border_color = beautiful.border_focus
+    bg = beautiful.bg_normal,
+    -- border_color = beautiful.border_focus
   })
 end
 

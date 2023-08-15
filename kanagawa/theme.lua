@@ -27,7 +27,8 @@ local kanagawa = {
 
 local theme = {}
 
-local display = kanagawa.border2
+-- local display = kanagawa.border2
+local display = kanagawa.cyan
 theme.palette = kanagawa
 
 theme.font          = "JetBrains Mono 12"

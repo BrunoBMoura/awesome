@@ -7,8 +7,12 @@ local dpi = beautiful.xresources.apply_dpi
 -- Calendar widget module.
 local calendar = {}
 
-local function create(screen)
-  local clock_widget = wibox.widget.textclock()
+local function create(screen, color)
+  local color = color and color or beautiful.fg_normal
+
+  local clock_widget = wibox.widget.textclock(
+    '<span color="' .. color .. '"> %a %b %d, %H:%M </span>'
+  )
 
   local cal_shape = function(cr, width, height)
     gears.shape.rectangle(cr, width, height)
@@ -27,7 +31,9 @@ local function create(screen)
   })
 
   -- Attach calentar to clock_widget
-  month_calendar:attach(clock_widget, "tc" , { on_pressed = true, on_hover = false })
+  month_calendar:attach(clock_widget, "tc" , {
+    on_pressed = true, on_hover = false
+  })
 
   return clock_widget
 end

@@ -13,6 +13,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
+      utils.colorize(require("config.widgets.menu"), kanagawa.border),
       screen.mytaglist,
       separator,
       screen.mypromptbox,
@@ -21,19 +22,19 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      require("config.widgets.calendar")(screen)
+      require("config.widgets.calendar")(screen, kanagawa.border)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.underlined(require("config.widgets.cpu"), kanagawa.orange),
+      utils.colorize(require("config.widgets.cpu"), kanagawa.orange),
       separator,
-      utils.underlined(require("config.widgets.ram"), kanagawa.green),
+      utils.colorize(require("config.widgets.ram"), kanagawa.green),
       separator,
-      utils.underlined(require("config.widgets.uptime"), kanagawa.magenta),
+      utils.colorize(require("config.widgets.uptime"), kanagawa.magenta),
       separator,
-      utils.underlined(volume_widget, kanagawa.red),
+      utils.colorize(volume_widget, kanagawa.red),
       separator,
-      utils.underlined(keyboard_layout_widget, kanagawa.yellow),
+      utils.colorize(keyboard_layout_widget, kanagawa.yellow),
       separator,
       wibox.widget.systray(),
       screen.mylayoutbox

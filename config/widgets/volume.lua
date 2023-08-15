@@ -93,7 +93,7 @@ local function worker()
   end
 
   volume.widget.popup_swap_sink = function()
-    awful.spawn.with_shell(PROCS.popup_swap_sink())
+    spawn.with_shell(PROCS.popup_swap_sink())
   end
 
   volume.widget:buttons(
