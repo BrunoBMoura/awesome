@@ -8,8 +8,8 @@ local utils = {}
 
 -- Colorizes the given widget with the given colors.
 utils.colorize = function(widget, foreground_color, background_color)
-  local fg = foreground_color and foreground_color or beautiful.fg_normal
-  local bg = background_color and background_color or beautiful.bg_normal
+  local fg = foreground_color or beautiful.fg_normal
+  local bg = background_color or beautiful.bg_normal
   return wibox.widget ({
     {
       widget,
@@ -33,7 +33,6 @@ utils.simple_tooltip = function(widgets_tbl, callback)
     margin_topbottom = dpi(15),
     border_width = dpi(1),
     bg = beautiful.bg_normal,
-    -- border_color = beautiful.border_focus
   })
 end
 

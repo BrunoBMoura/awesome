@@ -1,8 +1,8 @@
 local utils = require("config.widgets.utils")
-local kanagawa = require("kanagawa.theme").palette
 local dpi = beautiful.xresources.apply_dpi
 local wibox = require("wibox")
 
+local colors = USER.palette
 local custom_wibox = {}
 
 local function create(screen)
@@ -13,7 +13,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(require("config.widgets.menu"), kanagawa.border),
+      utils.colorize(require("config.widgets.menu"), colors.cyan),
       screen.mytaglist,
       separator,
       screen.mypromptbox,
@@ -22,19 +22,19 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      require("config.widgets.calendar")(screen, kanagawa.border)
+      require("config.widgets.calendar")(screen, colors.cyan)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(require("config.widgets.cpu"), kanagawa.orange),
+      utils.colorize(require("config.widgets.cpu"), colors.orange),
       separator,
-      utils.colorize(require("config.widgets.ram"), kanagawa.green),
+      utils.colorize(require("config.widgets.ram"), colors.green),
       separator,
-      utils.colorize(require("config.widgets.uptime"), kanagawa.magenta),
+      utils.colorize(require("config.widgets.uptime"), colors.magenta),
       separator,
-      utils.colorize(volume_widget, kanagawa.red),
+      utils.colorize(volume_widget, colors.red),
       separator,
-      utils.colorize(keyboard_layout_widget, kanagawa.yellow),
+      utils.colorize(keyboard_layout_widget, colors.yellow),
       separator,
       wibox.widget.systray(),
       screen.mylayoutbox

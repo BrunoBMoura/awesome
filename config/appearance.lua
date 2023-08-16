@@ -1,4 +1,4 @@
-beautiful.init(gears.filesystem.get_configuration_dir() .. "kanagawa/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 
 volume_widget = require("config.widgets.volume")
 keyboard_layout_widget = require("config.widgets.keyboard_layout")
