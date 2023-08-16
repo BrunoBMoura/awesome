@@ -5,7 +5,7 @@ local utils = require("config.widgets.utils")
 -- Local widget information.
 local PROC = {
   cmd = [[bash -c "mpstat | grep -oE 'all\s+([0-9]+,[0-9]+)'"]],
-  match = "(%d+)",
+  match = utils.build_match_for(1),
   interval = 5
 }
 

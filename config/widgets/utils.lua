@@ -6,6 +6,15 @@ local dpi = beautiful.xresources.apply_dpi
 -- Utils module.
 local utils = {}
 
+-- Builds a match string for the given number of occurrences or numerical values.
+utils.build_match_for = function(occurrences)
+  local match = "(%d+)"
+  for _ = 1, occurrences - 1 do
+    match = match .. "%s+(%d+)"
+  end
+  return match
+end
+
 -- Colorizes the given widget with the given colors.
 utils.colorize = function(widget, foreground_color, background_color)
   local fg = foreground_color or beautiful.fg_normal

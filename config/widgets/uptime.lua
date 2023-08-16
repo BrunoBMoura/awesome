@@ -6,13 +6,13 @@ local utils = require("config.widgets.utils")
 local PROCS = {
   main = {
     cmd = [[bash -c "uptime -p | grep -Eo '[0-9]{1,2}'"]],
-    match = "(%d+)%s+(%d+)",
-    submatch = "(%d+)",
+    match = utils.build_match_for(2),
+    submatch = utils.build_match_for(1),
     interval = 30
   },
   tooltip = {
     cmd = [[ bash -c "uptime -s | grep -Eo '[0-9]{1,6}'"]],
-    match = "(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)"
+    match = utils.build_match_for(6)
   }
 }
 

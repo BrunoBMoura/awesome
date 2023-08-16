@@ -17,7 +17,7 @@ local PROCS = {
   },
   get_volume =  {
     cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
-    match = "(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)",
+    match = utils.build_match_for(10),
     interval = 1
   },
   get_sink = {
@@ -70,7 +70,7 @@ local function worker()
         end
       end
 
-      return "No device found"
+      return "No sources in use"
     end
 
     volume.tooltip.source = extract_running_sink(stdout)

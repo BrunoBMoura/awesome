@@ -5,7 +5,7 @@ local utils = require("config.widgets.utils")
 -- Local widget information.
 local PROC = {
   cmd = [[bash -c "free | grep Mem"]],
-  match = "(%d+)%s+(%d+)%s+(%d+)",
+  match = utils.build_match_for(3),
   interval = 5
 }
 
