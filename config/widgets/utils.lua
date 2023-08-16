@@ -4,10 +4,10 @@ local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
 -- Utils module.
-local utils = {}
+local M = {}
 
 -- Builds a match string for the given number of occurrences or numerical values.
-utils.build_match_for = function(occurrences)
+M.build_match_for = function(occurrences)
   local match = "(%d+)"
   for _ = 1, occurrences - 1 do
     match = match .. "%s+(%d+)"
@@ -16,7 +16,7 @@ utils.build_match_for = function(occurrences)
 end
 
 -- Colorizes the given widget with the given colors.
-utils.colorize = function(widget, foreground_color, background_color)
+M.colorize = function(widget, foreground_color, background_color)
   local fg = foreground_color or beautiful.fg_normal
   local bg = background_color or beautiful.bg_normal
   return wibox.widget ({
@@ -31,7 +31,7 @@ utils.colorize = function(widget, foreground_color, background_color)
 end
 
 -- Creates a tooltip for the given widgets table.
-utils.simple_tooltip = function(widgets_tbl, callback)
+M.simple_tooltip = function(widgets_tbl, callback)
   awful.tooltip({
     objects = widgets_tbl,
     mode = "outside",
@@ -46,7 +46,7 @@ utils.simple_tooltip = function(widgets_tbl, callback)
 end
 
 -- Creates a simple textbox widget with default configurations.
-utils.simple_textbox = function()
+M.simple_textbox = function()
   return wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",
@@ -55,4 +55,4 @@ utils.simple_textbox = function()
   })
 end
 
-return utils
+return M

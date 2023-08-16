@@ -8,9 +8,9 @@ local dpi = beautiful.xresources.apply_dpi
 local calendar = {}
 
 local function create(screen, color)
-  local color = color and color or beautiful.fg_normal
+  color = color or beautiful.fg_normal
 
-  local clock_widget = wibox.widget.textclock(
+  calendar.clock_widget = wibox.widget.textclock(
     '<span color="' .. color .. '"> %a %b %d, %H:%M </span>'
   )
 
@@ -31,11 +31,11 @@ local function create(screen, color)
   })
 
   -- Attach calentar to clock_widget
-  month_calendar:attach(clock_widget, "tc" , {
+  month_calendar:attach(calendar.clock_widget, "tc" , {
     on_pressed = true, on_hover = false
   })
 
-  return clock_widget
+  return calendar.clock_widget
 end
 
 -- Set the __call method to allow calendar() to be called with its necessary arguments.
