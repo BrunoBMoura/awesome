@@ -22,7 +22,6 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      require("config.widgets.calendar")(screen, colors.cyan)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
@@ -35,6 +34,8 @@ local function create(screen)
       utils.colorize(volume_widget, colors.red),
       separator,
       utils.colorize(keyboard_layout_widget, colors.yellow),
+      separator,
+      require("config.widgets.calendar")(screen, colors.cyan),
       separator,
       wibox.widget.systray(),
       screen.mylayoutbox
