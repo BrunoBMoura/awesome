@@ -78,7 +78,7 @@ local function worker()
 
   local function update_volume_widget(widget, stdout)
     local _, vol = stdout:match(PROCS.get_volume.match)
-    widget:set_text(string.format("Vol:%s%%", vol))
+    widget:set_text(string.format(" %s%%", vol))
   end
   -- Then setup a watch to update the widget content.
   watch(PROCS.get_volume.cmd, PROCS.get_volume.interval, update_volume_widget, volume.widget)
