@@ -1,20 +1,21 @@
 #!/bin/bash
 
-choice=$(echo -e "Shutdown\nRestart\nLock Screen\nLogout" | rofi -dmenu -i)
+choice=$(echo -e "Shutdown\nRestart\nLogout" | rofi -dmenu -i)
 case "$choice" in
     "Shutdown")
         confirmation=$(echo -e "Yes\nNo" | rofi -dmenu -i -mesg "Shutdown?")
         case "$confirmation" in
-            "Yes") sudo shutdown -h now ;;
+            "Yes") shutdown now ;;
             *) ;;
         esac
-        sudo shutdown -h now ;;
+        ;;
     "Restart")
-        confirmation=$(echo -e "Yes\nNo" | rofi -dmenu -i -mesg "Shutdown?")
+        confirmation=$(echo -e "Yes\nNo" | rofi -dmenu -i -mesg "Restart?")
         case "$confirmation" in
-            "Yes") sudo shutdown -r now ;;
+            "Yes") shutdown -r now ;;
             *) ;;
         esac
+        ;;
     "Logout") awesome -q ;;
     *) ;;
 esac
