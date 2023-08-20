@@ -1,3 +1,5 @@
+local dpi = require("beautiful.xresources").apply_dpi
+
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 
 volume_widget = require("config.widgets.volume")
@@ -73,7 +75,12 @@ awful.screen.connect_for_each_screen(function(screen)
   -- Create a tasklist.
   screen.mytasklist = require("config.tasklist")(screen, tasklist_buttons)
   -- Create the wibox.
-  screen.mywibox = awful.wibar({ position = "top", screen = screen })
+  screen.mywibox = awful.wibar({
+    position = "top",
+    screen = screen,
+    height = dpi(35),
+    -- border_width = dpi(5)
+  })
   -- Add widgets to the wibox.
   screen.mywibox:setup(require("config.bar")(screen))
 end)

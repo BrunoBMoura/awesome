@@ -11,7 +11,7 @@ local function create(screen, color)
   color = color or beautiful.fg_normal
 
   calendar.clock_widget = wibox.widget.textclock(
-    '<span color="' .. color .. '"> 󰃰 %a %b %d, %H:%M </span>'
+    '<span color="' .. color .. '">󰃰 %a %b %d, %H:%M</span>'
   )
 
   local cal_shape = function(cr, width, height)
