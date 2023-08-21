@@ -31,7 +31,7 @@ local function create(screen, color)
   })
 
   -- Attach calentar to clock_widget
-  month_calendar:attach(calendar.clock_widget, "tr" , {
+  month_calendar:attach(calendar.clock_widget, "tc" , {
     on_pressed = true, on_hover = false
   })
 
