@@ -10,6 +10,7 @@ USER = {
   },
   palette = {
     -- kanagawa
+    vanta      = "#1F1F28",
     black      = "#16161d",
     background = "#181616",
     red        = "#c4746e",
@@ -24,7 +25,6 @@ USER = {
   },
   font = function(size)
     local default_size = 12
-    size = size or default_size
-    return string.format("JetBrains Mono %d", size)
+    return string.format("JetBrains Mono %d", size or default_size)
   end
 }
