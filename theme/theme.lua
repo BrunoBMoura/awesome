@@ -44,9 +44,9 @@ theme.fg_urgent     = theme.palette.red
 theme.fg_minimize   = theme.palette.black
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
+theme.border_width  = dpi(2)
 theme.border_normal = theme.palette.black
-theme.border_focus  = theme.palette.vanta
+theme.border_focus  = theme.palette.grey
 theme.border_marked = theme.palette.yellow
 
 theme.taglist_bg_focus     = display

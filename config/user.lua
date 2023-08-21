@@ -10,7 +10,6 @@ USER = {
   },
   palette = {
     -- kanagawa
-    vanta      = "#1F1F28",
     black      = "#16161d",
     background = "#181616",
     red        = "#c4746e",
