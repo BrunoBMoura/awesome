@@ -9,4 +9,9 @@ client.connect_signal("manage", function(c)
   if not awesome.startup then awful.client.setslave(c)
     awful.placement.no_offscreen(c)
   end
+
+  if c.maximized then
+    c.maximized = false
+  end
 end)
+

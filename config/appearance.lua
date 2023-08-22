@@ -6,7 +6,7 @@ volume_widget = require("config.widgets.volume")
 keyboard_layout_widget = require("config.widgets.keyboard_layout")
 
 local awesome_menu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "hotkeys", function() require("awful.hotkeys_popup").show_help(nil, awful.screen.focused()) end },
    { "manual", USER.terminal .. " -e man awesome" },
    { "edit config", USER.editor .. " " .. awesome.conffile },
    { "restart", awesome.restart },

@@ -10,7 +10,7 @@ awful.rules.rules = {
         keys         = client_keys,
         buttons      = client_buttons,
         screen       = awful.screen.preferred,
-        placement    = awful.placement.no_overlap+awful.placement.no_offscreen
+        placement    = awful.placement.no_overlap + awful.placement.no_offscreen
      }
     },
     -- Floating clients.
@@ -25,13 +25,9 @@ awful.rules.rules = {
           "Arandr",
           "Blueman-manager",
           "Gpick",
-          "Kruler",
           "MessageWin",  -- kalarm.
-          "Sxiv",
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-          "Wpa_gui",
-          "veromix",
-          "xtightvncviewer"},
+        },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
