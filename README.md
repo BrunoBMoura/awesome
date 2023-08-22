@@ -2,4 +2,4 @@
 
 ## Dependencies tracking
 
-mpstat and pulseaudio
+mpstat, ttf-jetbrains-mono, nerd-fonts and pulseaudio
