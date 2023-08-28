@@ -62,12 +62,12 @@ awful.screen.connect_for_each_screen(function(screen)
   screen.mylayoutbox = awful.widget.layoutbox(screen)
   screen.mylayoutbox:buttons(
     gears.table.join(
-      awful.button({}, 1, function() awful.layout.inc( 1) end),
+      awful.button({}, 1, function() awful.layout.inc(1) end),
       awful.button({}, 3, function() awful.layout.inc(-1) end)
     )
   )
   -- Create a taglist widget
-  screen.mytaglist =  require("config.taglist")(screen, tasklist_buttons)
+  screen.mytaglist =  require("config.taglist")(screen, taglist_buttons)
   screen.mytasklist = require("config.tasklist")(screen, tasklist_buttons)
   -- Create the wibox.
   screen.mywibox = awful.wibar({
