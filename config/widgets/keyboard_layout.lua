@@ -29,13 +29,15 @@ local keyboard = {
   }
 }
 
-local function create()
+local function worker(opts)
+  opts = opts or {}
+  local icon = opts.icon or ""
   keyboard.widget = utils.simple_textbox()
 
   -- First, invoke the setxkbmap command to set the initial layout and set
   -- the widgets text accordingly.
   awful.spawn.easy_async(build_cmd(keyboard.layouts[keyboard.current].name))
-  keyboard.widget:set_text(string.format("󰌌 %s", keyboard.layouts[keyboard.current].name))
+  keyboard.widget:set_text(string.format("%s%s", icon, keyboard.layouts[keyboard.current].name))
 
   -- Then, set the tooltip as the current layouts description text.
   utils.simple_tooltip({ keyboard.widget }, function()
@@ -46,7 +48,7 @@ local function create()
   keyboard.widget.switch = function()
     keyboard.current = keyboard.current % #keyboard.layouts + 1
     awful.spawn.easy_async(build_cmd(keyboard.layouts[keyboard.current].name))
-    keyboard.widget:set_text(string.format("󰌌 %s", keyboard.layouts[keyboard.current].name))
+    keyboard.widget:set_text(string.format("%s%s", icon, keyboard.layouts[keyboard.current].name))
   end
 
   -- And finally, add the 'click event' to the widget with a simple button.
@@ -58,4 +60,4 @@ local function create()
   return keyboard.widget
 end
 
-return create()
+return setmetatable(keyboard, { __call = function(_, ...) return worker(...) end })

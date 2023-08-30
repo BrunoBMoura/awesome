@@ -14,10 +14,14 @@ local PROCS = {
 -- menu widget module.
 local menu = {}
 
-local function worker()
+local function worker(opts)
+  opts = opts or {}
+  local icon = opts.icon or "Menu"
+  local font_size = opts.font_size or 20
+
   menu.widget = utils.simple_textbox()
-  menu.widget.font = USER.font(20)
-  menu.widget:set_text("   ")
+  menu.widget.font = USER.font(font_size)
+  menu.widget:set_text(string.format(" %s ", icon))
 
   menu.widget.show_popup = function()
     spawn.with_shell(PROCS.show_popup())
@@ -34,4 +38,4 @@ local function worker()
   return menu.widget
 end
 
-return worker()
+return setmetatable(menu, { __call = function(_, ...) return worker(...) end })

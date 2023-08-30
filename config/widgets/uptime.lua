@@ -13,13 +13,21 @@ local PROCS = {
   tooltip = {
     cmd = [[ bash -c "uptime -s | grep -Eo '[0-9]{1,6}'"]],
     match = utils.build_match_for(6)
-  }
+  },
+  --[[ on_click = function()
+    local script_name = "scripts/system/rofi_power_menu.sh"
+    local script_path = gears.filesystem.get_configuration_dir()
+    return string.format("bash %s/%s", script_path, script_name)
+  end ]]
 }
 
 -- Ram widget module.
 local uptime = {}
 
-local function worker()
+local function worker(opts)
+  opts = opts or {}
+  local icon = opts.icon or "Up:"
+
   uptime.widget = utils.simple_textbox()
 
   local startup = {}
@@ -56,12 +64,24 @@ local function worker()
 
     -- Properly access uptime information and set it as the widgets text.
     local uptime_info = time_parser(stdout)
-    widget:set_text(string.format("󰚰 %sh%sm", uptime_info.hour, uptime_info.min))
+    widget:set_text(string.format("%s%sh%sm", icon, uptime_info.hour, uptime_info.min))
   end
 
   watch(PROCS.main.cmd, PROCS.main.interval, update_uptime_widget, uptime.widget)
 
+  --[[ uptime.widget.on_click = function()
+    spawn.with_shell(PROCS.on_click())
+  end
+
+  uptime.widget:buttons(
+    gears.table.join(
+      awful.button({ }, 1, function()
+        uptime.widget:on_click()
+      end)
+    )
+  ) ]]
+
   return uptime.widget
 end
 
-return worker()
+return setmetatable(uptime, { __call = function(_, ...) return worker(...) end })

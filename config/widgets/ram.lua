@@ -12,18 +12,21 @@ local PROC = {
 -- Ram widget module.
 local ram = {}
 
-local function worker()
+local function worker(opts)
+  opts = opts or {}
+  local icon = opts.icon or "Ram:"
+
   ram.widget = utils.simple_textbox()
   spawn.easy_async(PROC.cmd, function(stdout)
     local total, used, _ = stdout:match(PROC.match)
     local ram_percentage = math.floor((used / total) * 100)
-    ram.widget:set_text(string.format(" %s%%", ram_percentage))
+    ram.widget:set_text(string.format("%s%s%%", icon, ram_percentage))
   end)
 
   local function update_ram_widget(widget, stdout)
     local total, used, _ = stdout:match(PROC.match)
     local ram_percentage = math.floor((used / total) * 100)
-    widget:set_text(string.format(" %s%%", ram_percentage))
+    widget:set_text(string.format("%s%s%%", icon, ram_percentage))
   end
 
   watch(PROC.cmd, PROC.interval, update_ram_widget, ram.widget)
@@ -31,4 +34,4 @@ local function worker()
   return ram.widget
 end
 
-return worker()
+return setmetatable(ram, { __call = function(_, ...) return worker(...) end })

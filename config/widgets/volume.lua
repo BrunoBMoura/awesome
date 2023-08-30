@@ -38,7 +38,8 @@ local PROCS = {
 
 local volume = {}
 
-local function worker()
+local function worker(opts)
+  opts = opts or {}
   volume.widget = utils.simple_textbox()
 
   -- Set the initial tooltip value.
@@ -76,9 +77,10 @@ local function worker()
     volume.tooltip.source = extract_running_sink(stdout)
   end)
 
+  local icon = opts.icon or "Vol:"
   local function update_volume_widget(widget, stdout)
     local _, vol = stdout:match(PROCS.get_volume.match)
-    widget:set_text(string.format(" %s%%", vol))
+    widget:set_text(string.format("%s%s%%", icon, vol))
   end
   -- Then setup a watch to update the widget content.
   watch(PROCS.get_volume.cmd, PROCS.get_volume.interval, update_volume_widget, volume.widget)
@@ -109,5 +111,5 @@ local function worker()
 
   return volume.widget
 end
+return setmetatable(volume, { __call = function(_, ...) return worker(...) end })
 
-return worker()

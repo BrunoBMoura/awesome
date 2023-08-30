@@ -13,7 +13,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(require("config.widgets.menu"), colors.cyan),
+      utils.colorize(require("config.widgets.menu")({ icon = " " }), colors.cyan),
       screen.mytaglist,
       separator,
       screen.mypromptbox,
@@ -22,15 +22,16 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      require("config.widgets.calendar")(screen, colors.cyan)
+      require("config.widgets.calendar")(screen, { colors = colors.cyan, icon = "󰃰" })
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(require("config.widgets.cpu"), colors.orange),
+      utils.colorize(require("config.widgets.cpu")({ symbol = " " }), colors.orange),
       separator,
-      utils.colorize(require("config.widgets.ram"), colors.green),
+      utils.colorize(require("config.widgets.ram")({ icon = " " }), colors.green),
       separator,
-      utils.colorize(require("config.widgets.uptime"), colors.magenta),
+      -- utils.colorize(require("config.widgets.uptime")({ icon = "󰚰 "}), colors.magenta),
+      utils.colorize(require("config.widgets.uptime")({ icon = "󰚰 "}), colors.magenta),
       separator,
       utils.colorize(volume_widget, colors.red),
       separator,

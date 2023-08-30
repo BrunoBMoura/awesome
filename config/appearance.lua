@@ -2,8 +2,8 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
-volume_widget = require("config.widgets.volume")
-keyboard_layout_widget = require("config.widgets.keyboard_layout")
+volume_widget = require("config.widgets.volume")({ icon = "󰕾 "})
+keyboard_layout_widget = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
 
 local awesome_menu = {
    { "hotkeys", function() require("awful.hotkeys_popup").show_help(nil, awful.screen.focused()) end },

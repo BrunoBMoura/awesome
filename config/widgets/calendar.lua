@@ -7,11 +7,13 @@ local dpi = beautiful.xresources.apply_dpi
 -- Calendar widget module.
 local calendar = {}
 
-local function create(screen, color)
-  color = color or beautiful.fg_normal
+local function create(screen, opts)
+  opts = opts or {}
+  local color = opts.color or beautiful.fg_normal
+  local icon = opts.icon or "Date:"
 
   calendar.clock_widget = wibox.widget.textclock(
-    '<span color="' .. color .. '">󰃰 %a %b %d, %H:%M</span>'
+    '<span color="' .. color .. '"> ' .. icon .. ' %a %b %d, %H:%M</span>'
   )
 
   local cal_shape = function(cr, width, height)
