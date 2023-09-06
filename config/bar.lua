@@ -7,7 +7,7 @@ local custom_wibox = {}
 
 local function create(screen)
   local separator = wibox.widget.textbox(" ")
-  local menu = require("config.widgets.menu")({ icon = " " })
+  local menu = require("config.widgets.menu")({ icon = "", font_size = 15 })
   local calendar = require("config.widgets.calendar")(screen, {
     icon = "󰃰", color = colors.cyan
   })
@@ -21,7 +21,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(menu, colors.white),
+      utils.colorize(menu, colors.grey, colors.white),
       screen.mytaglist,
       separator,
       screen.mypromptbox,

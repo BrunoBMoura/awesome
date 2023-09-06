@@ -21,7 +21,7 @@ local function worker(opts)
 
   menu.widget = utils.simple_textbox()
   menu.widget.font = USER.font(font_size)
-  menu.widget:set_text(string.format(" %s ", icon))
+  menu.widget:set_text(string.format(" %s  ", icon))
 
   menu.widget.show_popup = function()
     spawn.with_shell(PROCS.show_popup())
