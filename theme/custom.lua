@@ -29,7 +29,7 @@ local themes_path = gfs.get_configuration_dir()
 
 local theme = { palette = USER.palette }
 
-local display = USER.palette.cyan
+local display = USER.palette.grey
 
 theme.font          = USER.font()
 theme.bg_normal     = theme.palette.background
@@ -38,21 +38,23 @@ theme.bg_urgent     = theme.palette.yellow
 theme.bg_minimize   = theme.palette.orange
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = display
-theme.fg_focus      = display
+theme.fg_normal     = theme.palette.white
+theme.fg_focus      = theme.palette.white
 theme.fg_urgent     = theme.palette.red
 theme.fg_minimize   = theme.palette.black
 
 theme.useless_gap   = dpi(1)
 theme.border_width  = dpi(2)
+theme.border_radius = dpi(10)
 theme.border_normal = theme.palette.black
+-- theme.border_focus  = display
 theme.border_focus  = theme.palette.grey
 theme.border_marked = theme.palette.yellow
 
 theme.taglist_bg_focus     = display
 theme.taglist_fg_focus     = theme.palette.white
 theme.tasklist_fg_focus    = theme.palette.red
-theme.tasklist_bg_focus    = display
+theme.tasklist_bg_focus    = theme.palette.white
 theme.hotkeys_border_color = display
 
 local taglist_square_size = dpi(6)

@@ -19,7 +19,7 @@ end
 M.colorize = function(widget, foreground_color, background_color)
   local fg = foreground_color or beautiful.fg_normal
   local bg = background_color or beautiful.bg_normal
-  return wibox.widget ({
+  return wibox.widget({
     {
       widget,
       bg = bg,

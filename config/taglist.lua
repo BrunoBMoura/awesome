@@ -23,8 +23,8 @@ local function create(screen, buttons)
           },
           layout = wibox.layout.fixed.horizontal,
         },
-        left = dpi(12),
-        right = dpi(12),
+        left = dpi(10),
+        right = dpi(10),
         widget = wibox.container.margin
       },
       id = 'background_role',

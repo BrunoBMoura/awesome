@@ -1,19 +1,27 @@
 local utils = require("config.widgets.utils")
-local dpi = beautiful.xresources.apply_dpi
 local wibox = require("wibox")
+local dpi = beautiful.xresources.apply_dpi
 
 local colors = USER.palette
 local custom_wibox = {}
 
 local function create(screen)
   local separator = wibox.widget.textbox(" ")
+  local menu = require("config.widgets.menu")({ icon = " " })
+  local calendar = require("config.widgets.calendar")(screen, {
+    icon = "󰃰", color = colors.cyan
+  })
+  local cpu = require("config.widgets.cpu")({ icon = " " })
+  local ram = require("config.widgets.ram")({ icon = " " })
+  local uptime = require("config.widgets.uptime")({ icon = "󰚰 "})
+
   return {
     spacing = dpi(50),
     layout = wibox.layout.align.horizontal,
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(require("config.widgets.menu")({ icon = " " }), colors.cyan),
+      utils.colorize(menu, colors.white),
       screen.mytaglist,
       separator,
       screen.mypromptbox,
@@ -22,16 +30,15 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      require("config.widgets.calendar")(screen, { colors = colors.cyan, icon = "󰃰" })
+      calendar
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(require("config.widgets.cpu")({ symbol = " " }), colors.orange),
+      utils.colorize(cpu, colors.orange),
       separator,
-      utils.colorize(require("config.widgets.ram")({ icon = " " }), colors.green),
+      utils.colorize(ram, colors.green),
       separator,
-      -- utils.colorize(require("config.widgets.uptime")({ icon = "󰚰 "}), colors.magenta),
-      utils.colorize(require("config.widgets.uptime")({ icon = "󰚰 "}), colors.magenta),
+      utils.colorize(uptime, colors.magenta),
       separator,
       utils.colorize(volume_widget, colors.red),
       separator,
