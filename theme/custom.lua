@@ -68,7 +68,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.menu_submenu_icon = themes_path .. "theme.palette/submenu.png"
 theme.menu_height       = dpi(15)
 theme.menu_width        = dpi(100)
-theme.wallpaper         = themes_path .. "theme/clouds.png"
+theme.wallpaper         = themes_path .. "theme/curve.png"
 
 theme.layout_fairh      = themes_path .. "theme/layouts/fairhw.png"
 theme.layout_fairv      = themes_path .. "theme/layouts/fairvw.png"
