@@ -39,7 +39,9 @@ local tasklist_buttons = gears.table.join(
     end
   end),
   awful.button({ }, 3, function()
-    awful.menu.client_list({ theme = { width = 500 } })
+    awful.menu.client_list({
+      theme = { width = 500 }
+    })
   end)
 )
 
@@ -53,11 +55,19 @@ local function set_wallpaper(screen)
   end
 end
 
-screen.connect_signal("property::geometry", set_wallpaper)
+local function set_screen_prefs(screen)
+  if screen.index == 1 then
+    set_wallpaper(screen)
+    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[1])
+  elseif screen.index == 2 then
+    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[2])
+  end
+end
+
+-- screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(screen)
-  set_wallpaper(screen)
-  awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[1])
+  set_screen_prefs(screen)
   screen.mypromptbox = awful.widget.prompt()
   screen.mylayoutbox = awful.widget.layoutbox(screen)
   screen.mylayoutbox:buttons(

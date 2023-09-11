@@ -6,6 +6,17 @@ local dpi = beautiful.xresources.apply_dpi
 -- Utils module.
 local M = {}
 
+-- Notifies the given text.
+M.notify = function(text)
+  local info = debug.getinfo(1, "Sl")
+  naughty.notify({
+    title = "::Assert::",
+    text = string.format(
+      "Called from (%s, %s): %s", info.short_src, info.currentline, tostring(text)
+    )
+  })
+end
+
 -- Builds a match string for the given number of occurrences or numerical values.
 M.build_match_for = function(occurrences)
   local match = "(%d+)"
