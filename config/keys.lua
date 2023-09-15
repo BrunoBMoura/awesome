@@ -1,5 +1,6 @@
 local groups = {
   custom   = "custom",
+  widget   = "widget",
   awesome  = "awesome",
   client   = "client",
   launcher = "launcher",
@@ -63,13 +64,13 @@ local keys = gears.table.join(
   end),
 
   -- Widgets keybinds
-  keybind({ USER.keys.super }, "]", "increases the volume", groups.custom, function()
+  keybind({ USER.keys.super }, "]", "increases the volume", groups.widget, function()
       volume_widget:increase(5)
   end),
-  keybind({ USER.keys.super }, "[", "decreases the volume", groups.custom, function()
+  keybind({ USER.keys.super }, "[", "decreases the volume", groups.widget, function()
       volume_widget:decrease(5)
   end),
-  keybind({ USER.keys.super }, "space", "swaps the keyboard layout", groups.custom, function()
+  keybind({ USER.keys.super }, "space", "swaps the keyboard layout", groups.widget, function()
     keyboard_layout_widget:switch()
   end),
 
@@ -177,20 +178,6 @@ root.buttons(
   )
 )
 
-client_buttons = gears.table.join(
-  awful.button({ }, 1, function(c)
-    c:emit_signal("request::activate", "mouse_click", { raise = true })
-  end),
-  awful.button({ USER.keys.super }, 1, function(c)
-    c:emit_signal("request::activate", "mouse_click", { raise = true })
-    awful.mouse.client.move(c)
-  end),
-  awful.button({ USER.keys.super }, 3, function(c)
-    c:emit_signal("request::activate", "mouse_click", { raise = true })
-    awful.mouse.client.resize(c)
-  end)
-)
-
 client_keys = gears.table.join(
   keybind({ USER.keys.super }, "f", "toggle fullscreen", groups.client, function(c)
     c.fullscreen = not c.fullscreen
@@ -225,5 +212,19 @@ client_keys = gears.table.join(
   keybind({ USER.keys.super, USER.keys.shift }, "m", "(un)maximize horizontally", groups.client, function(c)
     c.maximized_horizontal = not c.maximized_horizontal
     c:raise()
+  end)
+)
+
+client_buttons = gears.table.join(
+  awful.button({ }, 1, function(c)
+    c:emit_signal("request::activate", "mouse_click", { raise = true })
+  end),
+  awful.button({ USER.keys.super }, 1, function(c)
+    c:emit_signal("request::activate", "mouse_click", { raise = true })
+    awful.mouse.client.move(c)
+  end),
+  awful.button({ USER.keys.super }, 3, function(c)
+    c:emit_signal("request::activate", "mouse_click", { raise = true })
+    awful.mouse.client.resize(c)
   end)
 )
