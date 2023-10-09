@@ -65,13 +65,16 @@ local keys = gears.table.join(
 
   -- Widgets keybinds
   keybind({ USER.keys.super }, "]", "increases the volume", groups.widget, function()
-      volume_widget:increase(5)
+    awesome.emit_signal("increase::volume")
   end),
   keybind({ USER.keys.super }, "[", "decreases the volume", groups.widget, function()
-      volume_widget:decrease(5)
+    awesome.emit_signal("decrease::volume")
   end),
   keybind({ USER.keys.super }, "space", "swaps the keyboard layout", groups.widget, function()
-    keyboard_layout_widget:switch()
+    awesome.emit_signal("switch::keyboard_layout")
+  end),
+  keybind({ USER.keys.super }, "c", "opens the control center", groups.widget, function()
+    awesome.emit_signal("toggle::control_center")
   end),
 
   -- Awesome keybinds

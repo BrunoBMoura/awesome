@@ -9,11 +9,13 @@ local function create(screen)
   local separator = wibox.widget.textbox(" ")
   local menu = require("config.widgets.menu")({ icon = "", font_size = 15 })
   local calendar = require("config.widgets.calendar")(screen, {
-    icon = "󰃰", color = colors.cyan
+    icon = "󰃰", color = colors.white
   })
   local cpu = require("config.widgets.cpu")({ icon = " " })
   local ram = require("config.widgets.ram")({ icon = " " })
   local uptime = require("config.widgets.uptime")({ icon = "󰚰 "})
+  local volume_widget = require("config.widgets.volume")({ icon = "󰕾 "})
+  local keyboard_layout_widget = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
 
   return {
     spacing = dpi(50),
@@ -21,7 +23,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(menu, colors.grey, colors.white),
+      utils.colorize(menu, colors.black, colors.white),
       screen.mytaglist,
       separator,
       screen.mypromptbox,
@@ -34,15 +36,15 @@ local function create(screen)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(cpu, colors.orange),
+      utils.underlined(utils.colorize(cpu, colors.white), colors.light_grey),
       separator,
-      utils.colorize(ram, colors.green),
+      utils.underlined(utils.colorize(ram, colors.white), colors.light_grey),
       separator,
-      utils.colorize(uptime, colors.magenta),
+      utils.underlined(utils.colorize(uptime, colors.white), colors.light_grey),
       separator,
-      utils.colorize(volume_widget, colors.red),
+      utils.underlined(utils.colorize(volume_widget, colors.white), colors.light_grey),
       separator,
-      utils.colorize(keyboard_layout_widget, colors.yellow),
+      utils.underlined(utils.colorize(keyboard_layout_widget, colors.white), colors.light_grey),
       separator,
       wibox.widget.systray(),
       screen.mylayoutbox

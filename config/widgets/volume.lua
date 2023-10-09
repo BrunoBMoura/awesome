@@ -109,6 +109,14 @@ local function worker(opts)
     )
   )
 
+  awesome.connect_signal("increase::volume", function()
+    volume.widget:increase(5)
+  end)
+
+  awesome.connect_signal("decrease::volume", function()
+    volume.widget:decrease(5)
+  end)
+
   return volume.widget
 end
 return setmetatable(volume, { __call = function(_, ...) return worker(...) end })

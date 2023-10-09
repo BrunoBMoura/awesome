@@ -57,6 +57,10 @@ local function worker(opts)
     end)
   )
 
+  awesome.connect_signal("switch::keyboard_layout", function()
+    keyboard.widget:switch()
+  end)
+
   return keyboard.widget
 end
 

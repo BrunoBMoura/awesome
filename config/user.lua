@@ -20,7 +20,8 @@ USER = {
     cyan       = "#8ea4a2",
     white      = "#c5c9c5",
     grey       = "#282727",
-    orange     = "#b6927b"
+    orange     = "#b6927b",
+    light_grey = "#625e5a",
   },
   font = function(size)
     local default_size = 12

@@ -66,4 +66,27 @@ M.simple_textbox = function()
   })
 end
 
+M.underlined = function(widget, underline_color)
+  local underline = wibox.widget {
+    widget        = wibox.widget.separator,
+    orientation   = "horizontal",
+    forced_height = dpi(1),
+    forced_width  = dpi(25),
+    color         = underline_color,
+  }
+
+  return wibox.widget({
+    {
+      widget,
+      layout = wibox.layout.stack,
+    },
+    {
+      underline,
+      top = dpi(28),
+      layout = wibox.container.margin,
+    },
+    layout = wibox.layout.stack,
+  })
+end
+
 return M

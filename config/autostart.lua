@@ -1,4 +1,14 @@
-awful.spawn.with_shell("picom")
-awful.spawn.with_shell("flameshot")
-awful.spawn.with_shell("systemctl start logid.service")
+local awful = require("awful")
+
+local autostart = {
+  "xrandr --output HDMI-A-0 --rotate right",
+  "picom",
+  "flameshot",
+  "systemctl start logid.service",
+}
+
+for _, command in ipairs(autostart) do
+  awful.spawn.with_shell(command)
+end
+
 -- awful.spawn.with_shell("xrandr --output HDMI-A-0 --rotate right")

@@ -43,7 +43,7 @@ local function create(screen, buttons)
           widget  = wibox.container.margin
         },
         nil,
-        create_callback = function(self, c, index, objects)
+        create_callback = function(self, c, _, _)
           self:get_children_by_id('clienticon')[1].client = c
         end,
         layout = wibox.layout.align.vertical,
