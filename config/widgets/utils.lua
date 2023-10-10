@@ -66,6 +66,7 @@ M.simple_textbox = function()
   })
 end
 
+-- Underlines a given widget.
 M.underlined = function(widget, underline_color)
   local underline = wibox.widget {
     widget        = wibox.widget.separator,
@@ -86,6 +87,29 @@ M.underlined = function(widget, underline_color)
       layout = wibox.container.margin,
     },
     layout = wibox.layout.stack,
+  })
+end
+
+-- Creates a box for the given widget.
+M.box = function(widget, foreground_color, background_color)
+  local fg = foreground_color or beautiful.fg_normal
+  local bg = background_color or beautiful.bg_normal
+  local margin = dpi(5)
+  local radius = dpi(5)
+  local shape = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, radius)
+  end
+
+  return wibox.widget({
+    {
+      widget,
+      bg = bg,
+      fg = fg,
+      -- shape = shape,
+      widget = wibox.container.background
+    },
+    margins = margin,
+    widget = wibox.container.margin
   })
 end
 

@@ -45,7 +45,7 @@ local function worker(opts)
   end)
 
   -- Next, define the switch function, which will be called when the widget is clicked.
-  keyboard.widget.switch = function()
+  keyboard.widget.switch = function(_)
     keyboard.current = keyboard.current % #keyboard.layouts + 1
     awful.spawn.easy_async(build_cmd(keyboard.layouts[keyboard.current].name))
     keyboard.widget:set_text(string.format("%s%s", icon, keyboard.layouts[keyboard.current].name))
@@ -56,10 +56,6 @@ local function worker(opts)
       keyboard.widget:switch()
     end)
   )
-
-  awesome.connect_signal("switch::keyboard_layout", function()
-    keyboard.widget:switch()
-  end)
 
   return keyboard.widget
 end

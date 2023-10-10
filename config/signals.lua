@@ -15,3 +15,14 @@ client.connect_signal("manage", function(c)
   end
 end)
 
+awesome.connect_signal("switch::keyboard_layout", function()
+  keyboard_layout_widget:switch()
+end)
+
+awesome.connect_signal("increase::volume", function()
+  volume_widget:increase(5)
+end)
+
+awesome.connect_signal("decrease::volume", function()
+  volume_widget:decrease(5)
+end)
