@@ -1,11 +1,10 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
 local audio = require("config.widgets.control_center.audio")
--- local utils = require("config.widgets.utils")
 
 local main_widget = wibox.widget {
   layout = wibox.layout.fixed.vertical,
-  spacing = dpi(2),
+  spacing = dpi(10),
 }
 
 local popup_widget = awful.popup({

@@ -1,5 +1,6 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
+local utils = require("config.widgets.utils")
 local colors = USER.palette
 
 local function create(text_icon, color)
@@ -14,7 +15,7 @@ local function create(text_icon, color)
     handle_margins = { top = 1, bottom = 1 },
     handle_shape = gears.shape.square,
     handle_color = beautiful.palette.white,
-    handle_border_color = beautiful.palette.black,
+    handle_border_color = beautiful.palette.grey,
   })
 
   local icon = wibox.widget({
@@ -38,7 +39,7 @@ local function create(text_icon, color)
       slider,
       widget = wibox.container.background,
       forced_width = dpi(380),
-      forced_height = dpi(20)
+      forced_height = dpi(25)
     },
     percentage
   })
@@ -46,11 +47,14 @@ local function create(text_icon, color)
   slider.value = 25
   percentage.markup = "25%"
 
-  return final_widget
+  return utils.box(final_widget, {
+    foreground_color = colors.white,
+    background_color = colors.grey,
+    margin = dpi(1),
+  })
 end
 
-local vol = create(" ", colors.green)
-local mic = create(" ", colors.yellow)
-
+local vol = create("  ", colors.green)
+local mic = create("  ", colors.yellow)
 
 return { speaker = vol, mic = mic }

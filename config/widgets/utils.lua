@@ -91,11 +91,12 @@ M.underlined = function(widget, underline_color)
 end
 
 -- Creates a box for the given widget.
-M.box = function(widget, foreground_color, background_color)
-  local fg = foreground_color or beautiful.fg_normal
-  local bg = background_color or beautiful.bg_normal
-  local margin = dpi(5)
-  local radius = dpi(5)
+M.box = function(widget, configs)
+  local args = configs or {}
+  local fg = args.foreground_color or beautiful.fg_normal
+  local bg = args.background_color or beautiful.bg_normal
+  local margin = args.margin or dpi(5)
+  local radius = args.radius or dpi(5)
   local shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, radius)
   end
@@ -105,7 +106,7 @@ M.box = function(widget, foreground_color, background_color)
       widget,
       bg = bg,
       fg = fg,
-      -- shape = shape,
+      shape = shape,
       widget = wibox.container.background
     },
     margins = margin,

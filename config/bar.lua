@@ -43,6 +43,7 @@ local function create(screen)
       volume_widget,
       separator,
       keyboard_layout_widget,
+      separator,
       wibox.widget.systray(),
       screen.mylayoutbox
     },
