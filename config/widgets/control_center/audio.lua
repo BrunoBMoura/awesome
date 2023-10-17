@@ -12,7 +12,7 @@ local function create(text_icon, color)
     bar_color = color,
     handle_width = dpi(30),
     handle_border_width = dpi(5),
-    handle_margins = { top = 1, bottom = 1 },
+    handle_margins = { top = dpi(1), bottom = dpi(1) },
     handle_shape = gears.shape.square,
     handle_color = beautiful.palette.white,
     handle_border_color = beautiful.palette.grey,
@@ -33,7 +33,7 @@ local function create(text_icon, color)
   local final_widget = wibox.widget({
     layout = wibox.layout.fixed.horizontal,
     fill_space = true,
-    spacing = dpi(5),
+    spacing = dpi(1),
     icon,
     {
       slider,
@@ -47,11 +47,7 @@ local function create(text_icon, color)
   slider.value = 25
   percentage.markup = "25%"
 
-  return utils.box(final_widget, {
-    foreground_color = colors.white,
-    background_color = colors.grey,
-    margin = dpi(1),
-  })
+  return final_widget
 end
 
 local vol = create("  ", colors.green)

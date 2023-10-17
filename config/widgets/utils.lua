@@ -57,12 +57,14 @@ M.simple_tooltip = function(widgets_tbl, callback)
 end
 
 -- Creates a simple textbox widget with default configurations.
-M.simple_textbox = function()
+M.simple_textbox = function(configs)
+  local args = configs or {}
+  local font = args.font or beautiful.font
   return wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",
     valign = "center",
-    font = beautiful.font
+    font = font
   })
 end
 
@@ -114,19 +116,24 @@ M.box = function(widget, configs)
   })
 end
 
-M.arc = function (bg, fg, thickness, text, icon)
-  local text_box = M.simple_textbox()
-  text_box:set_text(string.format("%s %s %s", text, icon, "0%" ))
+M.arc = function(bg, thickness, text, icon)
+  local text_box = M.simple_textbox({ font = USER.font(20) })
+  local text_box_bg = wibox.container.background(text_box)
+  text_box:set_text(string.format("%s%s", icon, "0%" ))
+
   return wibox.widget({
-    {
-      text_box,
-      bg = bg,
-      fg = fg,
-      widget = wibox.container.arcchart,
-      thickness = thickness
-    },
-    forced_height = dpi(155),
-    widget = wibox.container.background
+    text_box_bg,
+    max_value = 100,
+    min_value = 0,
+    thickness = thickness,
+    start_angle = 4.71238898, -- 2pi*3/4
+    forced_height = dpi(150),
+    forced_width = dpi(150),
+    border_width = dpi(1),
+    border_color = bg,
+    bg = bg,
+    colors = { USER.palette.grey },
+    widget = wibox.container.arcchart
   })
 end
 
