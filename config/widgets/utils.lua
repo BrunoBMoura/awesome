@@ -114,4 +114,20 @@ M.box = function(widget, configs)
   })
 end
 
+M.arc = function (bg, fg, thickness, text, icon)
+  local text_box = M.simple_textbox()
+  text_box:set_text(string.format("%s %s %s", text, icon, "0%" ))
+  return wibox.widget({
+    {
+      text_box,
+      bg = bg,
+      fg = fg,
+      widget = wibox.container.arcchart,
+      thickness = thickness
+    },
+    forced_height = dpi(155),
+    widget = wibox.container.background
+  })
+end
+
 return M

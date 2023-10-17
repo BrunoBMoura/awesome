@@ -1,11 +1,38 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
 local audio = require("config.widgets.control_center.audio")
+local utils = require("config.widgets.utils")
+local colors = USER.palette
+
+local mem = utils.arc(
+  beautiful.palette.blue, beautiful.palette.grey, dpi(8), "Mem", " "
+)
+
+local cpu = utils.arc(
+  beautiful.palette.green, beautiful.palette.grey, dpi(8), "Cpu", " "
+)
+
+local storage = utils.arc(
+  beautiful.palette.red, beautiful.palette.grey, dpi(8), "Storage", " "
+)
+
+local resources = wibox.widget({
+  layout = wibox.layout.fixed.horizontal,
+  spacing = dpi(10),
+})
 
 local main_widget = wibox.widget {
   layout = wibox.layout.fixed.vertical,
   spacing = dpi(10),
 }
+
+resources:add(cpu, mem, storage)
+
+local resources_widget = utils.box(resources, {
+  -- bg = beautiful.background,
+  background_color = colors.grey,
+  margins = dpi(15),
+})
 
 local popup_widget = awful.popup({
   visible = false,
@@ -32,7 +59,7 @@ awesome.connect_signal("toggle::control_center", function()
     popup_widget.visible = false
   else
     main_widget:reset()
-    main_widget:add(audio.speaker, audio.mic)
+    main_widget:add(resources_widget, audio.speaker, audio.mic)
     popup_widget.visible = true
   end
 end)
