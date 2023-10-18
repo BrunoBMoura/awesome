@@ -1,55 +1,28 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
-local colors = USER.palette
+local colors = beautiful.palette
+local helpers = require("config.widgets.helpers")
 
-local function create(text_icon, color)
-  local slider = wibox.widget({
-    widget = wibox.widget.slider,
-    maximum = 100,
-    forced_height = dpi(10),
-    bar_height = dpi(2),
-    bar_color = color,
-    handle_width = dpi(30),
-    handle_border_width = dpi(5),
-    handle_margins = { top = dpi(1), bottom = dpi(1) },
-    handle_shape = gears.shape.square,
-    handle_color = beautiful.palette.white,
-    handle_border_color = beautiful.palette.grey,
-  })
+local audio = {}
 
-  local icon = wibox.widget({
-    widget = wibox.widget.textbox,
-    markup = text_icon,
-    align = "center",
-    font = USER.font(15),
-  })
+local function create(opts)
+  opts = opts or {}
+  opts.mic = opts.mic or false
+  opts.speaker = opts.speaker or false
 
-  local percentage = wibox.widget({
-    widget = wibox.widget.textbox,
-    align = "center",
-  })
+  opts.speaker.icon = opts.speaker.icon or "  "
+  opts.speaker.color = opts.speaker.color or colors.green
 
-  local final_widget = wibox.widget({
-    layout = wibox.layout.fixed.horizontal,
-    fill_space = true,
-    spacing = dpi(1),
-    icon,
-    {
-      slider,
-      widget = wibox.container.background,
-      forced_width = dpi(380),
-      forced_height = dpi(25)
-    },
-    percentage
-  })
+  opts.mic.icon = opts.mic.icon or "  "
+  opts.mic.color = opts.mic.color or colors.orange
 
-  slider.value = 25
-  percentage.markup = "25%"
+  audio.speaker = helpers.slider_widget(opts.speaker.icon, opts.speaker.color)
+  audio.mic = helpers.slider_widget(opts.mic.icon, opts.mic.color)
 
-  return final_widget
+  audio.speaker:set_value(34)
+  audio.mic:set_value(43)
+
+  return { speaker = audio.speaker, mic = audio.mic }
 end
 
-local vol = create("  ", colors.green)
-local mic = create("  ", colors.yellow)
-
-return { speaker = vol, mic = mic }
+return setmetatable(audio, { __call = function(_, ...) return create(...) end })

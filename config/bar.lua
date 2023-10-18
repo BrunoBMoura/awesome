@@ -11,8 +11,6 @@ local function create(screen)
   local calendar = require("config.widgets.calendar")(screen, {
     icon = "󰃰", color = colors.white
   })
-  local cpu = require("config.widgets.cpu")({ icon = " " })
-  local ram = require("config.widgets.ram")({ icon = " " })
   local uptime = require("config.widgets.uptime")({ icon = "󰚰 "})
 
   return {
@@ -34,10 +32,6 @@ local function create(screen)
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      cpu,
-      separator,
-      ram,
-      separator,
       uptime,
       separator,
       volume_widget,

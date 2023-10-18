@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
+local colors = beautiful.palette
 
 -- helpers module.
 local M = {}
@@ -70,13 +71,13 @@ end
 
 -- Underlines a given widget.
 M.underlined = function(widget, underline_color)
-  local underline = wibox.widget {
+  local underline = wibox.widget({
     widget        = wibox.widget.separator,
     orientation   = "horizontal",
     forced_height = dpi(1),
     forced_width  = dpi(25),
     color         = underline_color,
-  }
+  })
 
   return wibox.widget({
     {
@@ -108,7 +109,7 @@ M.box = function(widget, opts)
       widget,
       bg = bg,
       fg = fg,
-      shape = shape,
+      -- shape = shape,
       widget = wibox.container.background
     },
     margins = margin,
@@ -116,6 +117,7 @@ M.box = function(widget, opts)
   })
 end
 
+-- Creates an arc widget with a text box inside it.
 M.arc = function(bg, thickness, text)
   local text_box = M.simple_textbox({ font = USER.font(20) })
   text_box:set_text(string.format("%s%s", text, "0%" ))
@@ -137,4 +139,74 @@ M.arc = function(bg, thickness, text)
   })
 end
 
+-- Creates an slider widget for ui controls. It also provides a simple
+-- single method on it for its value update.
+M.slider_widget = function(text_icon, color)
+  local slider = wibox.widget({
+    widget = wibox.widget.slider,
+    maximum = 100,
+    forced_height = dpi(10),
+    bar_height = dpi(2),
+    bar_color = color,
+    handle_width = dpi(30),
+    handle_border_width = dpi(5),
+    handle_margins = { top = dpi(1), bottom = dpi(1) },
+    handle_shape = gears.shape.square,
+    handle_color = colors.white,
+    handle_border_color = colors.grey,
+  })
+
+  local icon = wibox.widget({
+    widget = wibox.widget.textbox,
+    markup = text_icon,
+    align = "center",
+    font = USER.font(15),
+  })
+
+  local percentage = wibox.widget({
+    widget = wibox.widget.textbox,
+    align = "center",
+  })
+
+  local final_widget = wibox.widget({
+    layout = wibox.layout.fixed.horizontal,
+    fill_space = true,
+    spacing = dpi(1),
+    icon,
+    {
+      slider,
+      widget = wibox.container.background,
+      forced_width = dpi(380),
+      forced_height = dpi(25)
+    },
+    percentage
+  })
+
+  final_widget.set_value = function(_, value)
+    slider.value = value
+    percentage.markup = value .. "%"
+  end
+
+  return final_widget
+end
+
+M.button = function(opts)
+  opts = opts or {}
+  local text = opts.text or "Button"
+  local bg = opts.background_color or beautiful.background_alt
+  local fg = opts.foreground_color or beautiful.fg_normal
+
+  local widget = wibox.widget({
+    widget = wibox.container.background,
+    bg = bg,
+    fg = fg,
+    {
+      widget = wibox.widget.textbox,
+      text = text ,
+      font = USER.font(15),
+    }
+  })
+
+  return widget
+end
 return M

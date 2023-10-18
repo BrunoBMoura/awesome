@@ -2,6 +2,7 @@
 USER = {
   terminal = "kitty",
   editor   = os.getenv("EDITOR") or "nvim",
+  device = "/dev/sda2",
   keys = {
     alt   = "Mod1",
     super = "Mod4",
