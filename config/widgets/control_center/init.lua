@@ -32,10 +32,11 @@ local cpu = require("config.widgets.control_center.cpu")({
   color = beautiful.palette.green,
 })
 
-local storage = helpers.arc(
-  beautiful.palette.red, dpi(12), " "
-)
-storage.value = 50
+local storage = require("config.widgets.control_center.disk")({
+  icon = " ",
+  device = "/dev/sda2",
+  color = beautiful.palette.red,
+})
 
 local resources_widget = boxfy(wibox.layout.flex.horizontal, { cpu, mem, storage })
 
