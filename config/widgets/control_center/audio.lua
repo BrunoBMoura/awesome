@@ -1,6 +1,5 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
-local utils = require("config.widgets.utils")
 local colors = USER.palette
 
 local function create(text_icon, color)

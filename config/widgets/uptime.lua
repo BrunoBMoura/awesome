@@ -1,18 +1,18 @@
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
-local utils = require("config.widgets.utils")
+local helpers = require("config.widgets.helpers")
 
 -- Local widget information.
 local PROCS = {
   main = {
     cmd = [[bash -c "uptime -p | grep -Eo '[0-9]{1,2}'"]],
-    match = utils.build_match_for(2),
-    submatch = utils.build_match_for(1),
+    match = helpers.build_match_for(2),
+    submatch = helpers.build_match_for(1),
     interval = 30
   },
   tooltip = {
     cmd = [[ bash -c "uptime -s | grep -Eo '[0-9]{1,6}'"]],
-    match = utils.build_match_for(6)
+    match = helpers.build_match_for(6)
   }
 }
 
@@ -23,7 +23,7 @@ local function worker(opts)
   opts = opts or {}
   local icon = opts.icon or "Up:"
 
-  uptime.widget = utils.simple_textbox()
+  uptime.widget = helpers.simple_textbox()
 
   local startup = {}
   spawn.easy_async(PROCS.tooltip.cmd, function(stdout)
@@ -31,7 +31,7 @@ local function worker(opts)
     startup.hour, startup.min, startup.sec = stdout:match(PROCS.tooltip.match)
   end)
 
-  utils.simple_tooltip({ uptime.widget }, function()
+  helpers.simple_tooltip({ uptime.widget }, function()
     return string.format(
       "Up since %s/%s/%s, %s:%s:%s",
       startup.day, startup.month, startup.year,

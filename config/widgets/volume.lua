@@ -1,5 +1,5 @@
 local watch = require("awful.widget.watch")
-local utils = require("config.widgets.utils")
+local helpers = require("config.widgets.helpers")
 local spawn = require("awful.spawn")
 local awful = require("awful")
 local gears = require("gears")
@@ -17,7 +17,7 @@ local PROCS = {
   },
   get_volume =  {
     cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
-    match = utils.build_match_for(10),
+    match = helpers.build_match_for(10),
     interval = 1
   },
   get_sink = {
@@ -40,12 +40,12 @@ local volume = {}
 
 local function worker(opts)
   opts = opts or {}
-  volume.widget = utils.simple_textbox()
+  volume.widget = helpers.simple_textbox()
 
   -- Set the initial tooltip value.
   volume.tooltip = {}
   volume.tooltip.source = ""
-  utils.simple_tooltip({ volume.widget }, function()
+  helpers.simple_tooltip({ volume.widget }, function()
     return string.format("Sink: %s", volume.tooltip.source)
   end)
 

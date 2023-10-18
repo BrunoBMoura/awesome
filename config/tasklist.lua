@@ -7,15 +7,15 @@ local tasklist = {}
 
 local function create(screen, buttons)
   return awful.widget.tasklist({
-    screen   = screen,
+      screen   = screen,
       filter   = awful.widget.tasklist.filter.currenttags,
       buttons  = buttons,
       layout   = {
         spacing_widget = {
           {
-            forced_width  = 5,
-            forced_height = 25,
-            thickness     = 2,
+            forced_width  = dpi(5),
+            forced_height = dpi(25),
+            thickness     = dpi(2),
             color         = beautiful.bg_focus,
             widget        = wibox.widget.separator
           },
@@ -23,7 +23,7 @@ local function create(screen, buttons)
           halign = 'center',
           widget = wibox.container.place,
         },
-        spacing = 5,
+        spacing = dpi(5),
         layout  = wibox.layout.fixed.horizontal
       },
       widget_template = {

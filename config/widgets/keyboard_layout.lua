@@ -1,5 +1,5 @@
 local awful = require("awful")
-local utils = require("config.widgets.utils")
+local helpers = require("config.widgets.helpers")
 
 -- Local widget information.
 local PROC = {
@@ -32,7 +32,7 @@ local keyboard = {
 local function worker(opts)
   opts = opts or {}
   local icon = opts.icon or ""
-  keyboard.widget = utils.simple_textbox()
+  keyboard.widget = helpers.simple_textbox()
 
   -- First, invoke the setxkbmap command to set the initial layout and set
   -- the widgets text accordingly.
@@ -40,7 +40,7 @@ local function worker(opts)
   keyboard.widget:set_text(string.format("%s%s", icon, keyboard.layouts[keyboard.current].name))
 
   -- Then, set the tooltip as the current layouts description text.
-  utils.simple_tooltip({ keyboard.widget }, function()
+  helpers.simple_tooltip({ keyboard.widget }, function()
     return keyboard.layouts[keyboard.current].description
   end)
 

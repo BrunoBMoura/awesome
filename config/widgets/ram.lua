@@ -1,11 +1,11 @@
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
-local utils = require("config.widgets.utils")
+local helpers = require("config.widgets.helpers")
 
 -- Local widget information.
 local PROC = {
   cmd = [[bash -c "free | grep Mem"]],
-  match = utils.build_match_for(3),
+  match = helpers.build_match_for(3),
   interval = 5
 }
 
@@ -16,7 +16,7 @@ local function worker(opts)
   opts = opts or {}
   local icon = opts.icon or "Ram:"
 
-  ram.widget = utils.simple_textbox()
+  ram.widget = helpers.simple_textbox()
   spawn.easy_async(PROC.cmd, function(stdout)
     local total, used, _ = stdout:match(PROC.match)
     local ram_percentage = math.floor((used / total) * 100)

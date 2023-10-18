@@ -1,4 +1,4 @@
-local utils = require("config.widgets.utils")
+local helpers = require("config.widgets.helpers")
 local wibox = require("wibox")
 local dpi = beautiful.xresources.apply_dpi
 
@@ -21,7 +21,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      utils.colorize(menu, colors.white, colors.grey),
+      helpers.colorize(menu, colors.white, colors.grey),
       screen.mytaglist,
       separator,
       screen.mypromptbox,

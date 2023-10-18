@@ -1,6 +1,6 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
-local utils = require("config.widgets.utils")
+local helpers = require("config.widgets.helpers")
 
 -- Simple helper function to boxfy widgets inside a single shape
 -- keeping the spacing and marging consistent.
@@ -15,7 +15,7 @@ local function boxfy(layout, widgets_tbl)
     main_widget:add(widget)
   end
 
-  return utils.box(main_widget, {
+  return helpers.box(main_widget, {
     margin = dpi(5),
     background_color = beautiful.palette.grey,
     foreground_color = beautiful.fg_normal,
@@ -32,7 +32,7 @@ local cpu = require("config.widgets.control_center.cpu")({
   color = beautiful.palette.green,
 })
 
-local storage = utils.arc(
+local storage = helpers.arc(
   beautiful.palette.red, dpi(12), " "
 )
 storage.value = 50

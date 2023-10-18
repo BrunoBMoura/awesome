@@ -3,7 +3,7 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
--- Utils module.
+-- helpers module.
 local M = {}
 
 -- Notifies the given text.
