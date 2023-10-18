@@ -57,9 +57,9 @@ M.simple_tooltip = function(widgets_tbl, callback)
 end
 
 -- Creates a simple textbox widget with default configurations.
-M.simple_textbox = function(configs)
-  local args = configs or {}
-  local font = args.font or beautiful.font
+M.simple_textbox = function(opts)
+  opts = opts or {}
+  local font = opts.font or beautiful.font
   return wibox.widget({
     widget = wibox.widget.textbox,
     align = "center",
@@ -93,12 +93,12 @@ M.underlined = function(widget, underline_color)
 end
 
 -- Creates a box for the given widget.
-M.box = function(widget, configs)
-  local args = configs or {}
-  local fg = args.foreground_color or beautiful.fg_normal
-  local bg = args.background_color or beautiful.bg_normal
-  local margin = args.margin or dpi(5)
-  local radius = args.radius or dpi(5)
+M.box = function(widget, opts)
+  opts = opts or {}
+  local fg = opts.foreground_color or beautiful.fg_normal
+  local bg = opts.background_color or beautiful.bg_normal
+  local margin = opts.margin or dpi(5)
+  local radius = opts.radius or dpi(5)
   local shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, radius)
   end
@@ -116,13 +116,13 @@ M.box = function(widget, configs)
   })
 end
 
-M.arc = function(bg, thickness, text, icon)
+M.arc = function(bg, thickness, text)
   local text_box = M.simple_textbox({ font = USER.font(20) })
-  local text_box_bg = wibox.container.background(text_box)
-  text_box:set_text(string.format("%s%s", icon, "0%" ))
+  text_box:set_text(string.format("%s%s", text, "0%" ))
 
   return wibox.widget({
-    text_box_bg,
+    text_box,
+    id = "text",
     max_value = 100,
     min_value = 0,
     thickness = thickness,

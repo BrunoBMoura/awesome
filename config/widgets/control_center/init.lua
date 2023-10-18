@@ -1,39 +1,46 @@
 local wibox = require("wibox")
 local dpi = require("beautiful.xresources").apply_dpi
-local audio = require("config.widgets.control_center.audio")
 local utils = require("config.widgets.utils")
 
-local mem = utils.arc(
-  beautiful.palette.blue, dpi(12), "Mem", " "
-)
+-- Simple helper function to boxfy widgets inside a single shape
+-- keeping the spacing and marging consistent.
+local function boxfy(layout, widgets_tbl)
 
-mem.value = 50
+  local main_widget = wibox.widget({
+    layout = layout,
+    spacing = dpi(1),
+  })
 
-local cpu = utils.arc(
-  beautiful.palette.green, dpi(12), "Cpu", " "
-)
+  for _, widget in ipairs(widgets_tbl) do
+    main_widget:add(widget)
+  end
 
-cpu.value = 25
+  return utils.box(main_widget, {
+    margin = dpi(5),
+    background_color = beautiful.palette.grey,
+    foreground_color = beautiful.fg_normal,
+  })
+end
+
+local mem = require("config.widgets.control_center.ram")({
+  icon = " ",
+  color = beautiful.palette.blue,
+})
+
+local cpu = require("config.widgets.control_center.cpu")({
+  icon = " ",
+  color = beautiful.palette.green,
+})
 
 local storage = utils.arc(
-  beautiful.palette.red, dpi(12), "Disk", " "
+  beautiful.palette.red, dpi(12), " "
 )
+storage.value = 50
 
-storage.value = 75
+local resources_widget = boxfy(wibox.layout.flex.horizontal, { cpu, mem, storage })
 
-local resources = wibox.widget({
-  layout = wibox.layout.flex.horizontal,
-  spacing = dpi(1),
-})
-
-resources:add(cpu, mem, storage)
-
-local resources_widet_box = utils.box(resources, {
-  margin = dpi(5),
-  background_color = beautiful.palette.grey,
-  foreground_color = beautiful.fg_normal,
-})
-
+local audio = require("config.widgets.control_center.audio")
+local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
 
 local main_widget = wibox.widget {
   layout = wibox.layout.fixed.vertical,
@@ -60,24 +67,12 @@ local popup_widget = awful.popup({
   }
 })
 
-local audio_widget = wibox.widget({
-  layout = wibox.layout.fixed.vertical,
-  spacing = dpi(1),
-  audio.speaker,
-  audio.mic,
-})
-
-local audio_widget_box = utils.box(audio_widget, {
-  margin = dpi(5),
-  background_color = beautiful.palette.grey,
-})
-
 awesome.connect_signal("toggle::control_center", function()
   if popup_widget.visible then
     popup_widget.visible = false
   else
     main_widget:reset()
-    main_widget:add(resources_widet_box, audio_widget_box)
+    main_widget:add(resources_widget, audio_widget)
     popup_widget.visible = true
   end
 end)
