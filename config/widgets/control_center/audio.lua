@@ -10,14 +10,14 @@ local function create(opts)
   opts.mic = opts.mic or false
   opts.speaker = opts.speaker or false
 
-  opts.speaker.icon = opts.speaker.icon or "  "
+  opts.speaker.text = opts.speaker.text or "  "
   opts.speaker.color = opts.speaker.color or colors.green
 
-  opts.mic.icon = opts.mic.icon or "  "
+  opts.mic.text = opts.mic.text or "  "
   opts.mic.color = opts.mic.color or colors.orange
 
-  audio.speaker = helpers.slider_widget(opts.speaker.icon, opts.speaker.color)
-  audio.mic = helpers.slider_widget(opts.mic.icon, opts.mic.color)
+  audio.speaker = helpers.slider_widget(opts.speaker.text, opts.speaker.color)
+  audio.mic = helpers.slider_widget(opts.mic.text, opts.mic.color)
 
   audio.speaker:set_value(34)
   audio.mic:set_value(43)

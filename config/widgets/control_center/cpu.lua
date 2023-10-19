@@ -15,17 +15,17 @@ local cpu = {}
 
 local function worker(opts)
   opts = opts or {}
-  local icon = opts.icon or "Cpu:"
+  local text = opts.text or "Cpu:"
   local color = opts.color or USER.palette.green
 
-  cpu.widget = helpers.arc(color, dpi(12), icon)
+  cpu.widget = helpers.arc(color, dpi(12), text)
 
   spawn.easy_async(PROC.cmd, function(stdout)
     local used = stdout:match(PROC.match)
-    cpu.widget:set_text(string.format("%s%s%%", icon, used))
+    cpu.widget:set_text(string.format("%s%s%%", text, used))
 
     local text_widget = cpu.widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", icon, used))
+    text_widget:set_text(string.format("%s%s%%", text, used))
     cpu.widget.value = 100 - tonumber(used)
   end)
 
@@ -33,7 +33,7 @@ local function worker(opts)
     local used = stdout:match(PROC.match)
 
     local text_widget = widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", icon, used))
+    text_widget:set_text(string.format("%s%s%%", text, used))
     widget.value = 100 - tonumber(used)
   end
 

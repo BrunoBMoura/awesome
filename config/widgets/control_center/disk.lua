@@ -19,11 +19,11 @@ local disk = {}
 
 local function worker(opts)
   opts = opts or {}
-  local icon = opts.icon or "Disk:"
+  local text = opts.text or "Disk:"
   local device = opts.device or "/dev/sda1"
   local color = opts.color or USER.palette.red
 
-  disk.widget = helpers.arc(color, dpi(12), icon)
+  disk.widget = helpers.arc(color, dpi(12), text)
 
   spawn.easy_async(build_cmd(device), function(stdout)
     local used_disk_percentage  = stdout:match(PROC.match)
@@ -31,7 +31,7 @@ local function worker(opts)
     used_disk_percentage = tonumber(used_disk_percentage)
 
     local text_widget = disk.widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", icon, used_disk_percentage))
+    text_widget:set_text(string.format("%s%s%%", text, used_disk_percentage))
     disk.widget.value = 100 - used_disk_percentage
   end)
 
@@ -41,7 +41,7 @@ local function worker(opts)
     used_disk_percentage = tonumber(used_disk_percentage)
 
     local text_widget = widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", icon, used_disk_percentage))
+    text_widget:set_text(string.format("%s%s%%", text, used_disk_percentage))
     widget.value = 100 - used_disk_percentage
   end
 

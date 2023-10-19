@@ -10,5 +10,3 @@ local autostart = {
 for _, command in ipairs(autostart) do
   awful.spawn.with_shell(command)
 end
-
--- awful.spawn.with_shell("xrandr --output HDMI-A-0 --rotate right")
