@@ -8,7 +8,7 @@ local custom_wibox = {}
 local function create(screen)
   local separator = wibox.widget.textbox(" ")
   local menu = require("config.widgets.menu")({ icon = "", font_size = 15 })
-  local calendar = require("config.widgets.calendar")(screen, {
+  local date = require("config.widgets.date")({
     icon = "󰃰", color = colors.white
   })
   local uptime = require("config.widgets.uptime")({ icon = "󰚰 "})
@@ -28,7 +28,7 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      calendar,
+      date,
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
