@@ -55,15 +55,18 @@ local audio = require("config.widgets.control_center.audio")({
 
 local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
 
+-- Define the proper control center widget.
+local control_center = {}
+
 -- For the main widget, simply declare it as vertical layout.
-local main_widget = wibox.widget({
+control_center.main = wibox.widget({
   layout = wibox.layout.fixed.vertical,
   spacing = dpi(2),
 })
 
 -- Define a popup widget to contain the main widget that will be used as the real
 -- control center.
-local popup_widget = awful.popup({
+control_center.popup = awful.popup({
   visible = false,
   ontop = true,
   border_width = dpi(1),
@@ -78,26 +81,28 @@ local popup_widget = awful.popup({
     {
       widget = wibox.container.margin,
       margins = dpi(5),
-      main_widget,
+      control_center.main,
     }
   })
 })
 
--- Finally, connect the 'toggle::control_center' signal to the popup widget;
--- this will be used to toggle its visibility.
-awesome.connect_signal("toggle::control_center", function()
-  if popup_widget.visible then
-    popup_widget.visible = false
+-- Finally, define the control center toggle function to be called
+-- upon signal receival.
+control_center.toggle = function(self)
+  if self.popup.visible then
+    self.popup.visible = false
   else
     -- Whenever the popup widget is to be shown, reset the main widget to its default
     -- state, add to it all the previously defined widgets and set it as visible.
-    main_widget:reset()
-    main_widget:add(
+    self.main:reset()
+    self.main:add(
       clock_widget,
       calendar_widget,
       resources_widget,
       audio_widget
     )
-    popup_widget.visible = true
+    self.popup.visible = true
   end
-end)
+end
+
+return control_center

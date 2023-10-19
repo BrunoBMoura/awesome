@@ -2,6 +2,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
+control_center = require("config.widgets.control_center.init")
 volume_widget = require("config.widgets.volume")({ icon = "󰕾 "})
 keyboard_layout_widget = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
 

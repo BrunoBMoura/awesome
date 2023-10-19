@@ -26,3 +26,7 @@ end)
 awesome.connect_signal("decrease::volume", function()
   volume_widget:decrease(5)
 end)
+
+awesome.connect_signal("toggle::control_center", function()
+  control_center:toggle()
+end)
