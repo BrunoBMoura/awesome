@@ -1,5 +1,3 @@
-local wibox = require("wibox")
-local dpi = require("beautiful.xresources").apply_dpi
 local colors = beautiful.palette
 local helpers = require("config.widgets.helpers")
 
