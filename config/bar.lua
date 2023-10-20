@@ -7,11 +7,11 @@ local custom_wibox = {}
 
 local function create(screen)
   local separator = wibox.widget.textbox(" ")
-  local menu = require("config.widgets.menu")({ icon = "", font_size = 15 })
+  local menu = require("config.widgets.menu")({ text = "", font_size = 15 })
   local date = require("config.widgets.date")({
-    icon = "󰃰", color = colors.white
+    icon = " 󰃰", color = colors.white
   })
-  local uptime = require("config.widgets.uptime")({ icon = "󰚰 "})
+  local uptime = require("config.widgets.uptime")({ icon = " 󰚰 "})
 
   return {
     spacing = dpi(50),
@@ -22,22 +22,19 @@ local function create(screen)
       helpers.colorize(menu, colors.white, colors.grey),
       screen.mytaglist,
       separator,
-      screen.mypromptbox,
-      separator,
       screen.mytasklist,
+      separator,
+      screen.mypromptbox,
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      date,
+      helpers.box(date, { background_color = colors.grey }),
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      uptime,
-      separator,
-      volume_widget,
-      separator,
-      keyboard_layout_widget,
-      separator,
+      helpers.box(uptime, { background_color = colors.grey }),
+      helpers.box(volume_widget, { background_color = colors.grey }),
+      helpers.box(keyboard_layout_widget, { background_color = colors.grey }),
       wibox.widget.systray(),
       screen.mylayoutbox
     },

@@ -59,7 +59,7 @@ local function worker(opts)
 
     -- Properly access uptime information and set it as the widgets text.
     local uptime_info = time_parser(stdout)
-    widget:set_text(string.format("%s%sh%sm", icon, uptime_info.hour, uptime_info.min))
+    widget:set_text(string.format("%s%sh%sm ", icon, uptime_info.hour, uptime_info.min))
   end
 
   watch(PROCS.main.cmd, PROCS.main.interval, update_uptime_widget, uptime.widget)

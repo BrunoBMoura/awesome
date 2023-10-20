@@ -10,7 +10,7 @@ local function create(opts)
   local icon = opts.icon or "Date:"
 
   date.widget = wibox.widget.textclock(
-    '<span color="' .. color .. '"> ' .. icon .. ' %a %b %d, %H:%M</span>'
+    '<span color="'.. color .. '">' .. icon .. ' %d/%m, %H:%M </span>'
   )
 
   return date.widget
