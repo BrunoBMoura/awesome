@@ -69,30 +69,6 @@ M.simple_textbox = function(opts)
   })
 end
 
--- Underlines a given widget.
-M.underlined = function(widget, underline_color)
-  local underline = wibox.widget({
-    widget        = wibox.widget.separator,
-    orientation   = "horizontal",
-    forced_height = dpi(1),
-    forced_width  = dpi(25),
-    color         = underline_color,
-  })
-
-  return wibox.widget({
-    {
-      widget,
-      layout = wibox.layout.stack,
-    },
-    {
-      underline,
-      top = dpi(28),
-      layout = wibox.container.margin,
-    },
-    layout = wibox.layout.stack,
-  })
-end
-
 -- Creates a box for the given widget.
 M.box = function(widget, opts)
   opts = opts or {}
@@ -190,6 +166,7 @@ M.slider_widget = function(text_icon, color)
   return final_widget
 end
 
+-- Creates a button widget with a text box inside it as the buttons icon.
 M.button = function(opts)
   opts = opts or {}
   local text = opts.text or "Button"
@@ -210,12 +187,26 @@ M.button = function(opts)
   return widget
 end
 
+-- Crates a dynamic popup menu widget based on its arguments.
+-- The @opts argument is a table of tables with the following structure:
+--
+--  opts = {
+--    { name = "", command = "", text = "" },
+--    { name = "", command = "", text = "" },
+--    ...,
+--    ...,
+--    ...
+--  }
+--
+--In which the name field contains the name of the operation, the command
+--field contains the command to be executed and the text field contains the
+--text to be displayed on the option.
 M.popup_menu = function(opts)
   -- Proper widget to hold the options of the powermenu.
   local options_container = wibox.widget({
     homogeneous = false,
     expand = true,
-    forced_num_cols = 3,
+    forced_num_cols = #opts,
     spacing = dpi(10),
     layout = wibox.layout.grid
   })
@@ -291,6 +282,16 @@ M.popup_menu = function(opts)
     end
   end
 
+  -- Custom function to get the index of the current cell being accessed.
+  -- Used to allow mouse interaction on hover.
+  popup_widget._get_idx_by_id = function(_, id)
+    for idx, option in ipairs(options_container:get_children()) do
+      if option.id == id then
+        return idx
+      end
+    end
+  end
+
   -- Readability enhancement.
   popup_widget._current = function(self)
     local current_id = opts[self.current_index].name
@@ -298,25 +299,34 @@ M.popup_menu = function(opts)
   end
 
   -- Custom option function to properly change the current index and highlight
-  -- of the current cell.
-  popup_widget._option = function(self, operation)
+  -- of the current cell. It also provide support for complex selections such
+  -- as mouse hovering with the @meta_opts argument.
+  popup_widget._select = function(self, operation, meta_opts)
+    meta_opts = meta_opts or {}
     -- First, define the index adjustment for each operation.
+    -- By default ignore the passed meta_opts argument.
     local index_adjust = {
-      ["next"] = function()
+      ["next"] = function(_)
+        -- Circularly set the next index.
         self.current_index = self.current_index % #opts + 1
       end,
-      ["prev"] = function()
+      ["prev"] = function(_)
+        -- Circularly set the previous index.
         self.current_index = self.current_index - 1
         if self.current_index == 0 then
           self.current_index = #opts
         end
+      end,
+      ["hover"] = function(hover_opts)
+        -- Upon mouse hover, set the current index to the hovered option.
+        self.current_index = self:_get_idx_by_id(hover_opts.hovered_id)
       end
     }
 
     -- Access the current option and set its background to the default one.
     self:_current().bg = beautiful.background
     -- Perform the index adjustment.
-    index_adjust[operation]()
+    index_adjust[operation](meta_opts)
     -- Access the new current option and set its background to the highlighted one.
     self:_current().bg = beautiful.palette.grey
   end
@@ -331,10 +341,10 @@ M.popup_menu = function(opts)
       end,
       keypressed_callback = function(_, key)
         local operation = {
-          ["Right"] = function() self:_option("next") end,
-          ["Left"] = function() self:_option("prev") end,
-          ["l"] = function() self:_option("next") end,
-          ["h"] = function() self:_option("prev") end
+          ["Right"] = function() self:_select("next") end,
+          ["Left"]  = function() self:_select("prev") end,
+          ["l"]     = function() self:_select("next") end,
+          ["h"]     = function() self:_select("prev") end
         }
 
         -- If any other key is pressed while the prompt is running, do nothing.
@@ -358,6 +368,17 @@ M.popup_menu = function(opts)
     self.visible = true
     self:_current().bg = beautiful.palette.grey
     self:_run()
+  end
+
+  -- Connect the mouse enter/leave signals to the popup widgets children.
+  for _, option in ipairs(options_container:get_children()) do
+    option:connect_signal("mouse::enter", function()
+      popup_widget:_select("hover", { hovered_id = option.id })
+    end)
+
+    option:connect_signal("mouse::press", function()
+      M.notify("Power Menu - " .. option.command)
+    end)
   end
 
   return popup_widget

@@ -22,16 +22,16 @@ local function create(opts)
   menu.widget.font = USER.font(font_size)
   menu.widget:set_text(string.format(" %s  ", text))
 
-  local popup_widget = helpers.popup_menu(PROCS.main_menu_opts)
+  menu.popup_widget = helpers.popup_menu(PROCS.main_menu_opts)
 
-  menu.widget.show_popup = function()
+  --[[ menu.widget.show_popup = function()
     popup_widget:toggle()
-  end
+  end ]]
 
   menu.widget:buttons(
     gears.table.join(
       awful.button({ }, 1, function()
-        menu.widget:show_popup()
+        menu.popup_widget:toggle()
       end)
     )
   )
