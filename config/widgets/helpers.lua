@@ -1,5 +1,6 @@
 local wibox = require("wibox")
 local awful = require("awful")
+local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local colors = beautiful.palette
@@ -336,20 +337,27 @@ M.popup_menu = function(opts)
     self:_current().bg = beautiful.palette.grey
   end
 
+  -- Custom function to properly execute the current command.
+  popup_widget._exec_current = function(self)
+    local command = opts[self.current_index].command
+    M.notify(command)
+    -- awful.spawn.easy_async_with_shell(command)
+  end
+
   -- Method called to run the prompt and capture user key presses.
   popup_widget._run = function(self)
     awful.prompt.run({
       textbox = prompt,
       exe_callback = function()
         -- Properly execute the command here.
-        M.notify(opts[self.current_index].command)
+        self:_exec_current()
       end,
       keypressed_callback = function(_, key)
         local operation = {
           ["Right"] = function() self:_select("next") end,
-          ["Left"]  = function() self:_select("prev") end,
-          ["l"]     = function() self:_select("next") end,
-          ["h"]     = function() self:_select("prev") end
+          ["Left"] = function() self:_select("prev") end,
+          ["l"] = function() self:_select("next") end,
+          ["h"] = function() self:_select("prev") end
         }
 
         -- If any other key is pressed while the prompt is running, do nothing.
@@ -380,10 +388,14 @@ M.popup_menu = function(opts)
     option:connect_signal("mouse::enter", function()
       popup_widget:_select("hover", { hovered_id = option.id })
     end)
+    -- Pretty sure this is not the best way to do this, but it works;
+    -- the correct way should use the 'mouse::press' signal.
+    option:buttons(gears.table.join(
+      awful.button({}, 1, function()
+        popup_widget:_exec_current()
+      end)
+    ))
 
-    option:connect_signal("mouse::press", function()
-      M.notify("Power Menu - " .. option.command)
-    end)
   end
 
   return popup_widget

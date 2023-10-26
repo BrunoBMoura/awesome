@@ -1,7 +1,7 @@
 local spawn = require("awful.spawn")
 local helpers = require("config.widgets.helpers")
 local watch = require("awful.widget.watch")
-local colors = beautiful.palette
+local colors = require("beautiful").palette
 
 local PROCS = {
   speaker = {

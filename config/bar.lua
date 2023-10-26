@@ -1,8 +1,9 @@
 local helpers = require("config.widgets.helpers")
 local wibox = require("wibox")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
-local colors = USER.palette
+local colors = beautiful.palette
 local custom_wibox = {}
 
 local function create(screen)

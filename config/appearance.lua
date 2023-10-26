@@ -1,4 +1,6 @@
-local dpi = require("beautiful.xresources").apply_dpi
+local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
+
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
