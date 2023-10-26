@@ -62,7 +62,7 @@ local function worker(opts)
       widget:set_value(tonumber(vol or "0"))
     end
 
-    watch(PROCS.get_volume.cmd, PROCS.get_volume.interval, update_volume_slider, audio.speaker)
+    watch(PROCS.speaker.get_volume.cmd, PROCS.speaker.get_volume.interval, update_volume_slider, audio.speaker)
   end
 
   local function init_mic(initial_volume)
