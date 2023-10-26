@@ -158,9 +158,19 @@ M.slider_widget = function(text_icon, color)
     percentage
   })
 
+  -- Helper function to set all of the widgets values.
   final_widget.set_value = function(_, value)
     slider.value = value
     percentage.markup = value .. "%"
+  end
+
+  -- Helper function to connect a function to be called upon redraw
+  -- of the slider widget with its new value as argument.
+  final_widget.connect_function_upon_redraw = function(self, callback)
+    slider:connect_signal("widget::redraw_needed", function()
+      self:set_value(slider.value)
+      callback(slider.value)
+    end)
   end
 
   return final_widget

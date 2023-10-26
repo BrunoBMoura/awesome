@@ -80,7 +80,8 @@ local function worker(opts)
   local icon = opts.icon or "Vol:"
   local function update_volume_widget(widget, stdout)
     local _, vol = stdout:match(PROCS.get_volume.match)
-    widget:set_text(string.format(" %s%s%% ", icon, vol))
+    -- If the volume is nil, set it to 0.
+    widget:set_text(string.format(" %s%s%% ", icon, tonumber(vol or "0")))
   end
   -- Then setup a watch to update the widget content.
   watch(PROCS.get_volume.cmd, PROCS.get_volume.interval, update_volume_widget, volume.widget)
