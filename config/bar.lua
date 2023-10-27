@@ -34,8 +34,8 @@ local function create(screen)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       helpers.box(uptime, { background_color = colors.grey }),
-      helpers.box(volume_widget, { background_color = colors.grey }),
-      helpers.box(keyboard_layout_widget, { background_color = colors.grey }),
+      helpers.box(VOLUME_WIDGET, { background_color = colors.grey }),
+      helpers.box(KEYBOARD_LAYOUT_WIDGET, { background_color = colors.grey }),
       wibox.widget.systray(),
       screen.mylayoutbox
     },

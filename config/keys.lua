@@ -1,3 +1,6 @@
+local gears = require("gears")
+local awful = require("awful")
+
 local groups = {
   custom   = "custom",
   widget   = "widget",
@@ -80,7 +83,7 @@ local keys = gears.table.join(
   -- Awesome keybinds
   keybind({ USER.keys.super }, "s", "show help", groups.awesome, require("awful.hotkeys_popup").show_help),
   keybind({ USER.keys.super }, "w", "show main menu", groups.awesome, function()
-    main_menu:show()
+    MAIN_MENU:show()
   end),
   keybind({ USER.keys.super, USER.keys.ctrl }, "r", "reloads awesome", groups.awesome, awesome.restart),
   keybind({ USER.keys.super, USER.keys.shift, USER.keys.alt }, "q", "quits awesome", groups.awesome, awesome.quit),
@@ -175,7 +178,7 @@ root.keys(keys)
 
 root.buttons(
   gears.table.join(
-    awful.button({ }, 3, function() main_menu:toggle() end),
+    awful.button({ }, 3, function() MAIN_MENU:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
   )

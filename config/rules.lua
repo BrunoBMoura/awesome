@@ -1,4 +1,5 @@
 local beautiful = require("beautiful")
+local awful = require("awful")
 
 awful.rules.rules = {
     -- All clients will match this rule.

@@ -1,4 +1,5 @@
 local beautiful = require("beautiful")
+local awful = require("awful")
 
 client.connect_signal("focus", function(c)
   c.border_color = beautiful.border_focus
@@ -18,17 +19,17 @@ client.connect_signal("manage", function(c)
 end)
 
 awesome.connect_signal("switch::keyboard_layout", function()
-  keyboard_layout_widget:switch()
+  KEYBOARD_LAYOUT_WIDGET:switch()
 end)
 
 awesome.connect_signal("increase::volume", function()
-  volume_widget:increase(5)
+  VOLUME_WIDGET:increase(5)
 end)
 
 awesome.connect_signal("decrease::volume", function()
-  volume_widget:decrease(5)
+  VOLUME_WIDGET:decrease(5)
 end)
 
 awesome.connect_signal("toggle::control_center", function()
-  control_center:toggle()
+  CONTROL_CENTER:toggle()
 end)

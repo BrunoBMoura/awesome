@@ -1,12 +1,13 @@
 local beautiful = require("beautiful")
+local awful = require("awful")
+local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
-
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
-control_center = require("config.widgets.control_center.init")
-volume_widget = require("config.widgets.volume")({ icon = "󰕾 "})
-keyboard_layout_widget = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
+CONTROL_CENTER = require("config.widgets.control_center.init")
+VOLUME_WIDGET = require("config.widgets.volume")({ icon = "󰕾 "})
+KEYBOARD_LAYOUT_WIDGET = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
 
 local awesome_menu = {
   { "hotkeys", function()
@@ -22,7 +23,7 @@ local powermenu = {
   { "shutdown", "poweroff" },
 }
 
-main_menu = awful.menu({
+MAIN_MENU = awful.menu({
   auto_expand = true,
   items = {
     { "open terminal", USER.terminal },
