@@ -1,4 +1,3 @@
-require("config.init")
 require("config.user")
 require("config.setup")
 require("config.appearance")

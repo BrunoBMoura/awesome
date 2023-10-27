@@ -356,15 +356,15 @@ M.popup_menu = function(opts)
       keypressed_callback = function(_, key)
         local operation = {
           ["Right"] = function() self:_select("next") end,
-          ["Left"] = function() self:_select("prev") end,
-          ["l"] = function() self:_select("next") end,
-          ["h"] = function() self:_select("prev") end
+          ["Left"]  = function() self:_select("prev") end,
+          ["l"]     = function() self:_select("next") end,
+          ["h"]     = function() self:_select("prev") end
         }
-
         -- If any other key is pressed while the prompt is running, do nothing.
         if operation[key] == nil then
           return
         end
+
         operation[key]()
       end,
       done_callback = function()

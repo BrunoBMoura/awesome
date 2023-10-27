@@ -1,16 +1,6 @@
 -- Custom user settings
-USER = {
-  terminal = "kitty",
-  editor   = os.getenv("EDITOR") or "nvim",
-  device = "/dev/sda2",
-  keys = {
-    alt   = "Mod1",
-    super = "Mod4",
-    shift = "Shift",
-    ctrl  = "Control"
-  },
-  palette = {
-    -- kanagawa
+local palettes = {
+  kanagawa = {
     black      = "#16161d",
     background = "#181616",
     red        = "#c4746e",
@@ -22,8 +12,20 @@ USER = {
     white      = "#c5c9c5",
     grey       = "#282727",
     orange     = "#b6927b",
-    light_grey = "#625e5a",
   },
+}
+
+USER = {
+  terminal = "kitty",
+  editor   = os.getenv("EDITOR") or "nvim",
+  device = "/dev/sda2",
+  keys = {
+    alt   = "Mod1",
+    super = "Mod4",
+    shift = "Shift",
+    ctrl  = "Control"
+  },
+  palette = palettes.kanagawa,
   font = function(size)
     local default_size = 12
     return string.format("JetBrains Mono %d", size or default_size)
