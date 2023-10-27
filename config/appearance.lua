@@ -9,17 +9,25 @@ volume_widget = require("config.widgets.volume")({ icon = "󰕾 "})
 keyboard_layout_widget = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
 
 local awesome_menu = {
-   { "hotkeys", function() require("awful.hotkeys_popup").show_help(nil, awful.screen.focused()) end },
-   { "manual", USER.terminal .. " -e man awesome" },
-   { "edit config", USER.editor .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+  { "hotkeys", function()
+     require("awful.hotkeys_popup").show_help(nil, awful.screen.focused())
+   end },
+  { "manual", USER.terminal .. " -e man awesome" },
+  { "restart", awesome.restart },
+}
+
+local powermenu = {
+  { "logout", function() awesome.quit() end },
+  { "reboot", "reboot" },
+  { "shutdown", "poweroff" },
 }
 
 main_menu = awful.menu({
+  auto_expand = true,
   items = {
+    { "open terminal", USER.terminal },
     { "awesome", awesome_menu, beautiful.awesome_icon },
-    { "open terminal", USER.terminal }
+    { "power", powermenu },
   }
 })
 
