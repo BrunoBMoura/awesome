@@ -9,6 +9,9 @@ CONTROL_CENTER = require("config.widgets.control_center.init")
 VOLUME_WIDGET = require("config.widgets.volume")({ icon = "󰕾 "})
 KEYBOARD_LAYOUT_WIDGET = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
 
+MENUBAR = require("menubar")
+MENUBAR.utils.terminal = USER.terminal
+
 local awesome_menu = {
   { "hotkeys", function()
      require("awful.hotkeys_popup").show_help(nil, awful.screen.focused())
@@ -31,6 +34,25 @@ MAIN_MENU = awful.menu({
     { "power", powermenu },
   }
 })
+
+local function set_wallpaper(screen)
+  if beautiful.wallpaper then
+    local wallpaper = beautiful.wallpaper
+    if type(wallpaper) == "function" then
+      wallpaper = wallpaper(screen)
+    end
+    gears.wallpaper.maximized(wallpaper, screen, true)
+  end
+end
+
+local function set_screen_prefs(screen)
+  if screen.index == 1 then
+    set_wallpaper(screen)
+    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[1])
+  elseif screen.index == 2 then
+    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[2])
+  end
+end
 
 local taglist_buttons = gears.table.join(
   awful.button({ }, 1, function(tag) tag:view_only() end),
@@ -56,25 +78,6 @@ local tasklist_buttons = gears.table.join(
     })
   end)
 )
-
-local function set_wallpaper(screen)
-  if beautiful.wallpaper then
-    local wallpaper = beautiful.wallpaper
-    if type(wallpaper) == "function" then
-      wallpaper = wallpaper(screen)
-    end
-    gears.wallpaper.maximized(wallpaper, screen, true)
-  end
-end
-
-local function set_screen_prefs(screen)
-  if screen.index == 1 then
-    set_wallpaper(screen)
-    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[1])
-  elseif screen.index == 2 then
-    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[2])
-  end
-end
 
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -102,5 +105,3 @@ awful.screen.connect_for_each_screen(function(screen)
   screen.mywibox:setup(require("config.bar")(screen))
 end)
 
-menubar = require("menubar")
-menubar.utils.terminal = USER.terminal

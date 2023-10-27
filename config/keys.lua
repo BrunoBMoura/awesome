@@ -115,7 +115,7 @@ local keys = gears.table.join(
     awful.screen.focused().mypromptbox:run()
   end),
   keybind({ USER.keys.super, USER.keys.shift }, "p", "shows the menubar", groups.launcher, function()
-      menubar.show()
+      MENUBAR.show()
   end)
 )
 
