@@ -25,16 +25,6 @@ local function worker(opts)
 
   disk.widget = helpers.arc(color, dpi(12), text)
 
-  spawn.easy_async(build_cmd(device), function(stdout)
-    local used_disk_percentage  = stdout:match(PROC.match)
-    used_disk_percentage = used_disk_percentage:gsub("%%", "")
-    used_disk_percentage = tonumber(used_disk_percentage)
-
-    local text_widget = disk.widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", text, used_disk_percentage))
-    disk.widget.value = 100 - used_disk_percentage
-  end)
-
   local function update_disk_widget(widget, stdout)
     local used_disk_percentage  = stdout:match(PROC.match)
     used_disk_percentage = used_disk_percentage:gsub("%%", "")
@@ -44,6 +34,10 @@ local function worker(opts)
     text_widget:set_text(string.format("%s%s%%", text, used_disk_percentage))
     widget.value = 100 - used_disk_percentage
   end
+
+  spawn.easy_async(build_cmd(device), function(stdout)
+    update_disk_widget(disk.widget, stdout)
+  end)
 
   watch(build_cmd(device), PROC.interval, update_disk_widget, disk.widget)
 

@@ -15,12 +15,12 @@ local PROCS = {
     },
   },
   mic = {
-    set_volume = function(device, value) end,
-    get_volume = {
+    -- set_volume = function(device, value) end,
+    -- get_volume = {
       -- cmd = [[bash -c "pactl get-source-volume @DEFAULT_SOURCE@ | grep -Eo [0-9]'{,}'"]],
       -- match = helpers.build_match_for(10),
       -- interval = 1
-    }
+    -- }
   }
 }
 

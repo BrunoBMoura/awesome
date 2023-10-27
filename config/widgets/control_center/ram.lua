@@ -20,15 +20,6 @@ local function worker(opts)
 
   ram.widget = helpers.arc(color, dpi(12), text)
 
-  spawn.easy_async(PROC.cmd, function(stdout)
-    local total, used, _ = stdout:match(PROC.match)
-    local ram_percentage = math.floor((used / total) * 100)
-
-    local text_widget = ram.widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", text, ram_percentage))
-    ram.widget.value = 100 - ram_percentage
-  end)
-
   local function update_ram_widget(widget, stdout)
     local total, used, _ = stdout:match(PROC.match)
     local ram_percentage = math.floor((used / total) * 100)
@@ -37,6 +28,10 @@ local function worker(opts)
     text_widget:set_text(string.format("%s%s%%", text, ram_percentage))
     widget.value = 100 - ram_percentage
   end
+
+  spawn.easy_async(PROC.cmd, function(stdout)
+    update_ram_widget(ram.widget, stdout)
+  end)
 
   watch(PROC.cmd, PROC.interval, update_ram_widget, ram.widget)
 

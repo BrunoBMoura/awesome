@@ -20,22 +20,16 @@ local function worker(opts)
 
   cpu.widget = helpers.arc(color, dpi(12), text)
 
-  spawn.easy_async(PROC.cmd, function(stdout)
-    local used = stdout:match(PROC.match)
-    cpu.widget:set_text(string.format("%s%s%%", text, used))
-
-    local text_widget = cpu.widget:get_children()[1]
-    text_widget:set_text(string.format("%s%s%%", text, used))
-    cpu.widget.value = 100 - tonumber(used)
-  end)
-
   local function update_cpu_widget(widget, stdout)
     local used = stdout:match(PROC.match)
-
     local text_widget = widget:get_children()[1]
     text_widget:set_text(string.format("%s%s%%", text, used))
     widget.value = 100 - tonumber(used)
   end
+
+  spawn.easy_async(PROC.cmd, function(stdout)
+    update_cpu_widget(cpu.widget, stdout)
+  end)
 
   watch(PROC.cmd, PROC.interval, update_cpu_widget, cpu.widget)
 
