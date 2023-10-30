@@ -10,8 +10,8 @@ awful.rules.rules = {
         border_color = beautiful.border_normal,
         focus        = awful.client.focus.filter,
         raise        = true,
-        keys         = client_keys,
-        buttons      = client_buttons,
+        keys         = CLIENT_KEYS,
+        buttons      = CLIENT_BUTTONS,
         screen       = awful.screen.preferred,
         placement    = awful.placement.no_overlap + awful.placement.no_offscreen
      }
@@ -20,27 +20,27 @@ awful.rules.rules = {
     {
       rule_any = {
         instance = {
-          "DTA",  -- Firefox addon DownThemAll.
+          --[[ "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
-          "pinentry",
+          "pinentry", ]]
         },
         class = {
-          "Arandr",
+          --[[ "Arandr",
           "Blueman-manager",
           "Gpick",
           "MessageWin",  -- kalarm.
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size. ]]
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
         name = {
-          "Event Tester",  -- xev.
+          -- "Event Tester",  -- xev.
         },
         role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
+          --[[ "AlarmWindow",  -- Thunderbird's calendar.
           "ConfigManager",  -- Thunderbird's about:config.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools. ]]
         }
       },
       properties = { floating = false }

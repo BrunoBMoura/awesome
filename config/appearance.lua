@@ -13,25 +13,21 @@ MENUBAR = require("menubar")
 MENUBAR.utils.terminal = USER.terminal
 
 local awesome_menu = {
-  { "hotkeys", function()
-     require("awful.hotkeys_popup").show_help(nil, awful.screen.focused())
-   end },
+  {
+  "hotkeys", function()
+    require("awful.hotkeys_popup").show_help(nil, awful.screen.focused())
+  end
+  },
   { "manual", USER.terminal .. " -e man awesome" },
   { "restart", awesome.restart },
-}
-
-local powermenu = {
-  { "logout", function() awesome.quit() end },
-  { "reboot", "reboot" },
-  { "shutdown", "poweroff" },
+  { "logout", function() awesome.quit() end }
 }
 
 MAIN_MENU = awful.menu({
   auto_expand = true,
   items = {
     { "open terminal", USER.terminal },
-    { "awesome", awesome_menu, beautiful.awesome_icon },
-    { "power", powermenu },
+    { "awesome", awesome_menu, beautiful.awesome_icon }
   }
 })
 

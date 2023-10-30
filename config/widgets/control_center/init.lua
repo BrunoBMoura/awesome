@@ -26,7 +26,7 @@ end
 
 local function create()
   -- Require the clock widget and wrap it inside a box.
-  local clock = require("config.widgets.control_center.clock")({})
+  local clock = require("config.widgets.control_center.clock")()
   local clock_widget = boxfy(wibox.layout.fixed.vertical, { clock })
 
   -- Also, require the calendar widget and wrap it inside a box.
@@ -88,12 +88,17 @@ local function create()
   })
 
   -- Then, add the widgets to the main widget.
-  control_center.main:add(
+  local sections = {
     clock_widget,
     calendar_widget,
     resources_widget,
-    audio_widget
-  )
+    audio_widget,
+    -- audio_devices_widget,
+  }
+
+  for _, section in ipairs(sections) do
+    control_center.main:add(section)
+  end
 
   -- Finally, define the control center toggle function to be called
   -- upon signal receival.

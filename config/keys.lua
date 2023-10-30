@@ -184,7 +184,7 @@ root.buttons(
   )
 )
 
-client_keys = gears.table.join(
+CLIENT_KEYS = gears.table.join(
   keybind({ USER.keys.super }, "f", "toggle fullscreen", groups.client, function(c)
     c.fullscreen = not c.fullscreen
     c:raise()
@@ -221,7 +221,7 @@ client_keys = gears.table.join(
   end)
 )
 
-client_buttons = gears.table.join(
+CLIENT_BUTTONS = gears.table.join(
   awful.button({ }, 1, function(c)
     c:emit_signal("request::activate", "mouse_click", { raise = true })
   end),
