@@ -14,7 +14,15 @@ local function create()
       return wibox.widget({
         layout = wibox.layout.align.horizontal,
         prev_button,
-        widget,
+        -- Create a new widget to set the text color of the argument widget.
+        wibox.widget({
+          {
+            markup = "<b>" .. widget:get_text() .. "</b>",
+            align = 'center',
+            widget = wibox.widget.textbox
+          },
+          widget = wibox.container.background,
+        }),
         next_button
       })
     end

@@ -35,11 +35,11 @@ local function create()
 
   -- For the resource widgets, require them one by one then wrap them in a single box.
   local ram = require("config.widgets.control_center.ram")({
-    text = " ", color = colors.blue,
+    text = " ", color = colors.green,
   })
 
   local cpu = require("config.widgets.control_center.cpu")({
-    text = " ", color = colors.green,
+    text = " ", color = colors.blue,
   })
 
   local disk = require("config.widgets.control_center.disk")({
@@ -93,7 +93,6 @@ local function create()
     calendar_widget,
     resources_widget,
     audio_widget,
-    -- audio_devices_widget,
   }
 
   for _, section in ipairs(sections) do
