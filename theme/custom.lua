@@ -10,13 +10,11 @@
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
---
 -- Variables set for theming notifications:
 -- notification_font
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
-
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
@@ -68,7 +66,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.menu_submenu_icon = themes_path .. "theme.palette/submenu.png"
 theme.menu_height       = dpi(15)
 theme.menu_width        = dpi(100)
-theme.wallpaper         = themes_path .. "theme/curve.png"
+theme.wallpaper         = themes_path .. "theme/kanagawa.png"
 
 theme.layout_fairh      = themes_path .. "theme/layouts/fairhw.png"
 theme.layout_fairv      = themes_path .. "theme/layouts/fairvw.png"

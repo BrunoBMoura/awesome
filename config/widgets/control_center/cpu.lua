@@ -36,5 +36,4 @@ local function worker(opts)
   return cpu.widget
 end
 
--- return worker()
 return setmetatable(cpu, { __call = function(_, ...) return worker(...) end })
