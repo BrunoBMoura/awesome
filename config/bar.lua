@@ -13,7 +13,9 @@ local function create(screen)
     icon = " 󰃰", color = colors.white
   })
   local uptime = require("config.widgets.uptime")({ icon = " 󰚰 "})
-  local net = require("config.widgets.net")({ icon = "  ", interface = "enp5s0" })
+  local net = require("config.widgets.net")({
+    icon = "  ", interface = USER.wired_interface
+  })
 
   return {
     spacing = dpi(50),

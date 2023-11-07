@@ -7,8 +7,8 @@ local PROCS = {
   gather_data_from = function(interface)
     return string.format([[bash -c "ifconfig %s"]], interface)
   end,
-  cmd = function(device)
-    return string.format([[bash -c "ifconfig %s | grep %s"]], device, device)
+  cmd = function(interface)
+    return string.format([[bash -c "ifconfig %s | grep %s"]], interface, interface)
   end,
   interval = 5
 }

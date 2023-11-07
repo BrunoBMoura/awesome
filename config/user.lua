@@ -19,6 +19,7 @@ USER = {
   terminal = "kitty",
   editor   = os.getenv("EDITOR") or "nvim",
   device = "/dev/sda2",
+  wired_interface = "enp5s0",
   keys = {
     alt   = "Mod1",
     super = "Mod4",
