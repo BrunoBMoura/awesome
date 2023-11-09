@@ -13,7 +13,6 @@ local function create(screen)
     icon = " 󰃰", color = colors.white
   })
   local uptime = require("config.widgets.uptime")({ icon = " 󰚰 "})
-  local net = require("config.widgets.net")({ icon = "  "})
 
   return {
     spacing = dpi(50),
@@ -35,7 +34,6 @@ local function create(screen)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       helpers.box(uptime, { background_color = colors.grey }),
-      helpers.box(net, { background_color = colors.grey }),
       helpers.box(VOLUME_WIDGET, { background_color = colors.grey }),
       helpers.box(KEYBOARD_LAYOUT_WIDGET, { background_color = colors.grey }),
       wibox.widget.systray(),
