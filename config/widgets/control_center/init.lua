@@ -39,11 +39,11 @@ local function create()
   })
 
   local cpu = require("config.widgets.control_center.cpu")({
-    text = " ", color = colors.blue,
+    text = " ", color = colors.blue,
   })
 
   local disk = require("config.widgets.control_center.disk")({
-    text = " ", device = USER.device, color = colors.orange,
+    text = " 󰋊 ", device = USER.device, color = colors.orange,
   })
 
   local resources_widget = boxfy(wibox.layout.flex.horizontal, { cpu, ram, disk })
