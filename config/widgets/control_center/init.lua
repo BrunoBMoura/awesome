@@ -50,11 +50,17 @@ local function create()
 
   -- Require the audio widgets and wrap them inside a single box as well.
   local audio = require("config.widgets.control_center.audio")({
-    speaker = { text = "  ", color = beautiful.palette.green },
-    mic = { text = "  ", color = beautiful.palette.orange },
+    speaker = { text = "  ", color = beautiful.palette.green, value = 25 },
+    mic = { text = "  ", color = beautiful.palette.orange, value = 45 },
   })
 
   local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
+
+  local brightness = require("config.widgets.control_center.brightness")({
+    text = " 󰛨 ", color = beautiful.palette.yellow, value = 30
+  })
+
+  local brightness_widget = boxfy(wibox.layout.fixed.vertical, { brightness })
 
   -- Define the proper control center widget.
   local control_center = {}
@@ -93,6 +99,7 @@ local function create()
     calendar_widget,
     resources_widget,
     audio_widget,
+    brightness_widget
   }
 
   for _, section in ipairs(sections) do

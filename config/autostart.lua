@@ -1,10 +1,15 @@
 local awful = require("awful")
 
-local autostart = {
+local autostart = USER.portable and {
+  -- Notebook options.
+  "flameshot",
+  "nm-applet",
+} or {
+  -- Desktop options.
   "xrandr --output HDMI-A-0 --rotate right",
   "picom",
   "flameshot",
-  USER.portable and "nm-applet" or "systemctl start logid.service",
+  "systemctl start logid.service",
 }
 
 for _, command in ipairs(autostart) do

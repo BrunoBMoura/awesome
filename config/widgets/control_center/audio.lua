@@ -31,11 +31,13 @@ local function worker(opts)
   opts.mic = opts.mic or false
   opts.speaker = opts.speaker or false
 
-  opts.speaker.text = opts.speaker.text or "  "
+  opts.speaker.text = opts.speaker.text or "Speaker:"
   opts.speaker.color = opts.speaker.color or colors.green
+  opts.speaker.value = opts.speaker.value or 25
 
-  opts.mic.text = opts.mic.text or "  "
+  opts.mic.text = opts.mic.text or "Mic:"
   opts.mic.color = opts.mic.color or colors.orange
+  opts.mic.value = opts.speaker.value or 45
 
   audio.speaker = helpers.slider_widget(opts.speaker.text, opts.speaker.color)
   audio.mic = helpers.slider_widget(opts.mic.text, opts.mic.color)
@@ -69,8 +71,8 @@ local function worker(opts)
     audio.mic:set_value(initial_volume)
   end
 
-  init_speaker(25)
-  init_mic(45)
+  init_speaker(opts.speaker.value)
+  init_mic(opts.mic.value)
 
   return { speaker = audio.speaker, mic = audio.mic }
 end

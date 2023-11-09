@@ -15,13 +15,14 @@ local palettes = {
   },
 }
 
-local laptop = true
+local portable = true
+local device = portable and "/dev/nvme0n1p3" or "/dev/sda2"
 
 USER = {
-  portable = laptop and true or false,
+  portable = portable,
   terminal = "kitty",
   editor = os.getenv("EDITOR") or "nvim",
-  device = laptop and "/dev/nvme0n1p2" or "/dev/sda2",
+  device = device,
   keys = {
     alt   = "Mod1",
     super = "Mod4",

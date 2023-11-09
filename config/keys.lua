@@ -80,6 +80,10 @@ local keys = gears.table.join(
     awesome.emit_signal("toggle::control_center")
   end),
 
+  keybind({ USER.keys.super }, "z", "sets backlight", groups.widget, function()
+      awful.spawn.with_shell("xbacklight -set 50")
+  end),
+
   -- Awesome keybinds
   keybind({ USER.keys.super }, "s", "show help", groups.awesome, require("awful.hotkeys_popup").show_help),
   keybind({ USER.keys.super }, "w", "show main menu", groups.awesome, function()
