@@ -28,8 +28,8 @@ local audio = {}
 
 local function worker(opts)
   opts = opts or {}
-  opts.mic = opts.mic or false
-  opts.speaker = opts.speaker or false
+  opts.mic = opts.mic or {}
+  opts.speaker = opts.speaker or {}
 
   opts.speaker.text = opts.speaker.text or "Speaker:"
   opts.speaker.color = opts.speaker.color or colors.green

@@ -25,13 +25,13 @@ local function worker(opts)
 
   local function init_brightness(initial_value)
     -- Set the initial brightness value.
-    spawn.easy_async(PROCS.set_brightness(initial_value))
+    spawn.with_shell(PROCS.set_brightness(initial_value))
     brightness.widget:set_value(initial_value)
 
     -- Connect the callback function to be invoked whenever the brightness slider
     -- is updated.
     brightness.widget:connect_function_upon_redraw(function(slider_value)
-      spawn.easy_async(PROCS.set_brightness(slider_value))
+      spawn.with_shell(PROCS.set_brightness(slider_value))
     end)
 
     -- Finally, setup a watch to update the volume slider if the brightness is update

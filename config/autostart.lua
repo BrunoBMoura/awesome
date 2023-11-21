@@ -4,6 +4,7 @@ local autostart = USER.portable and {
   -- Notebook options.
   "flameshot",
   "nm-applet",
+  "cbatticon"
 } or {
   -- Desktop options.
   "xrandr --output HDMI-A-0 --rotate right",
