@@ -13,6 +13,19 @@ local palettes = {
     grey       = "#282727",
     orange     = "#b6927b",
   },
+  material = {
+    black      = "#000000",
+    background = "#1a1a1a",
+    red        = "#f07178",
+    green      = "#c3e88d",
+    yellow     = "#ffcb6b",
+    blue       = "#82aaff",
+    magenta    = "#b0c9ff",
+    cyan       = "#89ddff",
+    white      = "#eeffff",
+    grey       = "#212121",
+    orange     = "#f78c6c",
+  }
 }
 
 local portable = false
@@ -29,7 +42,7 @@ USER = {
     shift = "Shift",
     ctrl  = "Control"
   },
-  palette = palettes.kanagawa,
+  palette = palettes.material,
   font = function(size)
     local default_size = 12
     return string.format("JetBrains Mono %d", size or default_size)

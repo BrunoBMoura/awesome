@@ -56,6 +56,7 @@ M.simple_tooltip = function(widgets_tbl, callback)
     margin_topbottom = dpi(15),
     border_width = dpi(1),
     bg = beautiful.bg_normal,
+    border_color = beautiful.palette.grey,
   })
 end
 

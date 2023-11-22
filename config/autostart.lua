@@ -8,7 +8,6 @@ local autostart = USER.portable and {
 } or {
   -- Desktop options.
   "xrandr --output HDMI-A-0 --rotate right",
-  "picom",
   "flameshot",
   "systemctl start logid.service",
 }
