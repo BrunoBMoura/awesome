@@ -56,12 +56,6 @@ local function create()
 
   local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
 
-  local brightness = require("config.widgets.control_center.brightness")({
-    text = " 󰛨 ", color = beautiful.palette.yellow, value = 30
-  })
-
-  local brightness_widget = boxfy(wibox.layout.fixed.vertical, { brightness })
-
   -- Define the proper control center widget.
   local control_center = {}
 
@@ -99,8 +93,15 @@ local function create()
     calendar_widget,
     resources_widget,
     audio_widget,
-    brightness_widget
   }
+
+  if USER.portable then
+    local brightness = require("config.widgets.control_center.brightness")({
+      text = " 󰛨 ", color = beautiful.palette.yellow, value = 30
+    })
+    local brightness_widget = boxfy(wibox.layout.fixed.vertical, { brightness })
+    table.insert(sections, brightness_widget)
+  end
 
   for _, section in ipairs(sections) do
     control_center.main:add(section)

@@ -15,7 +15,7 @@ local palettes = {
   },
 }
 
-local portable = true
+local portable = false
 local device = portable and "/dev/nvme0n1p3" or "/dev/sda2"
 
 USER = {
