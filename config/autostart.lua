@@ -7,8 +7,9 @@ local autostart = USER.portable and {
   "cbatticon"
 } or {
   -- Desktop options.
-  "xrandr --output HDMI-A-0 --rotate right",
   "flameshot",
+  "nm-applet",
+  "xrandr --output HDMI-A-0 --rotate right",
   "systemctl start logid.service",
 }
 
