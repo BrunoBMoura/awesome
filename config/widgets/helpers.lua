@@ -342,7 +342,7 @@ M.popup_menu = function(opts)
   -- Custom function to properly execute the current command.
   popup_widget._exec_current = function(self)
     local command = opts[self.current_index].command
-    awful.spawn.easy_async_with_shell(command)
+    awful.spawn.with_shell(command)
   end
 
   -- Method called to run the prompt and capture user key presses.
