@@ -5,7 +5,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 
 -- Local widget information.
 local PROC = {
-  cmd = [[bash -c "mpstat | grep -oE 'all\s+([0-9]+,[0-9]+)'"]],
+  cmd = [[bash -c "mpstat | grep -oE 'all\s+([0-9]+.[0-9]+)'"]],
   match = helpers.build_match_for(1),
   interval = 5
 }

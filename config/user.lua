@@ -13,13 +13,29 @@ local palettes = {
     grey       = "#282727",
     orange     = "#b6927b",
   },
+  material = {
+    black      = "#000000",
+    background = "#1a1a1a",
+    red        = "#f07178",
+    green      = "#c3e88d",
+    yellow     = "#ffcb6b",
+    blue       = "#82aaff",
+    magenta    = "#b0c9ff",
+    cyan       = "#89ddff",
+    white      = "#eeffff",
+    grey       = "#212121",
+    orange     = "#f78c6c",
+  }
 }
 
+local portable = false
+local device = portable and "/dev/nvme0n1p3" or "/dev/sda2"
+
 USER = {
+  portable = portable,
   terminal = "kitty",
-  editor   = os.getenv("EDITOR") or "nvim",
-  device = "/dev/sda2",
-  wired_interface = "enp5s0",
+  editor = os.getenv("EDITOR") or "nvim",
+  device = device,
   keys = {
     alt   = "Mod1",
     super = "Mod4",

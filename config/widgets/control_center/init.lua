@@ -39,19 +39,19 @@ local function create()
   })
 
   local cpu = require("config.widgets.control_center.cpu")({
-    text = " ", color = colors.blue,
+    text = " ", color = colors.blue,
   })
 
   local disk = require("config.widgets.control_center.disk")({
-    text = " ", device = USER.device, color = colors.orange,
+    text = " 󰋊 ", device = USER.device, color = colors.orange,
   })
 
   local resources_widget = boxfy(wibox.layout.flex.horizontal, { cpu, ram, disk })
 
   -- Require the audio widgets and wrap them inside a single box as well.
   local audio = require("config.widgets.control_center.audio")({
-    speaker = { text = "  ", color = beautiful.palette.green },
-    mic = { text = "  ", color = beautiful.palette.orange },
+    speaker = { text = "  ", color = beautiful.palette.green, value = 25 },
+    mic = { text = "  ", color = beautiful.palette.orange, value = 45 },
   })
 
   local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
@@ -94,6 +94,14 @@ local function create()
     resources_widget,
     audio_widget,
   }
+
+  if USER.portable then
+    local brightness = require("config.widgets.control_center.brightness")({
+      text = " 󰛨 ", color = beautiful.palette.yellow, value = 30
+    })
+    local brightness_widget = boxfy(wibox.layout.fixed.vertical, { brightness })
+    table.insert(sections, brightness_widget)
+  end
 
   for _, section in ipairs(sections) do
     control_center.main:add(section)

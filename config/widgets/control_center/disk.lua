@@ -25,6 +25,10 @@ local function worker(opts)
 
   disk.widget = helpers.arc(color, dpi(12), text)
 
+  helpers.simple_tooltip({ disk.widget }, function ()
+    return string.format("Device: %s", device)
+  end)
+
   local function update_disk_widget(widget, stdout)
     local used_disk_percentage  = stdout:match(PROC.match)
     used_disk_percentage = used_disk_percentage:gsub("%%", "")

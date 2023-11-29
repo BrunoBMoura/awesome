@@ -2,6 +2,7 @@ local beautiful = require("beautiful")
 local awful = require("awful")
 local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
+local wibox = require("wibox")
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
@@ -61,8 +62,7 @@ local taglist_buttons = gears.table.join(
 )
 
 local tasklist_buttons = gears.table.join(
-  awful.button({ }, 1, function(c)
-    if c == client.focus then
+  awful.button({ }, 1, function(c) if c == client.focus then
       c.minimized = true
     else
       c:emit_signal("request::activate", "tasklist", { raise = true })
