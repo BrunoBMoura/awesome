@@ -2,4 +2,4 @@
 
 ## Dependencies tracking
 
-sysstat, ttf-jetbrains-mono, nerd-fonts and pulseaudio
+sysstat, ttf-jetbrains-mono, nerd-fonts, acpi and pulseaudio
