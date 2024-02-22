@@ -36,6 +36,7 @@ local function create(screen)
       helpers.box(uptime, { background_color = colors.grey }),
       helpers.box(VOLUME_WIDGET, { background_color = colors.grey }),
       helpers.box(KEYBOARD_LAYOUT_WIDGET, { background_color = colors.grey }),
+      helpers.box(BATT_WIDGET, { background_color = colors.grey }),
       wibox.widget.systray(),
       screen.mylayoutbox
     },

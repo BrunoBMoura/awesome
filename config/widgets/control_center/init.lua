@@ -97,7 +97,9 @@ local function create()
 
   if USER.portable then
     local brightness = require("config.widgets.control_center.brightness")({
-      text = " 󰛨 ", color = beautiful.palette.yellow, value = 30
+      text = " 󰛨 ",
+      color = beautiful.palette.yellow,
+      value = 30
     })
     local brightness_widget = boxfy(wibox.layout.fixed.vertical, { brightness })
     table.insert(sections, brightness_widget)

@@ -2,13 +2,13 @@ local beautiful = require("beautiful")
 local awful = require("awful")
 local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
-local wibox = require("wibox")
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
 CONTROL_CENTER = require("config.widgets.control_center.init")
-VOLUME_WIDGET = require("config.widgets.volume")({ icon = "󰕾 "})
-KEYBOARD_LAYOUT_WIDGET = require("config.widgets.keyboard_layout")({ icon = "󰌌 "})
+VOLUME_WIDGET = require("config.widgets.volume")({ icon = "󰕾 " })
+KEYBOARD_LAYOUT_WIDGET = require("config.widgets.keyboard_layout")({ icon = "󰌌 " })
+BATT_WIDGET = require("config.widgets.battery")({ icon = " " })
 
 MENUBAR = require("menubar")
 MENUBAR.utils.terminal = USER.terminal
@@ -47,7 +47,9 @@ local function set_screen_prefs(screen)
     set_wallpaper(screen)
     awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[1])
   elseif screen.index == 2 then
-    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[2])
+    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[3])
+  elseif screen.index == 3 then
+    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[3])
   end
 end
 

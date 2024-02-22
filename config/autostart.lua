@@ -1,15 +1,8 @@
 local awful = require("awful")
 
-local autostart = USER.portable and {
-  -- Notebook options.
+local autostart = {
   "flameshot",
   "nm-applet",
-  "cbatticon"
-} or {
-  -- Desktop options.
-  "flameshot",
-  "nm-applet",
-  "xrandr --output HDMI-A-0 --rotate right",
   "systemctl start logid.service",
 }
 
