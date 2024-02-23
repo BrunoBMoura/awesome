@@ -4,11 +4,11 @@ local gears = require("gears")
 
 local M = {}
 
-local function titlebar_button(symbol, color, click_function)
+local function titlebar_button(color, click_function)
   return wibox.widget({
     {
       {
-        text = symbol,
+        text = "󰝤 ",
         font = USER.font(20),
         align = "center",
         valign = "center",
@@ -58,15 +58,15 @@ M.setup_titlebar = function(c)
       layout  = wibox.layout.flex.horizontal
     },
     { -- Right
-      titlebar_button("󰝤 ", USER.palette.green, function()
+      titlebar_button(USER.palette.green, function()
         c.maximized = not c.maximized
         c:raise()
       end),
-      titlebar_button("󰝤 ", USER.palette.yellow, function()
+      titlebar_button(USER.palette.yellow, function()
         -- somehow not working as intended
         c.minimized = true
       end),
-      titlebar_button("󰝤 ", USER.palette.red, function()
+      titlebar_button(USER.palette.red, function()
         c:kill()
       end),
       layout = wibox.layout.fixed.horizontal()
