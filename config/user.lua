@@ -1,7 +1,7 @@
 local portable = true
 local device = portable and "/dev/nvme0n1p3" or "/dev/sda2"
 
-local palettes = require("config.palettes")
+local palettes = require("config.appearance.palettes")
 
 USER = {
   portable = portable,

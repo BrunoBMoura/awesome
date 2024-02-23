@@ -5,10 +5,10 @@ local dpi = beautiful.xresources.apply_dpi
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
-CONTROL_CENTER = require("config.widgets.control_center.init")
-VOLUME_WIDGET = require("config.widgets.volume")({ icon = "󰕾 " })
-KEYBOARD_LAYOUT_WIDGET = require("config.widgets.keyboard_layout")({ icon = "󰌌 " })
-BATT_WIDGET = require("config.widgets.battery")({ icon = " " })
+CONTROL_CENTER = require("config.appearance.widgets.control_center.init")
+VOLUME_WIDGET = require("config.appearance.widgets.volume")({ icon = "󰕾 " })
+KEYBOARD_LAYOUT_WIDGET = require("config.appearance.widgets.keyboard_layout")({ icon = "󰌌 " })
+BATT_WIDGET = require("config.appearance.widgets.battery")({ icon = " " })
 
 MENUBAR = require("menubar")
 MENUBAR.utils.terminal = USER.terminal
@@ -90,8 +90,8 @@ awful.screen.connect_for_each_screen(function(screen)
     )
   )
   -- Create a taglist widget
-  screen.mytaglist =  require("config.taglist")(screen, taglist_buttons)
-  screen.mytasklist = require("config.tasklist")(screen, tasklist_buttons)
+  screen.mytaglist =  require("config.appearance.taglist")(screen, taglist_buttons)
+  screen.mytasklist = require("config.appearance.tasklist")(screen, tasklist_buttons)
   -- Create the wibox.
   screen.mywibox = awful.wibar({
     position = "top",
@@ -100,7 +100,7 @@ awful.screen.connect_for_each_screen(function(screen)
     -- border_width = dpi(5)
   })
   -- Add widgets to the wibox.
-  screen.mywibox:setup(require("config.bar")(screen))
+  screen.mywibox:setup(require("config.appearance.bar")(screen))
 end)
 
-client.connect_signal("request::titlebars", require("config.titlebar").setup_titlebar)
+client.connect_signal("request::titlebars", require("config.appearance.titlebar").setup_titlebar)

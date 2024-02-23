@@ -5,7 +5,7 @@ local gears = require("gears")
 local M = {}
 
 local function titlebar_button(symbol, color, click_function)
-  return wibox.widget {
+  return wibox.widget({
     {
       {
         text = symbol,
@@ -23,7 +23,7 @@ local function titlebar_button(symbol, color, click_function)
       end)
     ),
     layout = wibox.layout.align.vertical
-  }
+  })
 end
 
 M.setup_titlebar = function(c)

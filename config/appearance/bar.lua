@@ -1,4 +1,4 @@
-local helpers = require("config.widgets.helpers")
+local helpers = require("config.appearance.widgets.helpers")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
@@ -8,11 +8,11 @@ local custom_wibox = {}
 
 local function create(screen)
   local separator = wibox.widget.textbox(" ")
-  local menu = require("config.widgets.menu")({ text = "", font_size = 15 })
-  local date = require("config.widgets.date")({
+  local menu = require("config.appearance.widgets.menu")({ text = "", font_size = 15 })
+  local date = require("config.appearance.widgets.date")({
     icon = " 󰃰", color = colors.white
   })
-  local uptime = require("config.widgets.uptime")({ icon = " 󰚰 "})
+  local uptime = require("config.appearance.widgets.uptime")({ icon = " 󰚰 "})
 
   return {
     spacing = dpi(50),

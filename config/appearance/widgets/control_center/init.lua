@@ -1,7 +1,7 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local dpi = require("beautiful.xresources").apply_dpi
-local helpers = require("config.widgets.helpers")
+local helpers = require("config.appearance.widgets.helpers")
 local beautiful = require("beautiful")
 local colors = beautiful.palette
 
@@ -26,30 +26,30 @@ end
 
 local function create()
   -- Require the clock widget and wrap it inside a box.
-  local clock = require("config.widgets.control_center.clock")()
+  local clock = require("config.appearance.widgets.control_center.clock")()
   local clock_widget = boxfy(wibox.layout.fixed.vertical, { clock })
 
   -- Also, require the calendar widget and wrap it inside a box.
-  local calendar = require("config.widgets.control_center.calendar")
+  local calendar = require("config.appearance.widgets.control_center.calendar")
   local calendar_widget = boxfy(wibox.layout.fixed.vertical, { calendar })
 
   -- For the resource widgets, require them one by one then wrap them in a single box.
-  local ram = require("config.widgets.control_center.ram")({
+  local ram = require("config.appearance.widgets.control_center.ram")({
     text = " ", color = colors.green,
   })
 
-  local cpu = require("config.widgets.control_center.cpu")({
+  local cpu = require("config.appearance.widgets.control_center.cpu")({
     text = " ", color = colors.blue,
   })
 
-  local disk = require("config.widgets.control_center.disk")({
+  local disk = require("config.appearance.widgets.control_center.disk")({
     text = " 󰋊 ", device = USER.device, color = colors.orange,
   })
 
   local resources_widget = boxfy(wibox.layout.flex.horizontal, { cpu, ram, disk })
 
   -- Require the audio widgets and wrap them inside a single box as well.
-  local audio = require("config.widgets.control_center.audio")({
+  local audio = require("config.appearance.widgets.control_center.audio")({
     speaker = { text = "  ", color = beautiful.palette.green, value = 25 },
     mic = { text = "  ", color = beautiful.palette.orange, value = 45 },
   })
@@ -96,7 +96,7 @@ local function create()
   }
 
   if USER.portable then
-    local brightness = require("config.widgets.control_center.brightness")({
+    local brightness = require("config.appearance.widgets.control_center.brightness")({
       text = " 󰛨 ",
       color = beautiful.palette.yellow,
       value = 30

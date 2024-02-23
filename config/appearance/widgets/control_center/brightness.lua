@@ -1,5 +1,5 @@
 local spawn = require("awful.spawn")
-local helpers = require("config.widgets.helpers")
+local helpers = require("config.appearance.widgets.helpers")
 local watch = require("awful.widget.watch")
 local colors = require("beautiful").palette
 
