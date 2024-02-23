@@ -57,7 +57,7 @@ local function worker(opts)
       batt.text = "Battery is full"
       batt.current_percentage = 100
     else
-      local _, state, percentage, hour, min, sec = stdout:match(PROC.match)
+      local --[[id]]_, state, percentage, hour, min, sec = stdout:match(PROC.match)
       widget:set_text(string.format(" %s%s%% ", icon, percentage))
       eval_batt_non_full(state, percentage, hour, min, sec)
     end

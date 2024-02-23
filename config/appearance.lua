@@ -2,7 +2,6 @@ local beautiful = require("beautiful")
 local awful = require("awful")
 local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
-local wibox = require("wibox")
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 

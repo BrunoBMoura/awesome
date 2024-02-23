@@ -39,7 +39,11 @@ M.setup_titlebar = function(c)
     end)
   )
 
-  awful.titlebar(c, { bg = USER.palette.background } ):setup({
+  local titlebar = awful.titlebar(c, {
+    bg = USER.palette.background
+  })
+
+  titlebar:setup({
     { -- Left
       awful.titlebar.widget.iconwidget(c),
       buttons = buttons,
