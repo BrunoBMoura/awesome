@@ -1,4 +1,4 @@
-local helpers = require("config.appearance.widgets.helpers")
+local helpers = require("config.appearance.helpers")
 local awful = require("awful")
 local gears = require("gears")
 

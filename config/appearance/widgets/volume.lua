@@ -1,5 +1,5 @@
 local watch = require("awful.widget.watch")
-local helpers = require("config.appearance.widgets.helpers")
+local helpers = require("config.appearance.helpers")
 local spawn = require("awful.spawn")
 local awful = require("awful")
 local gears = require("gears")

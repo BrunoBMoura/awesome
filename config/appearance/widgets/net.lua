@@ -1,4 +1,4 @@
-local helpers = require("config.appearance.widgets.helpers")
+local helpers = require("config.appearance.helpers")
 local spawn = require("awful.spawn")
 local watch = require("awful.widget.watch")
 

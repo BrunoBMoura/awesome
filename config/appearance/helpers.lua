@@ -200,15 +200,17 @@ M.button = function(opts)
   return widget
 end
 
--- Crates a dynamic popup menu widget based on its arguments.
--- The opts argument is a table of tables with the following structure:
---  opts = {
---    { name = "", command = "", text = "" },
---    { name = "", command = "", text = "" },
---  }
--- In which the name field contains the name of the operation, the command
--- field contains the command to be executed and the text field contains the
--- text to be displayed on the option.
+--[[
+  Crates a dynamic popup menu widget based on its arguments.
+  The opts argument is a table of tables with the following structure:
+   opts = {
+     { name = "", command = "", text = "" },
+     { name = "", command = "", text = "" },
+   }
+  In which the name field contains the name of the operation, the command
+  field contains the command to be executed and the text field contains the
+  text to be displayed on the option.
+]]
 M.popup_menu = function(opts)
   -- Proper widget to hold the options of the powermenu.
   local options_container = wibox.widget({
@@ -391,11 +393,13 @@ M.popup_menu = function(opts)
     end)
     -- Pretty sure this is not the best way to do this, but it works;
     -- the correct way should use the 'mouse::press' signal.
-    option:buttons(gears.table.join(
-      awful.button({}, 1, function()
-        popup_widget:_exec_current()
-      end)
-    ))
+    option:buttons(
+      gears.table.join(
+        awful.button({}, 1, function()
+          popup_widget:_exec_current()
+        end)
+      )
+    )
 
   end
 

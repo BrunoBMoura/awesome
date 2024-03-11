@@ -1,4 +1,4 @@
-local helpers = require("config.appearance.widgets.helpers")
+local helpers = require("config.appearance.helpers")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi

@@ -1,11 +1,12 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
+-- local helpers = require("config.appearance.helpers")
 
 local M = {}
 
-local function titlebar_button(color, click_function)
-  return wibox.widget({
+local function titlebar_button(color, tooltip, click_function)
+  local button = wibox.widget({
     {
       {
         text = "󰝤 ",
@@ -24,6 +25,8 @@ local function titlebar_button(color, click_function)
     ),
     layout = wibox.layout.align.vertical
   })
+
+  return button
 end
 
 M.setup_titlebar = function(c)
@@ -58,15 +61,15 @@ M.setup_titlebar = function(c)
       layout  = wibox.layout.flex.horizontal
     },
     { -- Right
-      titlebar_button(USER.palette.green, function()
+      titlebar_button(USER.palette.green, "Maximize", function()
         c.maximized = not c.maximized
         c:raise()
       end),
-      titlebar_button(USER.palette.yellow, function()
+      titlebar_button(USER.palette.yellow, "Minimize", function()
         -- somehow not working as intended
         c.minimized = true
       end),
-      titlebar_button(USER.palette.red, function()
+      titlebar_button(USER.palette.red, "Close", function()
         c:kill()
       end),
       layout = wibox.layout.fixed.horizontal()

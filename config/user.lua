@@ -5,7 +5,7 @@ local palettes = require("config.appearance.palettes")
 
 USER = {
   portable = portable,
-  terminal = "kitty",
+  terminal = "wezterm",
   editor = os.getenv("EDITOR") or "nvim",
   device = device,
   keys = {
@@ -17,6 +17,6 @@ USER = {
   palette = palettes.kanagawa,
   font = function(size)
     local default_size = 12
-    return string.format("JetBrains Mono %d", size or default_size)
+    return string.format("JetBrainsMono %d", size or default_size)
   end
 }
