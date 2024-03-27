@@ -7,7 +7,7 @@ local naughty = require("naughty")
 local PROC = {
   cmd = [[bash -c "acpi"]],
   match = "Battery (%d+): (%a+), (%d+)%%, (%d+):(%d+):(%d+)",
-  interval = 60
+  interval = 15
 }
 
 -- batt widget module.
