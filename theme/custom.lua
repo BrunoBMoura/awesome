@@ -42,11 +42,12 @@ theme.fg_urgent     = theme.palette.red
 theme.fg_minimize   = theme.palette.black
 
 theme.useless_gap   = dpi(1)
-theme.border_width  = dpi(2)
+theme.border_width  = dpi(1)
 theme.border_radius = dpi(10)
 theme.border_normal = theme.palette.black
 -- theme.border_focus  = display
-theme.border_focus  = theme.palette.grey
+-- theme.border_focus  = theme.palette.white
+theme.border_focus  = display
 theme.border_marked = theme.palette.yellow
 
 theme.taglist_bg_focus     = display
@@ -66,7 +67,6 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.menu_submenu_icon = themes_path .. "theme/palette/submenu.png"
 theme.menu_height       = dpi(15)
 theme.menu_width        = dpi(100)
-theme.wallpaper         = themes_path .. "theme/kanagawa.png"
 
 theme.layout_fairh      = themes_path .. "theme/layouts/fairhw.png"
 theme.layout_fairv      = themes_path .. "theme/layouts/fairvw.png"

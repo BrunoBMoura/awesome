@@ -32,25 +32,14 @@ MAIN_MENU = awful.menu({
   }
 })
 
-local function set_wallpaper(screen)
-  if beautiful.wallpaper then
-    local wallpaper = beautiful.wallpaper
-    if type(wallpaper) == "function" then
-      wallpaper = wallpaper(screen)
-    end
-    gears.wallpaper.maximized(wallpaper, screen, true)
-  end
-end
-
 local function set_screen_prefs(screen)
-  if screen.index == 1 then
-    set_wallpaper(screen)
-    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[1])
-  elseif screen.index == 2 then
-    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[3])
-  elseif screen.index == 3 then
-    awful.tag({ "1", "2", "3", "4", "5" }, screen, awful.layout.layouts[3])
-  end
+  gears.wallpaper.set(USER.palette.background)
+  local layouts = {
+    awful.layout.layouts[4],
+    awful.layout.layouts[4],
+    awful.layout.layouts[4],
+  }
+  awful.tag({ "1", "2", "3", "4", "5" }, screen, layouts[screen.index])
 end
 
 local taglist_buttons = gears.table.join(
@@ -77,8 +66,6 @@ local tasklist_buttons = gears.table.join(
   end)
 )
 
-screen.connect_signal("property::geometry", set_wallpaper)
-
 awful.screen.connect_for_each_screen(function(screen)
   set_screen_prefs(screen)
   screen.mypromptbox = awful.widget.prompt()
@@ -97,7 +84,6 @@ awful.screen.connect_for_each_screen(function(screen)
     position = "top",
     screen = screen,
     height = dpi(35),
-    -- border_width = dpi(5)
   })
   -- Add widgets to the wibox.
   screen.mywibox:setup(require("config.appearance.bar")(screen))
