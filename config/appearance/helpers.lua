@@ -9,6 +9,10 @@ local colors = beautiful.palette
 -- helpers module.
 local M = {}
 
+M.spawn = function(command, callback)
+  return awful.spawn.easy_async(command, callback)
+end
+
 -- Notifies the given text.
 M.notify = function(text)
   local info = debug.getinfo(1, "Sl")
