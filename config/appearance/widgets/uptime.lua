@@ -26,7 +26,7 @@ local function worker(opts)
   uptime.widget = helpers.simple_textbox()
 
   local startup = {}
-  spawn.easy_async(PROCS.tooltip.cmd, function(stdout)
+  helpers.spawn(PROCS.tooltip.cmd, function(stdout)
     startup.year, startup.month, startup.day,
     startup.hour, startup.min, startup.sec = stdout:match(PROCS.tooltip.match)
   end)
