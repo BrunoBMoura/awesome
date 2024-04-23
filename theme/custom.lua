@@ -64,7 +64,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
   taglist_square_size, theme.fg_normal
 )
 
-theme.menu_submenu_icon = themes_path .. "theme/palette/submenu.png"
+theme.menu_submenu_icon = themes_path .. "theme/submenu.png"
 theme.menu_height       = dpi(15)
 theme.menu_width        = dpi(100)
 
