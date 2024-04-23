@@ -1,5 +1,4 @@
 local watch = require("awful.widget.watch")
-local spawn = require("awful.spawn")
 local helpers = require("config.appearance.helpers")
 local dpi = require("beautiful").xresources.apply_dpi
 
@@ -29,9 +28,9 @@ local function worker(opts)
     widget.value = 100 - ram_percentage
   end
 
-  spawn.easy_async(PROC.cmd, function(stdout)
+  --[[ helpers.spawn_and_capture(PROC.cmd, function(stdout)
     update_ram_widget(ram.widget, stdout)
-  end)
+  end) ]]
 
   watch(PROC.cmd, PROC.interval, update_ram_widget, ram.widget)
 

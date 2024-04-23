@@ -9,8 +9,12 @@ local colors = beautiful.palette
 -- helpers module.
 local M = {}
 
-M.spawn = function(command, callback)
-  return awful.spawn.easy_async(command, callback)
+M.spawn_and_capture = function(command, capture_callback)
+  return awful.spawn.easy_async(command, capture_callback)
+end
+
+M.simple_spawn = function(command)
+  return awful.spawn.with_shell(command)
 end
 
 -- Notifies the given text.

@@ -1,5 +1,4 @@
 local watch = require("awful.widget.watch")
-local spawn = require("awful.spawn")
 local helpers = require("config.appearance.helpers")
 
 -- Local widget information.
@@ -26,7 +25,7 @@ local function worker(opts)
   uptime.widget = helpers.simple_textbox()
 
   local startup = {}
-  helpers.spawn(PROCS.tooltip.cmd, function(stdout)
+  helpers.spawn_and_capture(PROCS.tooltip.cmd, function(stdout)
     startup.year, startup.month, startup.day,
     startup.hour, startup.min, startup.sec = stdout:match(PROCS.tooltip.match)
   end)

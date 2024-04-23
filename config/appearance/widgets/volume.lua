@@ -1,6 +1,5 @@
 local watch = require("awful.widget.watch")
 local helpers = require("config.appearance.helpers")
-local spawn = require("awful.spawn")
 local awful = require("awful")
 local gears = require("gears")
 
@@ -88,15 +87,15 @@ local function worker(opts)
 
   -- And finally set the volume widget methods.
   volume.widget.increase = function(_, percent)
-    spawn.easy_async(PROCS.increase.call("pulse", percent))
+    helpers.simple_spawn(PROCS.increase.call("pulse", percent))
   end
 
   volume.widget.decrease = function(_, percent)
-    spawn.easy_async(PROCS.decrease.call("pulse", percent))
+    helpers.simple_spawn(PROCS.decrease.call("pulse", percent))
   end
 
   volume.widget.popup_swap_sink = function()
-    spawn.with_shell(PROCS.popup_swap_sink())
+    helpers.simple_spawn(PROCS.popup_swap_sink())
   end
 
   volume.widget:buttons(

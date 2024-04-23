@@ -47,13 +47,13 @@ local function worker(opts)
 
   local function init_speaker(initial_volume)
     -- Set the initial sink volume.
-    spawn.easy_async(PROCS.speaker.set_volume("pulse", initial_volume))
+    helpers.simple_spawn(PROCS.speaker.set_volume("pulse", initial_volume))
     audio.speaker:set_value(initial_volume)
 
     -- Connect the callback function to be invoked whenever the volume slider
     -- is updated.
     audio.speaker:connect_function_upon_redraw(function(slider_value)
-      spawn.easy_async(PROCS.speaker.set_volume("pulse", slider_value))
+      helpers.simple_spawn(PROCS.speaker.set_volume("pulse", slider_value))
     end)
 
     -- Finally, setup a watch to update the volume slider if the volume is update

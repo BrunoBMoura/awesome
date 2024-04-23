@@ -1,5 +1,4 @@
 local watch = require("awful.widget.watch")
-local spawn = require("awful.spawn")
 local helpers = require("config.appearance.helpers")
 local dpi = require("beautiful").xresources.apply_dpi
 
@@ -7,7 +6,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 local PROC = {
   cmd = [[bash -c "mpstat | grep -oE 'all\s+([0-9]+.[0-9]+)'"]],
   match = helpers.build_match_for(1),
-  interval = 5
+  interval = 10
 }
 
 -- cpu widget module.
@@ -27,9 +26,9 @@ local function worker(opts)
     widget.value = 100 - tonumber(used)
   end
 
-  spawn.easy_async(PROC.cmd, function(stdout)
+  --[[ helpers.spawn_and_capture(PROC.cmd, function(stdout)
     update_cpu_widget(cpu.widget, stdout)
-  end)
+  end) ]]
 
   watch(PROC.cmd, PROC.interval, update_cpu_widget, cpu.widget)
 
