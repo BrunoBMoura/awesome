@@ -61,12 +61,7 @@ local function worker(opts)
       widget:set_text(string.format(" %s%s%% ", icon, percentage))
       eval_batt_non_full(state, percentage, hour, min, sec)
     end
-
   end
-
-  spawn.easy_async(PROC.cmd, function(stdout)
-    update_batt_widget(batt.widget, stdout)
-  end)
 
   watch(PROC.cmd, PROC.interval, update_batt_widget, batt.widget)
 
