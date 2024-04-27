@@ -1,7 +1,6 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
--- local helpers = require("config.appearance.helpers")
 
 local M = {}
 

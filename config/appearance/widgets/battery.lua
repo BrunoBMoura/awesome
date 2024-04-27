@@ -1,6 +1,6 @@
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
-local helpers = require("config.appearance.helpers")
+local helpers = require("config.helpers")
 local naughty = require("naughty")
 
 -- Local widget information.
@@ -36,6 +36,14 @@ local function worker(opts)
       return
     end
 
+    local function eval_border_color(state, percentage)
+      if state == "Charging" then
+        return USER.palette.green
+      else
+        return percentage <= 10 and USER.palette.red or USER.palette.yellow
+      end
+    end
+
     -- If the percentage is different, notify the user at steps of 10%.
     local current_decimal = math.floor(batt.current_percentage / 10)
     local new_decimal = math.floor(percentage / 10)
@@ -45,7 +53,7 @@ local function worker(opts)
         text = string.format(
           "Battery is at %s%%, %s:%s:%s remaining.", percentage, hour, min, sec
         ),
-        border_color = percentage <= 10 and USER.palette.red or USER.palette.green,
+        border_color = eval_border_color(state, percentage)
       })
       batt.current_percentage = percentage
     end

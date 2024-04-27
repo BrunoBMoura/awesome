@@ -24,5 +24,18 @@ return {
     white      = "#eeffff",
     grey       = "#212121",
     orange     = "#f78c6c",
+  },
+  plastlins = {
+    background = "#2e3233",
+    black      = "#242727",
+    red        = "#eb7a73",
+    green      = "#b9c675",
+    yellow     = "#e8b267",
+    blue       = "#8dbba3",
+    magenta    = "#e396a4",
+    cyan       = "#99c792",
+    white      = "#f1e4c2",
+    grey       = "#5d5d5d",
+    orange     = "#e89a5e",
   }
 }

@@ -1,5 +1,5 @@
 local awful = require("awful")
-local helpers = require("config.appearance.helpers")
+local helpers = require("config.helpers")
 
 -- Local widget information.
 local PROC = {

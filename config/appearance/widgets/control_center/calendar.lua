@@ -2,7 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local helpers = require("config.appearance.helpers")
+local helpers = require("config.helpers")
 local dpi = beautiful.xresources.apply_dpi
 
 local function create()

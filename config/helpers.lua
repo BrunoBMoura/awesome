@@ -24,7 +24,8 @@ M.notify = function(text)
     title = "::Assert::",
     text = string.format(
       "Called from (%s, %s): %s", info.short_src, info.currentline, tostring(text)
-    )
+    ),
+    border_color = USER.palette.orange
   })
 end
 

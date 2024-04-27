@@ -83,7 +83,7 @@ awful.screen.connect_for_each_screen(function(screen)
   screen.mywibox = awful.wibar({
     position = "top",
     screen = screen,
-    height = dpi(35),
+    height = dpi(30),
   })
   -- Add widgets to the wibox.
   screen.mywibox:setup(require("config.appearance.bar")(screen))

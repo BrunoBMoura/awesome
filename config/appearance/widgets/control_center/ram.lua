@@ -1,5 +1,5 @@
 local watch = require("awful.widget.watch")
-local helpers = require("config.appearance.helpers")
+local helpers = require("config.helpers")
 local dpi = require("beautiful").xresources.apply_dpi
 
 -- Local widget information.

@@ -14,7 +14,7 @@ USER = {
     shift = "Shift",
     ctrl  = "Control"
   },
-  palette = palettes.kanagawa,
+  palette = palettes.plastlins,
   font = function(size)
     local default_size = 12
     return string.format("JetBrainsMono %d", size or default_size)

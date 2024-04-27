@@ -1,13 +1,13 @@
 local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
-local helpers = require("config.appearance.helpers")
+local helpers = require("config.helpers")
 local dpi = require("beautiful").xresources.apply_dpi
 
 -- Local widget information.
 local PROC = {
   cmd = [[bash -c "df -h | grep %s"]],
   match = "(%d+%%)",
-  interval = 30
+  interval = 60
 }
 
 local function build_cmd(device)

@@ -1,7 +1,7 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local dpi = require("beautiful.xresources").apply_dpi
-local helpers = require("config.appearance.helpers")
+local helpers = require("config.helpers")
 local beautiful = require("beautiful")
 local colors = beautiful.palette
 
@@ -51,7 +51,7 @@ local function create()
   -- Require the audio widgets and wrap them inside a single box as well.
   local audio = require("config.appearance.widgets.control_center.audio")({
     speaker = { text = "  ", color = beautiful.palette.green, value = 25 },
-    mic = { text = "  ", color = beautiful.palette.orange, value = 45 },
+    mic = { text = "    ", color = beautiful.palette.orange, value = 45 },
   })
 
   local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
