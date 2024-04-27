@@ -9,10 +9,13 @@ local colors = beautiful.palette
 -- helpers module.
 local M = {}
 
+-- Helper function to spawn a command and capture its output, mostly
+-- used by widget modules.
 M.spawn_and_capture = function(command, capture_callback)
   return awful.spawn.easy_async(command, capture_callback)
 end
 
+-- Helper function to simply spawn a command, mostly used by widget modules.
 M.simple_spawn = function(command)
   return awful.spawn.with_shell(command)
 end
