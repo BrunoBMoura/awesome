@@ -20,7 +20,7 @@ local function create(screen)
     expand = "none",
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      helpers.colorize(menu, colors.white, colors.grey),
+      helpers.box(menu),
       screen.mytaglist,
       separator,
       screen.mytasklist,
@@ -29,14 +29,15 @@ local function create(screen)
     },
     { -- Middle widgets
       layout = wibox.layout.fixed.horizontal,
-      helpers.box(date, { background_color = colors.grey }),
+      -- helpers.box(date, { background_color = colors.grey }),
+      helpers.box(date),
     },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
-      helpers.box(uptime, { background_color = colors.grey }),
-      helpers.box(VOLUME_WIDGET, { background_color = colors.grey }),
-      helpers.box(KEYBOARD_LAYOUT_WIDGET, { background_color = colors.grey }),
-      helpers.box(BATT_WIDGET, { background_color = colors.grey }),
+      helpers.box(uptime),
+      helpers.box(VOLUME_WIDGET),
+      helpers.box(KEYBOARD_LAYOUT_WIDGET),
+      helpers.box(BATT_WIDGET),
       wibox.widget.systray(),
       screen.mylayoutbox
     },

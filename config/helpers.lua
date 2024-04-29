@@ -41,21 +41,6 @@ M.build_match_for = function(occurrences)
   return match
 end
 
--- Colorizes the given widget with the given colors.
-M.colorize = function(widget, foreground_color, background_color)
-  local fg = foreground_color or beautiful.fg_normal
-  local bg = background_color or beautiful.bg_normal
-  return wibox.widget({
-    {
-      widget,
-      bg = bg,
-      fg = fg,
-      widget = wibox.container.background
-    },
-    layout = wibox.layout.fixed.horizontal
-  })
-end
-
 -- Creates a tooltip for the given widgets table.
 M.simple_tooltip = function(widgets_tbl, callback)
   awful.tooltip({
