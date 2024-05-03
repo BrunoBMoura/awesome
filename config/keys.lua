@@ -222,6 +222,9 @@ CLIENT_KEYS = gears.table.join(
   keybind({ USER.keys.super, USER.keys.shift }, "m", "(un)maximize horizontally", groups.client, function(c)
     c.maximized_horizontal = not c.maximized_horizontal
     c:raise()
+  end),
+  keybind({ USER.keys.super, USER.keys.shift, USER.keys.ctrl }, "p", "print for ranulfo", groups.client, function()
+      awful.spawn.with_shell("flameshot launcher")
   end)
 )
 
