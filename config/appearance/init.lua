@@ -3,6 +3,8 @@ local awful = require("awful")
 local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
 
+beautiful.xresources.set_dpi(USER.global_dpi)
+
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/custom.lua")
 
 CONTROL_CENTER = require("config.appearance.widgets.control_center.init")
@@ -87,6 +89,9 @@ awful.screen.connect_for_each_screen(function(screen)
   })
   -- Add widgets to the wibox.
   screen.mywibox:setup(require("config.appearance.bar")(screen))
+  -- screen.dpi = 130
 end)
 
 client.connect_signal("request::titlebars", require("config.appearance.titlebar").setup_titlebar)
+
+-- beautiful.xresources.set_dpi(80, 1)

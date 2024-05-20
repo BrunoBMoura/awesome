@@ -51,7 +51,7 @@ local function create()
 
   local calendar = wibox.widget({
     date = os.date("*t"),
-    font = USER.font(12),
+    font = USER.font(11),
     spacing = dpi(1),
     widget = wibox.widget.calendar.month,
     fn_embed = decorate_header,

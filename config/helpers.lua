@@ -95,7 +95,7 @@ end
 
 -- Creates an arc widget with a text box inside it.
 M.arc = function(bg, thickness, text)
-  local text_box = M.simple_textbox({ font = USER.font(20) })
+  local text_box = M.simple_textbox({ font = USER.font(18) })
   text_box:set_text(string.format("%s%s", text, "0%" ))
 
   return wibox.widget({
