@@ -20,6 +20,14 @@ M.simple_spawn = function(command)
   return awful.spawn.with_shell(command)
 end
 
+M.extract_numbers = function(input)
+  local numbers = {}
+  for number in string.gmatch(input, "[-+]?%d*%.?%d+") do
+    table.insert(numbers, tonumber(number))
+  end
+  return numbers
+end
+
 -- Notifies the given text.
 M.notify = function(text)
   local info = debug.getinfo(1, "Sl")

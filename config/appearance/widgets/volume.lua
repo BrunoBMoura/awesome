@@ -15,8 +15,11 @@ local PROCS = {
     end
   },
   get_volume =  {
-    cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
-    match = helpers.build_match_for(10),
+    -- cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
+    cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@"]],
+    stereo_match = helpers.build_match_for(10),
+    stered_grep = "grep -Eo [0-9]'{,}'",
+    mono_match = helpers.build_match_for(2),
     interval = 1
   },
   get_sink = {
@@ -78,7 +81,8 @@ local function worker(opts)
 
   local icon = opts.icon or "Vol:"
   local function update_volume_widget(widget, stdout)
-    local _, vol = stdout:match(PROCS.get_volume.match)
+    local numbers = helpers.extract_numbers(stdout)
+    local vol = numbers[2]
     -- If the volume is nil, set it to 0.
     widget:set_text(string.format(" %s%s%% ", icon, tonumber(vol or "0")))
   end
