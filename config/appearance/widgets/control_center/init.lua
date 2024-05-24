@@ -50,8 +50,8 @@ local function create()
 
   -- Require the audio widgets and wrap them inside a single box as well.
   local audio = require("config.appearance.widgets.control_center.audio")({
-    speaker = { text = "  ", color = beautiful.palette.green, value = 25 },
-    mic = { text = "    ", color = beautiful.palette.orange, value = 45 },
+    speaker = { color = beautiful.palette.green, value = 25 },
+    mic = { color = beautiful.palette.orange, value = 45 },
   })
 
   local audio_widget = boxfy(wibox.layout.fixed.vertical, { audio.speaker, audio.mic })
@@ -97,7 +97,6 @@ local function create()
 
   if USER.portable then
     local brightness = require("config.appearance.widgets.control_center.brightness")({
-      text = " 󰛨 ",
       color = beautiful.palette.yellow,
       value = 30
     })

@@ -20,6 +20,8 @@ M.simple_spawn = function(command)
   return awful.spawn.with_shell(command)
 end
 
+-- Helper function to extract numbers from a given string and
+-- return them as a table.
 M.extract_numbers = function(input)
   local numbers = {}
   for number in string.gmatch(input, "[-+]?%d*%.?%d+") do
@@ -125,7 +127,7 @@ end
 
 -- Creates an slider widget for ui controls. It also provides a simple
 -- single method on it for its value update.
-M.slider_widget = function(text_icon, color)
+M.slider_widget = function(text_icon, color, font)
   local slider = wibox.widget({
     widget = wibox.widget.slider,
     maximum = 100,
@@ -144,7 +146,7 @@ M.slider_widget = function(text_icon, color)
     widget = wibox.widget.textbox,
     markup = text_icon,
     align = "center",
-    font = USER.font(15),
+    font = font or USER.font(12),
   })
 
   local percentage = wibox.widget({

@@ -17,11 +17,12 @@ local brightness = {}
 local function worker(opts)
   opts = opts or {}
 
-  opts.text = opts.text or "Brightness:"
+  opts.text = opts.text or "Brt: "
+  opts.font = opts.font or USER.font(10)
   opts.color = opts.color or colors.yellow
   opts.value = opts.value or 20
 
-  brightness.widget = helpers.slider_widget(opts.text, opts.color)
+  brightness.widget = helpers.slider_widget(opts.text, opts.color, opts.font)
 
   local function init_brightness(initial_value)
     -- Set the initial brightness value.

@@ -8,8 +8,7 @@ local PROCS = {
       return string.format("amixer -D %s sset Master %s%%", device, value)
     end,
     get_volume = {
-      cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
-      match = helpers.build_match_for(10),
+      cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@"]],
       interval = 1
     },
   },
@@ -30,16 +29,18 @@ local function worker(opts)
   opts.mic = opts.mic or {}
   opts.speaker = opts.speaker or {}
 
-  opts.speaker.text = opts.speaker.text or "Speaker:"
+  opts.speaker.text = opts.speaker.text or "Vol: "
+  opts.speaker.font = opts.font or USER.font(10)
   opts.speaker.color = opts.speaker.color or colors.green
   opts.speaker.value = opts.speaker.value or 25
 
-  opts.mic.text = opts.mic.text or "Mic:"
+  opts.mic.text = opts.mic.text or "Mic: "
+  opts.mic.font = opts.font or USER.font(10)
   opts.mic.color = opts.mic.color or colors.orange
   opts.mic.value = opts.speaker.value or 45
 
-  audio.speaker = helpers.slider_widget(opts.speaker.text, opts.speaker.color)
-  audio.mic = helpers.slider_widget(opts.mic.text, opts.mic.color)
+  audio.speaker = helpers.slider_widget(opts.speaker.text, opts.speaker.color, opts.speaker.font)
+  audio.mic = helpers.slider_widget(opts.mic.text, opts.mic.color, opts.mic.font)
 
   -- Simply due to organization, define a function to properly initialize each
   -- of the widgets.
@@ -58,7 +59,8 @@ local function worker(opts)
     -- Finally, setup a watch to update the volume slider if the volume is update
     -- by another source.
     local function update_volume_slider(widget, stdout)
-      local _, vol = stdout:match(PROCS.speaker.get_volume.match)
+      local numbers = helpers.extract_numbers(stdout)
+      local vol = numbers[2]
       -- If the volume is nil, set it to 0.
       widget:set_value(tonumber(vol or "0"))
     end

@@ -15,11 +15,7 @@ local PROCS = {
     end
   },
   get_volume =  {
-    -- cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]'{,}'"]],
     cmd = [[bash -c "pactl get-sink-volume @DEFAULT_SINK@"]],
-    stereo_match = helpers.build_match_for(10),
-    stered_grep = "grep -Eo [0-9]'{,}'",
-    mono_match = helpers.build_match_for(2),
     interval = 1
   },
   get_sink = {
