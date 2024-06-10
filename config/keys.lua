@@ -53,6 +53,12 @@ local keys = gears.table.join(
   keybind({ USER.keys.super, USER.keys.alt }, "h", "decreases master width factor", groups.custom, function()
     awful.tag.incmwfact(-0.05)
   end),
+  keybind({ USER.keys.super, USER.keys.alt }, "j", "increases master width factor", groups.custom, function()
+    awful.client.incwfact(-0.05)
+  end),
+  keybind({ USER.keys.super, USER.keys.alt }, "k", "decreases master width factor", groups.custom, function()
+    awful.client.incwfact(0.05)
+  end),
   keybind({ USER.keys.super, USER.keys.shift }, "j", "swap with lower client by direction", groups.custom, function()
     awful.client.swap.global_bydirection("down")
   end),
@@ -223,7 +229,7 @@ CLIENT_KEYS = gears.table.join(
     c.maximized_horizontal = not c.maximized_horizontal
     c:raise()
   end),
-  keybind({ USER.keys.super, USER.keys.shift, USER.keys.ctrl }, "p", "print for ranulfo", groups.client, function()
+  keybind({ USER.keys.super, USER.keys.shift, USER.keys.ctrl }, "p", "flameshot print shortcut", groups.client, function()
       awful.spawn.with_shell("flameshot launcher")
   end)
 )
