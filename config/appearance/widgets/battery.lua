@@ -80,7 +80,11 @@ local function worker(opts)
 
     -- Then, get the battery percentage and time remaining.
     local values = helpers.extract_numbers(stdout)
-    local --[[id]]_, percentage, hour, min, sec = values[1], values[2], values[3], values[4], values[5]
+    -- local id = values[1]
+    local percentage = values[2] or 0
+    local hour       = values[3] or 0
+    local min        = values[4] or 0
+    local sec        = values[5] or 0
     -- Notify if necessary.
     eval_batt_non_full(state, percentage, hour, min, sec)
     -- And update the widget.
