@@ -265,7 +265,7 @@ M.popup_menu = function(opts)
       forced_width = dpi(100),
       forced_height = dpi(100),
       buttons = {
-        awful.button({}, 1, function ()
+        awful.button({}, 1, function()
           M.notify("Power Menu" .. option.name)
         end)
       },

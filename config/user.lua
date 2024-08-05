@@ -1,6 +1,6 @@
 local portable = true
 local device = portable and "/dev/nvme0n1p3" or "/dev/sda2"
-local global_dpi = portable and 120 or 96
+local global_dpi = portable and 115 or 96
 
 local palettes = require("config.appearance.palettes")
 

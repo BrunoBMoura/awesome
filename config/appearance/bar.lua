@@ -8,7 +8,7 @@ local custom_wibox = {}
 
 local function create(screen)
   local separator = wibox.widget.textbox(" ")
-  local menu = require("config.appearance.widgets.menu")({ text = "", font_size = 15 })
+  local menu = require("config.appearance.widgets.menu")({ text = "", font_size = 13 })
   local date = require("config.appearance.widgets.date")({
     icon = " 󰃰", color = colors.white
   })

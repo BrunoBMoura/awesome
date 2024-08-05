@@ -3,6 +3,7 @@ local awful = require("awful")
 local autostart = {
   "flameshot",
   "nm-applet",
+  "picom",
 }
 
 for _, command in ipairs(autostart) do
