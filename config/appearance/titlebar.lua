@@ -1,6 +1,8 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 
 local M = {}
 
@@ -9,7 +11,7 @@ local function titlebar_button(color, tooltip, click_function)
     {
       {
         text = "󰝤 ",
-        font = USER.font(20),
+        font = USER.font(14),
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox,
@@ -49,12 +51,17 @@ M.setup_titlebar = function(c)
     { -- Left
       awful.titlebar.widget.iconwidget(c),
       buttons = buttons,
-      layout  = wibox.layout.fixed.horizontal
+      -- layout  = wibox.layout.fixed.horizontal,
+      top = dpi(3),
+      bottom = dpi(3),
+      left = dpi(3),
+      widget = wibox.container.margin
     },
     { -- Middle
       { -- Title
         align  = "center",
-        widget = awful.titlebar.widget.titlewidget(c)
+        widget = awful.titlebar.widget.titlewidget(c),
+        font = USER.font(8)
       },
       buttons = buttons,
       layout  = wibox.layout.flex.horizontal
