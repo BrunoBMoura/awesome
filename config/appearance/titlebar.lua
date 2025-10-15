@@ -6,26 +6,40 @@ local dpi = xresources.apply_dpi
 
 local M = {}
 
-local function titlebar_button(color, tooltip, click_function)
+local function titlebar_button(opts)
   local button = wibox.widget({
     {
       {
-        text = "󰝤 ",
+        id = "button_text_box",
+        text = opts.text or "󰝤 ",
         font = USER.font(14),
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox,
       },
-      fg = color,
+      id = "button_text_box_container",
+      fg = opts.color or USER.palette.blue,
       widget = wibox.container.background
     },
     buttons = gears.table.join(
       awful.button({}, 1, function()
-        click_function()
+        if opts.click_function then
+          opts.click_function()
+        end
       end)
     ),
     layout = wibox.layout.align.vertical
   })
+
+  local button_container = button:get_children_by_id("button_text_box_container")[1]
+  local initial_color = button_container.fg
+  button:connect_signal("mouse::enter", function()
+    button_container.fg = USER.palette.white
+  end)
+
+  button:connect_signal("mouse::leave", function()
+    button_container.fg = initial_color
+  end)
 
   return button
 end
@@ -67,17 +81,40 @@ M.setup_titlebar = function(c)
       layout  = wibox.layout.flex.horizontal
     },
     { -- Right
-      titlebar_button(USER.palette.green, "Maximize", function()
-        c.maximized = not c.maximized
-        c:raise()
-      end),
-      titlebar_button(USER.palette.yellow, "Minimize", function()
-        -- somehow not working as intended
-        c.minimized = true
-      end),
-      titlebar_button(USER.palette.red, "Close", function()
-        c:kill()
-      end),
+      titlebar_button({
+        color = USER.palette.blue,
+        text = "󱂬 ",
+        tooltip = "Float",
+        click_function = function()
+          c.floating = not c.floating
+        end
+      }),
+      titlebar_button({
+        color = USER.palette.green,
+        text = "󰘖 ",
+        tooltip = "Mazimize",
+        click_function = function()
+          c.maximized = not c.maximized
+          c:raise()
+        end
+      }),
+      titlebar_button({
+        color = USER.palette.yellow,
+        text = "󰘕 ",
+        tooltip = "Minimize",
+        click_function = function()
+          awful.client.focus.history.previous()
+          c.minimized = true
+        end
+      }),
+      titlebar_button({
+        color = USER.palette.red,
+        text = "󰖭 ",
+        tooltip = "Close",
+        click_function = function()
+          c:kill()
+        end
+      }),
       layout = wibox.layout.fixed.horizontal()
     },
     layout = wibox.layout.align.horizontal,

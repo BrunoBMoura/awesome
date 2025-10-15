@@ -35,11 +35,9 @@ MAIN_MENU = awful.menu({
 })
 
 local function set_screen_prefs(screen)
-  -- gears.wallpaper.set(USER.palette.background)
-  local path = gears.filesystem.get_configuration_dir() .. "/theme/wallpapers/leaf.jpg"
-  -- local path = gears.filesystem.get_configuration_dir() .. "/theme/wallpapers/light.png"
+  gears.wallpaper.set(USER.palette.background)
   -- local path = gears.filesystem.get_configuration_dir() .. "/theme/wallpapers/simple.jpg"
-  gears.wallpaper.maximized(path, screen, true)
+  -- gears.wallpaper.maximized(path, screen, true)
   local layouts = {
     awful.layout.layouts[4],
     awful.layout.layouts[4],

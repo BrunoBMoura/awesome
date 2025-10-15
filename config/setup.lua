@@ -37,3 +37,5 @@ awful.layout.layouts = {
 }
 
 awful.mouse.snap.edge_enabled = false
+
+-- awful.client.focus.history.enable_tracking()
